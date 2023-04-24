@@ -5,7 +5,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (
-    <main className="text-2xl font-bold bg-red-700 pl-4 mt-12">
+    <main className="text-2xl">
       halo sanak sadonyo wei
     </main>
   )
