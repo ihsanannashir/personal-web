@@ -4,21 +4,8 @@ import Link from 'next/link'
 import {BsGithub, BsArrowUpRightSquare } from 'react-icons/bs'
 import SlideUp from './SlideUp'
 
+//projects will be updated regularly
 const projects = [
-    {
-        name: "Defood App",
-        desc: "A simple food delivery app, created for RAION Internship 2021",
-        image: "/defood.png",
-        github: "https://github.com/ihsanannashir/defood-app",
-        link: "https://github.com/ihsanannashir/defood-app",
-    },
-    {
-        name: "Defood App",
-        desc: "A simple food delivery app, created for RAION Internship 2021",
-        image: "/defood.png",
-        github: "https://github.com/ihsanannashir/defood-app",
-        link: "https://github.com/ihsanannashir/defood-app",
-    },
     {
         name: "Defood App",
         desc: "A simple food delivery app, created for RAION Internship 2021",
@@ -33,7 +20,7 @@ function ProjectSection() {
     <section id='projects'>
         <h1 className='text-center font-bold text-4xl'>
             Projects
-            <hr className='w-6 h-1 mx-auto my-4 bg-blue-950 border-0 rounded'/>
+            <hr className='w-6 h-1 mx-auto my-4 bg-blue-600 border-0 rounded'/>
         </h1>
         <div className='flex flex-col space-y-28'>
             {projects.map((projects, index) => {

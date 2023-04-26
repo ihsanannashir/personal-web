@@ -35,9 +35,11 @@ export const Navbar = () => {
       <div className='justify-between md:items-center md:flex'>
         <div>
           <div className='flex item-center justify-between py-3'>
-            <div className='md:py-5 md:block'>
-              <h2 className='text-2xl font-bold'>Ihsan An-Nashir</h2>
-            </div>
+            <Link to="home">
+              <div className='md:py-5 md:block'>
+                <h2 className='text-2xl font-bold cursor-pointer'>Ihsan An-Nashir</h2>
+              </div>
+            </Link>
             <div className='md:hidden'>
               <button onClick={()=>setNavbar(!navbar)}>
                 {navbar ? <IoMdClose size={30} /> : <IoMdMenu size={30} /> }
@@ -47,9 +49,9 @@ export const Navbar = () => {
         </div>
         <div>
           <div className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${navbar ? "block" : "hidden"}`}>
-            <div className='items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0'>
+            <div className='items-center justify-center space-y-8 md:flex md:space-x-10 md:space-y-0'>
               {NAV_ITEMS.map((item, idx) => {
-                return <Link key={idx} to={item.page} className={"block lg:inline-block text-neutral-900 hover:text-neutral-500 dark:text-neutral-100"} activeClass="active" spy={true} smooth={true} offset={-100} duration={500} onClick={() => setNavbar(!navbar)}>{item.label}</Link>
+                return <Link key={idx} to={item.page} className={"block lg:inline-block text-neutral-900 hover:text-neutral-500 dark:text-neutral-100 cursor-pointer"} activeClass="active" spy={true} smooth={true} offset={-100} duration={500} onClick={() => setNavbar(!navbar)}>{item.label}</Link>
               })}
               {currentTheme === "dark" ? (
                 <button onClick={() => setTheme("light")} className='bg-slate-100 p-2 rounded-xl'>
