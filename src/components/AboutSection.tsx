@@ -12,6 +12,7 @@ const skills = [
     { skill: "TailwindCSS" },
     { skill: "Bootstrap" },
     { skill: "Chakra UI" },
+    { skill: "Flutter" },
 ]
 
 function AboutSection() {
@@ -27,7 +28,7 @@ function AboutSection() {
                     <h1 className='text-center font-bold text-2xl mb-6 md:text-left'>More about me!</h1>
                     <p>Hi there! I am <span className='text-blue-600 font-semibold'>Ihsan</span>, a <span className='text-blue-600'>highly ambitious</span> and <span className='text-blue-600'>aspiring</span> frontend developer based in Indonesia.</p>
                     <br />
-                    <p>I graduated from Brawijaya University, Malang in early 2023 with a bachelor degree in Computer Engineering and have been exploring in the <span className='text-blue-600'>web development</span> field since late 2020 because i have a <span className='text-blue-600'>strong interest</span> in it.</p>
+                    <p>I graduated from Brawijaya University, Malang in early 2023 with a bachelor degree in Computer Engineering and have <span className='text-blue-600'>prior experiences</span> working as a frontend engineer intern in several companies.</p>
                     <br />
                     <p>Currently focusing on frontend web development mainly using ReactJS, i am <span className='text-blue-600'>open to the possibility</span> of doing backend and other tech stacks.</p>
                     <br />
@@ -37,7 +38,7 @@ function AboutSection() {
                     <h1 className='text-center text-2xl font-bold mb-6 md:text-left'>My Skills</h1>
                     <div className='flex flex-wrap flex-row justify-center md:justify-start'>
                         {skills.map((item, index) => {
-                            return <p key={index} className='bg-gray-200 px-4 py-2 mr-2 mt-2 text-gray-500 rounded font-semibold'>{item.skill}</p>
+                            return <p key={index} className='bg-gray-200 px-4 py-2 mr-2 mt-2 text-gray-500 rounded font-semibold hover:scale-110 ease-in-out duration-300 cursor-default'>{item.skill}</p>
                         })}
                     </div>
                 </div>

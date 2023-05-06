@@ -8,10 +8,10 @@ import SlideUp from './SlideUp'
 const projects = [
     {
         name: "Defood App",
-        desc: "A simple food delivery app, created for RAION Internship 2021",
+        desc: "A simple food delivery app. I created the app's frontend UI as part of a final project for my community's event.",
         image: "/defood.png",
         github: "https://github.com/ihsanannashir/defood-app",
-        link: "https://github.com/ihsanannashir/defood-app",
+        link: "",
     },
 ]
 
@@ -29,7 +29,7 @@ function ProjectSection() {
                         <SlideUp offset='-300px 0px -300px 0px'>
                             <div className='flex flex-col animate-slideUpCubiBezier animation-delay-2 md:flex-row md:space-x-12'>
                                 <div className='mt-8 md:w-1/2'>
-                                    <Link href={projects.link} target='_blank'>
+                                    <Link href={projects.link ? projects.link : projects.github} target='_blank'>
                                         <Image
                                             src={projects.image}
                                             alt=""
@@ -49,10 +49,10 @@ function ProjectSection() {
                                                 className='hover:-translate-y-1 transition-transform cursor-pointer'
                                             />
                                         </Link>
-                                        <Link href={projects.link} target='_blank'>
+                                        <Link href={projects.link ? projects.link : '/'} target='_blank'>
                                             <BsArrowUpRightSquare
                                                     size={30}
-                                                    className='hover:-translate-y-1 transition-transform cursor-pointer'
+                                                    className={`hover:-translate-y-1 transition-transform cursor-pointer ${projects.link ? projects.link : 'hidden'}`}
                                                 />
                                         </Link>
                                     </div>

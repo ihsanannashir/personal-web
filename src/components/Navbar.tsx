@@ -35,7 +35,7 @@ export const Navbar = () => {
       <div className='justify-between md:items-center md:flex'>
         <div>
           <div className='flex item-center justify-between py-3'>
-            <Link to="home">
+            <Link to="home" activeClass="active" spy={true} smooth={true} offset={-100} duration={500} onClick={() => setNavbar(!navbar)}>
               <div className='md:py-5 md:block'>
                 <h2 className='text-2xl font-bold cursor-pointer'>Ihsan An-Nashir</h2>
               </div>
