@@ -5,9 +5,14 @@ import './globals.css'
 import { ThemeProvider } from 'next-themes'
 
 export default function RootLayout({ children }) {
+  if (typeof window !== 'undefined') {
+    // Perform localStorage action
+    localStorage.theme = 'light'
+  }
+  
   return (
     <html lang="en">
-      <body className='dark:bg-[#121212]'>
+      <body className='bg-white dark:bg-[#121212]'>
         <ThemeProvider enableSystem={true} attribute='class'>
           <Navbar />
           {children}
