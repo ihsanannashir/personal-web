@@ -13,7 +13,7 @@ const HeroSection = () => {
             </div>
             <div className='md:mt-2 md:w-3/5'>
                 <h1 className='font-bold text-4xl mt-6 md:text-7xl md:mt-0'>Halo, I&#39;m Ihsan!</h1>
-                <p className='text-lg mt-4 mb-6 md:text-2xl'>Computer Engineering Fresh Graduate with a background in Frontend Development.</p>
+                <p className='text-lg mt-4 mb-6 md:text-2xl'>Computer Engineering Fresh Graduate and Aspiring Frontend Developer.</p>
                 <Link
                 to="projects"
                 className="text-neutral-100 font-semibold px-6 py-3 bg-blue-600 rounded shadow hover:bg-blue-800 cursor-default"
