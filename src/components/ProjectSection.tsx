@@ -7,6 +7,13 @@ import SlideUp from './SlideUp'
 //projects will be updated regularly
 const projects = [
     {
+        name: "Mooviku",
+        desc: "A Movie customize catalog web using TMDB API. Mooviku is a collaboration project that consist of Web and Android App. I created the web version and it was done for personal purpose.",
+        image: "https://github.com/ihsanannashir/movie-web-app/raw/main/public/thumbnail.png?raw=true",
+        github: "https://github.com/ihsanannashir/movie-web-app",
+        link: "https://mooviku.vercel.app/",
+    },
+    {
         name: "Defood App",
         desc: "A simple food delivery app. I created the app's frontend UI as part of a final project for my community's event.",
         image: "/defood.png",
@@ -22,7 +29,7 @@ function ProjectSection() {
             Projects
             <hr className='w-6 h-1 mx-auto my-4 bg-blue-600 border-0 rounded'/>
         </h1>
-        <div className='flex flex-col space-y-28'>
+        <div className='flex flex-col space-y-20'>
             {projects.map((projects, index) => {
                 return (
                     <div key={index}>
