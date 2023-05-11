@@ -14,6 +14,13 @@ const projects = [
         link: "https://mooviku.vercel.app/",
     },
     {
+        name: "Bookshelf App",
+        desc: "A simple bookshelf web app integrated with local storage for readings tracking, created to complete a dicoding web development submission.",
+        image: "https://github.com/ihsanannashir/bookshelf-app/blob/main/styles/img/bookshelf.png?raw=true",
+        github: "https://github.com/ihsanannashir/bookshelf-app",
+        link: "https://ihsanannashir.github.io/bookshelf-app/",
+    },
+    {
         name: "Defood App",
         desc: "A simple food delivery app. I created the app's frontend UI as part of a final project for my community's event.",
         image: "/defood.png",
