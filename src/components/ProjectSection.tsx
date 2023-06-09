@@ -14,6 +14,13 @@ const projects = [
         link: "https://mooviku.vercel.app/",
     },
     {
+        name: "Countries List Information",
+        desc: "A REST Countries API with color theme switcher. This is my solution to the challenge created by Frontend Mentor Website.",
+        image: "https://github.com/ihsanannashir/countries-information/raw/main/public/Countries-API.png",
+        github: "https://github.com/ihsanannashir/countries-information",
+        link: "https://countries-information-fm.vercel.app/",
+    },
+    {
         name: "Bookshelf App",
         desc: "A simple bookshelf web app integrated with local storage for readings tracking, created to complete a dicoding web development submission.",
         image: "https://github.com/ihsanannashir/bookshelf-app/blob/main/styles/img/bookshelf.png?raw=true",
