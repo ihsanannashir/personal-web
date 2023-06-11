@@ -1,11 +1,9 @@
 "use client";
-import { Link } from "react-scroll/modules";
+import Link from "next/link";
 import React, { useState } from "react";
 import { useTheme } from "next-themes";
 import { RiMoonFill, RiSunLine } from "react-icons/ri";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
-
-// Soon to be archived.
 
 interface NavItem {
   label: string;
@@ -15,19 +13,23 @@ interface NavItem {
 const NAV_ITEMS: Array<NavItem> = [
   {
     label: "Home",
-    page: "home",
+    page: "/",
   },
   {
-    label: "About",
-    page: "about",
+    label: "Experiences",
+    page: "/experiences",
   },
   {
     label: "Projects",
-    page: "projects",
+    page: "/projects",
+  },
+  {
+    label: "Contact",
+    page: "/contact",
   },
 ];
 
-export const Navbar = () => {
+export const NewNavbar = () => {
   const { systemTheme, theme, setTheme } = useTheme();
   const currentTheme = theme === "system" ? systemTheme : theme;
   const [navbar, setNavbar] = useState(false);
@@ -37,15 +39,7 @@ export const Navbar = () => {
       <div className="justify-between md:items-center md:flex">
         <div>
           <div className="flex item-center justify-between py-3">
-            <Link
-              to="home"
-              activeClass="active"
-              spy={true}
-              smooth={true}
-              offset={-100}
-              duration={500}
-              onClick={() => setNavbar(!navbar)}
-            >
+            <Link href="/">
               <div className="md:py-5 md:block">
                 <h2 className="text-2xl font-bold cursor-pointer">
                   Ihsan An-Nashir
@@ -70,16 +64,10 @@ export const Navbar = () => {
                 return (
                   <Link
                     key={idx}
-                    to={item.page}
+                    href={item.page}
                     className={
                       "block lg:inline-block text-neutral-900 hover:text-neutral-500 dark:text-neutral-100 cursor-pointer"
                     }
-                    activeClass="active"
-                    spy={true}
-                    smooth={true}
-                    offset={-100}
-                    duration={500}
-                    onClick={() => setNavbar(!navbar)}
                   >
                     {item.label}
                   </Link>
