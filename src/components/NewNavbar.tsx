@@ -23,10 +23,6 @@ const NAV_ITEMS: Array<NavItem> = [
     label: "Projects",
     page: "/projects",
   },
-  {
-    label: "Contact",
-    page: "/contact",
-  },
 ];
 
 export const NewNavbar = () => {
@@ -41,7 +37,7 @@ export const NewNavbar = () => {
           <div className="flex item-center justify-between py-3">
             <Link href="/">
               <div className="md:py-5 md:block">
-                <h2 className="text-2xl font-bold cursor-pointer">
+                <h2 className="text-2xl font-bold cursor-pointer text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">
                   Ihsan An-Nashir
                 </h2>
               </div>
@@ -66,28 +62,21 @@ export const NewNavbar = () => {
                     key={idx}
                     href={item.page}
                     className={
-                      "block lg:inline-block text-neutral-900 hover:text-neutral-500 dark:text-neutral-100 cursor-pointer"
+                      "block lg:inline-block text-neutral-900 hover:text-blue-600 dark:text-neutral-100 cursor-pointer"
                     }
                   >
                     {item.label}
                   </Link>
                 );
               })}
-              {currentTheme === "dark" ? (
-                <button
-                  onClick={() => setTheme("light")}
-                  className="bg-slate-100 p-2 rounded-xl"
-                >
-                  <RiSunLine size={25} color="black" />
-                </button>
-              ) : (
-                <button
-                  onClick={() => setTheme("dark")}
-                  className="bg-slate-100 p-2 rounded-xl"
-                >
-                  <RiMoonFill size={25} />
-                </button>
-              )}
+              <Link
+                href="/contact"
+                className={
+                  "block lg:inline-block text-neutral-100 font-semibold bg-blue-600 shadow hover:bg-blue-800 cursor-default py-2 px-4 rounded w-28 md:w-auto"
+                }
+              >
+                Let&apos;s Talk!
+              </Link>
             </div>
           </div>
         </div>

@@ -22,21 +22,30 @@ function Footer() {
             rel="noreferrer"
             target="_blank"
           >
-            <AiOutlineGithub className={iconTheme} size={30} />
+            <AiOutlineGithub
+              className={iconTheme + " hover:text-[#0d1117]"}
+              size={30}
+            />
           </a>
           <a
             href="https://linkedin.com/in/ihsanannashir"
             rel="noreferrer"
             target="_blank"
           >
-            <AiOutlineLinkedin className={iconTheme} size={30} />
+            <AiOutlineLinkedin
+              className={iconTheme + " hover:text-[#0077b5]"}
+              size={30}
+            />
           </a>
           <a
             href="mailto:ihsanannashir@gmail.com"
             rel="noreferrer"
             target="_blank"
           >
-            <AiOutlineMail className={iconTheme} size={30} />
+            <AiOutlineMail
+              className={iconTheme + " hover:text-red-500"}
+              size={30}
+            />
           </a>
         </div>
       </div>

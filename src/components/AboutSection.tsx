@@ -26,35 +26,37 @@ function AboutSection() {
         <div className="flex flex-col space-y-10 items-stretch justify-center align-top md:flex-row md:text-left md:p-4 md:space-y-0 md:space-x-10">
           <div className="md:w-1/2">
             <h1 className="text-center font-bold text-2xl mb-6 md:text-left">
-              More about me!
+              More about me
             </h1>
-            <p>
-              Hi there! I am{" "}
-              <span className="text-blue-600 font-semibold">Ihsan</span>, a{" "}
-              <span className="text-blue-600">highly ambitious</span> and{" "}
-              <span className="text-blue-600">aspiring</span> frontend developer
-              based in Indonesia.
-            </p>
-            <br />
-            <p>
-              I graduated from Brawijaya University, Malang in early 2023 with a
-              bachelor degree in Computer Engineering and have{" "}
-              <span className="text-blue-600">prior experiences</span> working
-              as a frontend engineer intern in several companies.
-            </p>
-            <br />
-            <p>
-              Currently focusing on frontend web development mainly using
-              ReactJS, i am{" "}
-              <span className="text-blue-600">open to the possibility</span> of
-              doing backend and other tech stacks.
-            </p>
-            <br />
-            <p>
-              I love learning and discovering with many things, and currently
-              seeking for opportunities to{" "}
-              <span className="text-blue-600">grow and learn</span>.
-            </p>
+            <div className="text-lg">
+              <p>
+                Hi again! I am{" "}
+                <span className="text-blue-600 font-semibold">Ihsan</span>, a{" "}
+                <span className="text-blue-600">highly ambitious</span> and{" "}
+                <span className="text-blue-600">aspiring</span> frontend
+                developer based in Indonesia.
+              </p>
+              <br />
+              <p>
+                I graduated from Brawijaya University, Malang in early 2023 with
+                a bachelor degree in Computer Engineering and have{" "}
+                <span className="text-blue-600">prior experiences</span> working
+                as a frontend engineer intern in several companies.
+              </p>
+              <br />
+              <p>
+                Currently focusing on frontend web development mainly using
+                ReactJS, i am{" "}
+                <span className="text-blue-600">open to the possibility</span>{" "}
+                of doing backend and other tech stacks.
+              </p>
+              <br />
+              <p>
+                I love learning and discovering with many things, and currently
+                seeking for opportunities to{" "}
+                <span className="text-blue-600">grow and learn</span>.
+              </p>
+            </div>
           </div>
           <div className="md:w-1/2">
             <h1 className="text-center text-2xl font-bold mb-6 md:text-left">

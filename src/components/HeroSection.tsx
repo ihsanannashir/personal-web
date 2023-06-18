@@ -20,18 +20,23 @@ const HeroSection = () => {
           />
         </div>
         <div className="md:mt-2 md:w-3/5">
-          <h1 className="font-bold text-4xl mt-6 md:text-7xl md:mt-0">
-            Halo, I&#39;m Ihsan!
+          <h1 className="font-bold text-4xl mt-6 md:text-7xl md:mt-0 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">
+            Hi, I&#39;m Ihsan.
           </h1>
           <p className="text-lg mt-4 mb-6 md:text-2xl">
-            Aspiring Frontend Developer.
+            Aspiring Frontend Developer based in Indonesia.
           </p>
-          <Link
-            href="projects"
+          <ScrollLink
+            to="projects"
+            activeClass="active"
+            spy={true}
+            smooth={true}
+            offset={-100}
+            duration={500}
             className="text-neutral-100 font-semibold px-6 py-3 bg-blue-600 rounded shadow hover:bg-blue-800 cursor-default"
           >
-            Contact
-          </Link>
+            See my works
+          </ScrollLink>
         </div>
       </div>
       <div className="flex flex-row justify-center">

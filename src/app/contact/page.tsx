@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 
-function Contact() {
+function ContactPage() {
   return (
     <main className="pt-20 md:pt-28">
       <div>ini Contact</div>
@@ -9,4 +9,4 @@ function Contact() {
   );
 }
 
-export default Contact;
+export default ContactPage;
