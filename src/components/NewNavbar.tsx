@@ -31,7 +31,7 @@ export const NewNavbar = () => {
   const [navbar, setNavbar] = useState(false);
 
   return (
-    <header className="w-full mx-auto px-4 bg-white shadow fixed top-0 z-50 sm:px-20 dark:bg-[#121212] dark:border-b dark:border-stone-600">
+    <header className="w-full mx-auto px-4 bg-white shadow fixed top-0 z-50 sm:px-20">
       <div className="justify-between md:items-center md:flex">
         <div>
           <div className="flex item-center justify-between py-3">
@@ -62,7 +62,7 @@ export const NewNavbar = () => {
                     key={idx}
                     href={item.page}
                     className={
-                      "block lg:inline-block text-neutral-900 hover:text-blue-600 dark:text-neutral-100 cursor-pointer"
+                      "block lg:inline-block text-neutral-900 hover:text-blue-600 cursor-pointer"
                     }
                   >
                     {item.label}
