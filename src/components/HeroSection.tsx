@@ -20,7 +20,7 @@ const HeroSection = () => {
           />
         </div>
         <div className="md:mt-2 md:w-3/5">
-          <h1 className="font-bold text-4xl mt-6 md:text-7xl md:mt-0 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">
+          <h1 className="font-bold text-4xl mt-6 md:text-7xl md:mt-0 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">
             Hi, I&#39;m Ihsan.
           </h1>
           <p className="text-lg mt-4 mb-6 md:text-2xl">

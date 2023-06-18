@@ -2,7 +2,6 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import { useTheme } from "next-themes";
-import { RiMoonFill, RiSunLine } from "react-icons/ri";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
 
 interface NavItem {
@@ -37,7 +36,7 @@ export const NewNavbar = () => {
           <div className="flex item-center justify-between py-3">
             <Link href="/">
               <div className="md:py-5 md:block">
-                <h2 className="text-2xl font-bold cursor-pointer text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">
+                <h2 className="text-2xl font-bold cursor-pointer text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">
                   Ihsan An-Nashir
                 </h2>
               </div>

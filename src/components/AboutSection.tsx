@@ -19,9 +19,9 @@ function AboutSection() {
   return (
     <section id="about">
       <div className="my-12 pb-12 md:pt-16 md:pb-48">
-        <h1 className="text-center font-bold text-4xl">
-          About Me
-          <hr className="w-6 h-1 mx-auto my-4 bg-blue-600 border-0 rounded" />
+        <h1 className="relative text-center font-bold text-4xl py-2">
+          <span className="z-30 relative">About Me</span>
+          <hr className="relative w-40 h-1 mx-auto my-4 border-blue-600 border-[4px] translate-y-[-10px] z-0" />
         </h1>
         <div className="flex flex-col space-y-10 items-stretch justify-center align-top md:flex-row md:text-left md:p-4 md:space-y-0 md:space-x-10">
           <div className="md:w-1/2">

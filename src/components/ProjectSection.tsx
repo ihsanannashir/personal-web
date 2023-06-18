@@ -42,9 +42,9 @@ const projects = [
 function ProjectSection() {
   return (
     <section id="projects">
-      <h1 className="text-center font-bold text-4xl">
-        Projects
-        <hr className="w-6 h-1 mx-auto my-4 bg-blue-600 border-0 rounded" />
+      <h1 className="relative text-center font-bold text-4xl py-2">
+        <span className="z-30 relative">My Works</span>
+        <hr className="relative w-40 h-1 mx-auto my-4 border-blue-600 border-[4px] translate-y-[-10px] z-0" />
       </h1>
       <div className="flex flex-col space-y-20">
         {projects.map((projects, index) => {
