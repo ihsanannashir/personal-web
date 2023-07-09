@@ -1,11 +1,12 @@
 "use client";
 import React from "react";
+import PageLayout from "../../components/PageLayout";
 
 function Experiences() {
   return (
-    <main className="pt-20 md:pt-28">
-      <div>ini experience</div>
-    </main>
+    <PageLayout>
+      <h1>Ini Experiences</h1>
+    </PageLayout>
   );
 }
 

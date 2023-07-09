@@ -1,11 +1,12 @@
 "use client";
 import React from "react";
+import PageLayout from "../../components/PageLayout";
 
 function Projects() {
   return (
-    <main className="pt-20 md:pt-28">
-      <div>ini projects</div>
-    </main>
+    <PageLayout>
+      <h1>ini Project</h1>
+    </PageLayout>
   );
 }
 

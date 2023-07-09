@@ -1,11 +1,12 @@
 "use client";
 import React from "react";
+import PageLayout from "../../components/PageLayout";
 
 function ContactPage() {
   return (
-    <main className="pt-20 md:pt-28">
-      <div>ini Contact</div>
-    </main>
+    <PageLayout>
+      <h1>Contact Me!</h1>
+    </PageLayout>
   );
 }
 

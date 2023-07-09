@@ -1,7 +1,6 @@
 "use client";
 import Link from "next/link";
 import React, { useState } from "react";
-import { useTheme } from "next-themes";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
 
 interface NavItem {
@@ -25,8 +24,6 @@ const NAV_ITEMS: Array<NavItem> = [
 ];
 
 export const NewNavbar = () => {
-  const { systemTheme, theme, setTheme } = useTheme();
-  const currentTheme = theme === "system" ? systemTheme : theme;
   const [navbar, setNavbar] = useState(false);
 
   return (
