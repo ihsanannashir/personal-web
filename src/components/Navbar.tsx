@@ -1,11 +1,7 @@
 "use client";
-import { Link } from "react-scroll/modules";
+import Link from "next/link";
 import React, { useState } from "react";
-import { useTheme } from "next-themes";
-import { RiMoonFill, RiSunLine } from "react-icons/ri";
 import { IoMdMenu, IoMdClose } from "react-icons/io";
-
-// Soon to be archived.
 
 interface NavItem {
   label: string;
@@ -15,39 +11,29 @@ interface NavItem {
 const NAV_ITEMS: Array<NavItem> = [
   {
     label: "Home",
-    page: "home",
+    page: "/",
   },
   {
-    label: "About",
-    page: "about",
+    label: "Experiences",
+    page: "/experiences",
   },
   {
     label: "Projects",
-    page: "projects",
+    page: "/projects",
   },
 ];
 
 export const Navbar = () => {
-  const { systemTheme, theme, setTheme } = useTheme();
-  const currentTheme = theme === "system" ? systemTheme : theme;
   const [navbar, setNavbar] = useState(false);
 
   return (
-    <header className="w-full mx-auto px-4 bg-white shadow fixed top-0 z-50 sm:px-20 dark:bg-[#121212] dark:border-b dark:border-stone-600">
+    <header className="w-full mx-auto px-4 bg-white shadow fixed top-0 z-50 sm:px-20">
       <div className="justify-between md:items-center md:flex">
         <div>
           <div className="flex item-center justify-between py-3">
-            <Link
-              to="home"
-              activeClass="active"
-              spy={true}
-              smooth={true}
-              offset={-100}
-              duration={500}
-              onClick={() => setNavbar(!navbar)}
-            >
+            <Link href="/">
               <div className="md:py-5 md:block">
-                <h2 className="text-2xl font-bold cursor-pointer">
+                <h2 className="text-2xl font-bold cursor-pointer text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-blue-400">
                   Ihsan An-Nashir
                 </h2>
               </div>
@@ -70,36 +56,23 @@ export const Navbar = () => {
                 return (
                   <Link
                     key={idx}
-                    to={item.page}
+                    href={item.page}
                     className={
-                      "block lg:inline-block text-neutral-900 hover:text-neutral-500 dark:text-neutral-100 cursor-pointer"
+                      "block lg:inline-block text-neutral-900 hover:text-blue-600 cursor-pointer"
                     }
-                    activeClass="active"
-                    spy={true}
-                    smooth={true}
-                    offset={-100}
-                    duration={500}
-                    onClick={() => setNavbar(!navbar)}
                   >
                     {item.label}
                   </Link>
                 );
               })}
-              {currentTheme === "dark" ? (
-                <button
-                  onClick={() => setTheme("light")}
-                  className="bg-slate-100 p-2 rounded-xl"
-                >
-                  <RiSunLine size={25} color="black" />
-                </button>
-              ) : (
-                <button
-                  onClick={() => setTheme("dark")}
-                  className="bg-slate-100 p-2 rounded-xl"
-                >
-                  <RiMoonFill size={25} />
-                </button>
-              )}
+              <Link
+                href="/contact"
+                className={
+                  "block lg:inline-block text-neutral-100 font-semibold bg-blue-600 shadow hover:bg-blue-800 cursor-default py-2 px-4 rounded w-28 md:w-auto"
+                }
+              >
+                Let&apos;s Talk!
+              </Link>
             </div>
           </div>
         </div>
