@@ -2,7 +2,6 @@
 import React from "react";
 import Image from "next/image";
 import { Link as ScrollLink } from "react-scroll/modules";
-import Link from "next/link";
 import { HiArrowDown } from "react-icons/hi";
 
 const HeroSection = () => {
