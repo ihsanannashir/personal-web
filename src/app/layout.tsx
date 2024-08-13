@@ -1,8 +1,17 @@
 import "./globals.css";
 
-export const metadata = {
-  title: "Ihsan An-Nashir's Portfolio",
-  description: "Personal Portfolio Website of Ihsan An-Nashir.",
+import { Metadata } from "next";
+import { Plus_Jakarta_Sans } from "next/font/google";
+
+const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"] });
+
+export const metadata: Metadata = {
+  title: {
+    template: "Ihsan An-Nashir • %s",
+    default: "Ihsan An-Nashir • Portfolio",
+  },
+  description:
+    "A Portfolio website of Ihsan An-Nashir, Web Developer based in Indonesia",
 };
 
 export default function RootLayout({
@@ -11,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={jakarta.className}>
       <body>{children}</body>
     </html>
   );
