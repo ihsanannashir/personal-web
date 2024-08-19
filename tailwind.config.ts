@@ -19,6 +19,15 @@ const config = {
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
+      colors: {
+        theme: {
+          cameo: "#D8B491",
+          barley: "#A47F5D",
+          cashmere: "#E8C8A4",
+          almond: "#EED9C3",
+          indian: "#C2A994",
+        },
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -41,7 +50,7 @@ const config = {
       },
     },
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
 } satisfies Config;
 
 export default config;
