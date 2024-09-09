@@ -5,6 +5,7 @@ import { Metadata } from "next";
 import { Plus_Jakarta_Sans as FontSans } from "next/font/google";
 
 import NavigationBar from "../components/navigation-bar";
+import { TooltipProvider } from "../components/ui/tooltip";
 
 const fontSans = FontSans({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -31,15 +32,17 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={clsx(
-          "relative min-h-screen bg-background font-sans antialiased max-w-4xl py-12 sm:py-24 px-6 mx-auto mt-10 sm:mt-0",
-          fontSans.variable
-        )}
-      >
-        <NavigationBar />
-        {children}
-      </body>
+      <TooltipProvider>
+        <body
+          className={clsx(
+            "relative min-h-screen bg-background font-sans antialiased max-w-4xl py-12 sm:py-24 px-6 mx-auto mt-10 sm:mt-0",
+            fontSans.variable
+          )}
+        >
+          <NavigationBar />
+          {children}
+        </body>
+      </TooltipProvider>
     </html>
   );
 }
