@@ -35,7 +35,7 @@ export default function RootLayout({
       <TooltipProvider>
         <body
           className={clsx(
-            "relative min-h-screen bg-background font-sans antialiased max-w-4xl py-12 sm:py-24 px-6 mx-auto mt-10 sm:mt-0",
+            "relative min-h-screen bg-background font-sans antialiased max-w-4xl pb-12 pt-24 sm:py-24 px-6 mx-auto",
             fontSans.variable
           )}
         >
