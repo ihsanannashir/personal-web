@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const NavigationBar = () => {
   return (
-    <nav className="fixed z-50 top-4 left-0 sm:left-auto w-full sm:max-w-4xl">
+    <nav className="fixed z-50 top-4 w-full sm:max-w-4xl">
       <div className="flex justify-between p-4 mr-12 bg-white rounded-lg border">
         <div>Home</div>
         <div className="flex space-x-4">
