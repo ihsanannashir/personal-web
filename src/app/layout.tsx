@@ -4,6 +4,8 @@ import "./globals.css";
 import { Metadata } from "next";
 import { Plus_Jakarta_Sans as FontSans } from "next/font/google";
 
+import NavigationBar from "../components/navigation-bar";
+
 const fontSans = FontSans({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
@@ -31,10 +33,11 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body
         className={clsx(
-          "min-h-screen bg-background font-sans antialiased max-w-4xl mx-auto py-12 sm:py-24 px-6",
+          "relative min-h-screen bg-background font-sans antialiased max-w-4xl py-12 sm:py-24 px-6 mx-auto mt-10 sm:mt-0",
           fontSans.variable
         )}
       >
+        <NavigationBar />
         {children}
       </body>
     </html>
