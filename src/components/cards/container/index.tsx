@@ -20,9 +20,7 @@ const ContainerCard = ({
 
   return (
     <section>
-      {title && (
-        <h2 className="font-bold text-xl sm:text-2xl mb-2 sm:mb-4">{title}</h2>
-      )}
+      {title && <h2 className="font-bold text-xl sm:text-2xl mb-4">{title}</h2>}
       <div className={clsx(variantClassName, className)}>{children}</div>
     </section>
   );
