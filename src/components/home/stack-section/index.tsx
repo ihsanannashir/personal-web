@@ -32,7 +32,7 @@ const StackSection = () => {
                   src={item.icon}
                   width={35}
                   height={35}
-                  className="hover:-translate-y-1 transition-transform"
+                  className="hover:scale-125 transition-transform"
                 />
               </TooltipTrigger>
               <TooltipContent>
