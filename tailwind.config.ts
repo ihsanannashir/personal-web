@@ -24,12 +24,8 @@ const config = {
       },
       colors: {
         background: "#F5F7F8",
-        theme: {
-          cameo: "#D8B491",
-          barley: "#A47F5D",
-          cashmere: "#E8C8A4",
-          almond: "#EED9C3",
-          indian: "#C2A994",
+        brand: {
+          primary: "#1792C3",
         },
       },
       backgroundImage: {
