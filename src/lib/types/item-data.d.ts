@@ -5,3 +5,8 @@ export type ProjectData = {
   thumbnail?: string | StaticImport;
   tech?: any;
 };
+
+export type MenuData = {
+  title: string;
+  slug: string;
+};

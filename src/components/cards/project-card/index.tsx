@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ProjectData } from "../../../lib/types/card";
+import { ProjectData } from "../../../lib/types/item-data";
 import Image from "next/image";
 
 const ProjectCard = ({

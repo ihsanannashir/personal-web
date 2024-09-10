@@ -1,4 +1,4 @@
-import { ProjectData } from "../../../lib/types/card";
+import { ProjectData } from "../../../lib/types/item-data";
 import ContainerCard from "../../cards/container-card";
 import ProjectCard from "../../cards/project-card";
 import StackShowcase from "../../stack-showcase";
