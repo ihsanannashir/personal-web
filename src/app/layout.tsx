@@ -6,6 +6,7 @@ import { Plus_Jakarta_Sans as FontSans } from "next/font/google";
 
 import NavigationBar from "../components/navigation-bar";
 import { TooltipProvider } from "../components/ui/tooltip";
+import Footer from "../components/footer";
 
 const fontSans = FontSans({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -35,12 +36,15 @@ export default function RootLayout({
       <TooltipProvider>
         <body
           className={clsx(
-            "relative min-h-screen bg-background font-sans antialiased max-w-4xl pb-12 pt-24 sm:py-24 px-6 mx-auto",
+            "relative min-h-screen bg-background font-sans antialiased",
             fontSans.variable
           )}
         >
           <NavigationBar />
-          {children}
+          <main className="mx-auto max-w-4xl pb-12 pt-24 sm:py-24 px-6 min-h-[93svh]">
+            {children}
+          </main>
+          <Footer />
         </body>
       </TooltipProvider>
     </html>
