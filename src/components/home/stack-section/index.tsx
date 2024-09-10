@@ -1,9 +1,14 @@
 import Image from "next/image";
-import ContainerCard from "../../cards/container";
+import ContainerCard from "../../cards/container-card";
 import { Tooltip, TooltipContent } from "../../ui/tooltip";
 import { TooltipTrigger } from "@radix-ui/react-tooltip";
 
-const STACK = [
+type StackData = {
+  title: string;
+  icon: string;
+};
+
+const STACK: StackData[] = [
   { title: "Typescript", icon: "/icons/typescript.svg" },
   { title: "ReactJS", icon: "/icons/react.svg" },
   { title: "NextJS", icon: "/icons/nextjs.svg" },

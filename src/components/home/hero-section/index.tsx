@@ -1,5 +1,5 @@
 import Image from "next/image";
-import ContainerCard from "../../cards/container";
+import ContainerCard from "../../cards/container-card";
 
 const HeroSection = () => {
   return (
