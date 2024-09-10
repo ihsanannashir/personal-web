@@ -27,6 +27,13 @@ const config = {
         brand: {
           primary: "#1792C3",
         },
+        scotland: {
+          "100": "#CCDBE6",
+          "200": "#99B7CE",
+          "300": "#6693B5",
+          "400": "#336F9D",
+          "500": "#004B84",
+        },
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
