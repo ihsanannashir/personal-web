@@ -1,15 +1,52 @@
-import { BsChatLeftTextFill, BsGithub, BsLinkedin } from "react-icons/bs";
+import {
+  BsChatLeftTextFill,
+  BsGithub,
+  BsLinkedin,
+  BsList,
+} from "react-icons/bs";
 import Link from "next/link";
+import { MenuData } from "../../lib/types/item-data";
+import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
+
+const MENUS: MenuData[] = [
+  { title: "Home", slug: "/" },
+  { title: "About", slug: "/about" },
+  { title: "Projects", slug: "/project" },
+];
 
 const NavigationBar = () => {
   return (
     <nav className="fixed z-50 top-4 w-full">
       <div className="sm:max-w-4xl sm:mx-auto">
         <div className="flex justify-between p-4 mx-6 sm:mx-6 bg-white rounded-2xl border">
-          {/* Title */}
-          <div className="font-semibold">
-            <Link href={"/"}>Ihsan An-Nashir's Portfolio</Link>
-          </div>
+          {/* Navigation Desktop */}
+          <ul className="hidden sm:flex space-x-4 text-sm">
+            {MENUS.map((menu, index) => {
+              return (
+                <li key={index}>
+                  <Link href={menu.slug}>{menu.title}</Link>
+                </li>
+              );
+            })}
+          </ul>
+
+          {/* Navigation Mobile */}
+          <Sheet>
+            <SheetTrigger className="sm:hidden">
+              <BsList size={22} />
+            </SheetTrigger>
+            <SheetContent side={"left"}>
+              <ul className="text-lg space-y-4">
+                {MENUS.map((menu, index) => {
+                  return (
+                    <li key={index}>
+                      <Link href={menu.slug}>{menu.title}</Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </SheetContent>
+          </Sheet>
 
           {/* Social Media */}
           <div className="flex space-x-4">
