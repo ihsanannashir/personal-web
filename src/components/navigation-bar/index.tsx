@@ -5,7 +5,9 @@ const NavigationBar = () => {
   return (
     <nav className="fixed z-50 top-4 w-full sm:max-w-4xl">
       <div className="flex justify-between p-4 mr-12 bg-white rounded-2xl border">
-        <div>Home</div>
+        <div className="font-semibold">
+          <Link href={"/"}>Ihsan An-Nashir's Portfolio</Link>
+        </div>
         <div className="flex space-x-4">
           <Link href={"https://github.com/ihsanannashir"}>
             <BsGithub
