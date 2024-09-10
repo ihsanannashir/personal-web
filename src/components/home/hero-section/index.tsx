@@ -24,7 +24,7 @@ const HeroSection = () => {
               className="rounded-lg"
             />
           </div>
-          <div className="w-64 h-64 sm:w-20 sm:h-20 bg-slate-300 rotate-6 rounded-lg z-10" />
+          <div className="w-64 h-64 sm:w-20 sm:h-20 bg-gray-200 rotate-6 rounded-lg z-10" />
         </div>
       </div>
     </ContainerCard>
