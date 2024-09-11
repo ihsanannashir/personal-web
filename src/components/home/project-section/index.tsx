@@ -5,27 +5,18 @@ import StackShowcase from "../../stack-showcase";
 
 const PROJECTS: ProjectData[] = [
   {
-    title: "Testing",
-    slug: "testing",
-    description: "Lorem Ipsum lorem",
+    title: "Yomy",
+    slug: "yomy",
+    description: "A web based SaaS Customer Feedback Manager Application",
     thumbnail: "/defood.png",
     tech: <StackShowcase nextjs tailwind />,
   },
   {
-    title: "Testing 2",
-    slug: "testing-2",
+    title: "Fakta 2.0",
+    slug: "fakta-com",
     description: "Lorem Ipsum lorem 2",
     thumbnail: "/defood.png",
     tech: <StackShowcase nextjs tailwind expressjs />,
-  },
-  {
-    title: "Testing 3",
-    slug: "testing-3",
-    description: "Lorem Ipsum lorem 3",
-    thumbnail: "/defood.png",
-    tech: (
-      <StackShowcase react nextjs tailwind nodejs expressjs mysql postgresql />
-    ),
   },
 ];
 
@@ -34,7 +25,7 @@ const ProjectSection = () => {
     <ContainerCard
       variant="transparent"
       title="My Projects"
-      className="grid grid-cols-1 sm:grid-cols-2 gap-6"
+      className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-10"
     >
       {PROJECTS.map((project, index) => {
         return (
