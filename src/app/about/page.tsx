@@ -15,7 +15,7 @@ const AboutPage = () => {
           Experienced in Web Development, I have developed software with various
           technologies like Javascript/Typescript, Java, and frameworks like
           NextJS and Spring Boot. My expertise spans in frontend development,
-          especially React. I'm open to explore many new stacks in order to
+          especially React. I&apos;m open to explore many new stacks in order to
           learn and keep myself updated within the industries.
         </p>
       </div>
