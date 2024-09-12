@@ -1,3 +1,5 @@
+"use client";
+
 import {
   BsChatLeftTextFill,
   BsGithub,
@@ -5,8 +7,11 @@ import {
   BsList,
 } from "react-icons/bs";
 import Link from "next/link";
-import { MenuData } from "../../lib/types/item-data";
+import { MenuData, SocialData } from "../../lib/types/item-data";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
+import { usePathname } from "next/navigation";
+import clsx from "clsx";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 const MENUS: MenuData[] = [
   { title: "Home", slug: "/" },
@@ -14,18 +19,60 @@ const MENUS: MenuData[] = [
   { title: "Projects", slug: "/project" },
 ];
 
+const SOCIALS: SocialData[] = [
+  {
+    title: "Github",
+    url: "https://github.com/ihsanannashir",
+    icon: (
+      <BsGithub
+        size={22}
+        className="hover:-translate-y-1 transition-transform"
+      />
+    ),
+  },
+  {
+    title: "LinkedIn",
+    url: "https://linkedin.com/in/ihsanannashir",
+    icon: (
+      <BsLinkedin
+        size={22}
+        className="hover:-translate-y-1 transition-transform"
+      />
+    ),
+  },
+  {
+    title: "Email",
+    url: "mailto:ihsanannashir@gmail.com",
+    icon: (
+      <BsChatLeftTextFill
+        size={22}
+        className="hover:-translate-y-1 transition-transform"
+      />
+    ),
+  },
+];
+
 const NavigationBar = () => {
+  const pathname = usePathname();
+
   return (
     <nav className="fixed z-50 top-4 w-full">
       <div className="sm:max-w-4xl sm:mx-auto">
-        <div className="flex justify-between p-4 mx-6 sm:mx-6 bg-white rounded-2xl border">
+        <div className="flex justify-between mx-6 sm:mx-6 p-4 sm:p-2 bg-white rounded-2xl border">
           {/* Navigation Desktop */}
-          <ul className="hidden sm:flex space-x-4 text-sm">
+          <ul className="hidden sm:flex text-sm">
             {MENUS.map((menu, index) => {
               return (
-                <li key={index}>
-                  <Link href={menu.slug}>{menu.title}</Link>
-                </li>
+                <Link href={menu.slug} key={index}>
+                  <li
+                    className={clsx(
+                      pathname == menu.slug && "bg-scotland-500 text-white",
+                      "duration-500 py-2 px-4 hover:bg-scotland-400 hover:text-white rounded-xl"
+                    )}
+                  >
+                    {menu.title}
+                  </li>
+                </Link>
               );
             })}
           </ul>
@@ -39,7 +86,10 @@ const NavigationBar = () => {
               <ul className="text-lg space-y-4">
                 {MENUS.map((menu, index) => {
                   return (
-                    <li key={index}>
+                    <li
+                      key={index}
+                      className={clsx(pathname == menu.slug && "font-bold")}
+                    >
                       <Link href={menu.slug}>{menu.title}</Link>
                     </li>
                   );
@@ -49,25 +99,19 @@ const NavigationBar = () => {
           </Sheet>
 
           {/* Social Media */}
-          <div className="flex space-x-4">
-            <Link href={"https://github.com/ihsanannashir"}>
-              <BsGithub
-                size={22}
-                className="hover:-translate-y-1 transition-transform"
-              />
-            </Link>
-            <Link href={"https://linkedin.com/in/ihsanannashir"}>
-              <BsLinkedin
-                size={22}
-                className="hover:-translate-y-1 transition-transform"
-              />
-            </Link>
-            <Link href={"mailto:ihsanannashir@gmail.com"}>
-              <BsChatLeftTextFill
-                size={22}
-                className="hover:-translate-y-1 transition-transform"
-              />
-            </Link>
+          <div className="flex space-x-4 p-0 sm:p-2">
+            {SOCIALS.map((social, index) => {
+              return (
+                <Tooltip key={index}>
+                  <TooltipTrigger>
+                    <Link href={social.url ?? ""}>{social.icon}</Link>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>{social.title}</p>
+                  </TooltipContent>
+                </Tooltip>
+              );
+            })}
           </div>
         </div>
       </div>

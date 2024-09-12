@@ -1,3 +1,6 @@
+import { ReactElement } from "react";
+import { IconType } from "react-icons";
+
 export type ProjectData = {
   title: string;
   slug: string;
@@ -9,4 +12,10 @@ export type ProjectData = {
 export type MenuData = {
   title: string;
   slug: string;
+};
+
+export type SocialData = {
+  title: string;
+  url?: string;
+  icon: ReactElement;
 };
