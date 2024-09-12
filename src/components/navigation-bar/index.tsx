@@ -58,7 +58,7 @@ const NavigationBar = () => {
   return (
     <nav className="fixed z-50 top-4 w-full">
       <div className="sm:max-w-4xl sm:mx-auto">
-        <div className="flex justify-between mx-6 sm:mx-6 p-4 sm:p-2 bg-white rounded-2xl border">
+        <div className="flex justify-between mx-6 sm:mx-6 p-4 sm:p-2 bg-white drop-shadow-[4px_4px_0px_rgba(118,116,250,0.75)] rounded-2xl border">
           {/* Navigation Desktop */}
           <ul className="hidden sm:flex text-sm">
             {MENUS.map((menu, index) => {

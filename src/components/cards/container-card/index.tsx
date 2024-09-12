@@ -18,7 +18,8 @@ const ContainerCard = ({
   moreUrl,
 }: ContainerCardProps) => {
   const variantClassName = clsx({
-    ["bg-white rounded-lg border p-6"]: variant === "default",
+    ["bg-white drop-shadow-[4px_4px_0px_rgba(118,116,250,0.75)] rounded-lg border p-6"]:
+      variant === "default",
     ["bg-transparent"]: variant === "transparent",
   });
 
