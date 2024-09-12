@@ -32,7 +32,7 @@ const StackSection = () => {
                   src={item.icon}
                   width={35}
                   height={35}
-                  className="hover:scale-125 transition-transform"
+                  className="sm:hover:scale-125 transition-transform"
                 />
               </TooltipTrigger>
               <TooltipContent>
