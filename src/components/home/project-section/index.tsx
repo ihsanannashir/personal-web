@@ -8,15 +8,16 @@ const PROJECTS: ProjectData[] = [
     title: "Yomy",
     slug: "yomy",
     description: "A web based SaaS Customer Feedback Manager Application",
-    thumbnail: "/defood.png",
-    tech: <StackShowcase nextjs tailwind />,
+    thumbnail: "/assets/yomy.png",
+    tech: <StackShowcase react tailwind />,
   },
   {
     title: "Fakta 2.0",
     slug: "fakta-com",
-    description: "Lorem Ipsum lorem 2",
-    thumbnail: "/defood.png",
-    tech: <StackShowcase nextjs tailwind expressjs />,
+    description:
+      "An Indonesian online media platform that offers news, data, and opinions on a wide range of topics.",
+    thumbnail: "/assets/faktacom.png",
+    tech: <StackShowcase nextjs tailwind />,
   },
 ];
 
@@ -24,8 +25,9 @@ const ProjectSection = () => {
   return (
     <ContainerCard
       variant="transparent"
-      title="My Projects"
+      title="Some of my works"
       className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-10"
+      moreUrl="/project"
     >
       {PROJECTS.map((project, index) => {
         return (

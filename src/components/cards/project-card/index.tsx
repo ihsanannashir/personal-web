@@ -11,7 +11,7 @@ const ProjectCard = ({
 }: ProjectData) => {
   return (
     <Link href={`/project/${slug}`}>
-      <div className="hover:scale-105 transition-transform p-0 bg-white rounded-lg border drop-shadow-sm">
+      <div className="hover:scale-105 transition-transform p-0 bg-white rounded-lg border drop-shadow-sm sm:min-h-[365px]">
         {/* Thumbnail */}
         {thumbnail && (
           <Image
@@ -20,7 +20,7 @@ const ProjectCard = ({
             width={0}
             height={0}
             sizes="100vw"
-            className="w-full h-52 rounded-t-lg object-cover"
+            className="w-full h-52 rounded-t-lg object-cover border-b"
           />
         )}
 
