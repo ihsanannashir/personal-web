@@ -14,7 +14,7 @@ export const PROJECTS: ProjectData[] = [
     slug: "fakta-com",
     description:
       "An Indonesian online media platform that offers news, data, and opinions on a wide range of topics.",
-    thumbnail: "/assets/faktacom.png",
+    thumbnail: "/assets/fakta.png",
     tech: <StackShowcase nextjs tailwind />,
   },
 ];
