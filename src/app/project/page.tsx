@@ -1,14 +1,15 @@
 import ProjectCard from "../../components/cards/project-card";
+import TitleCard from "../../components/cards/title-card";
 import { PROJECTS } from "../../lib/data/projects";
 
 const ProjectPage = () => {
   return (
     <div className="space-y-8">
       {/* Title */}
-      <div className="space-y-2">
-        <h1 className="text-3xl font-bold">Projects</h1>
-        <p>Projects that has been done by me individually and as a team.</p>
-      </div>
+      <TitleCard
+        title="Projects"
+        description="Projects that has been done by me individually and as a team."
+      />
 
       {/* Projects */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-10">

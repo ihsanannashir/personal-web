@@ -1,5 +1,11 @@
+import TitleCard from "../../components/cards/title-card";
+
 const AboutPage = () => {
-  return <>About</>;
+  return (
+    <div>
+      <TitleCard title="About" />
+    </div>
+  );
 };
 
 export default AboutPage;
