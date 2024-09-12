@@ -34,6 +34,13 @@ const config = {
           "400": "#336F9D",
           "500": "#004B84",
         },
+        blurple: {
+          "100": "#BEB6ED",
+          "200": "#9092E7",
+          "300": "#7674FA",
+          "400": "#283FB9",
+          "500": "#002FA7",
+        },
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
