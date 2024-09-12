@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import Link from "next/link";
-import { BsArrowRight, BsChevronRight } from "react-icons/bs";
+import { BsChevronRight } from "react-icons/bs";
 
 interface ContainerCardProps {
   children: React.ReactNode;
