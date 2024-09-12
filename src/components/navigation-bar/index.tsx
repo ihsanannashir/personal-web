@@ -26,7 +26,7 @@ const SOCIALS: SocialData[] = [
     icon: (
       <BsGithub
         size={22}
-        className="hover:-translate-y-1 transition-transform"
+        className="hover:-translate-y-1 hover:text-blurple-400 duration-500 transition-transform"
       />
     ),
   },
@@ -36,7 +36,7 @@ const SOCIALS: SocialData[] = [
     icon: (
       <BsLinkedin
         size={22}
-        className="hover:-translate-y-1 transition-transform"
+        className="hover:-translate-y-1 hover:text-blurple-400 duration-500 transition-transform"
       />
     ),
   },
@@ -46,7 +46,7 @@ const SOCIALS: SocialData[] = [
     icon: (
       <BsChatLeftTextFill
         size={22}
-        className="hover:-translate-y-1 transition-transform"
+        className="hover:-translate-y-1 hover:text-blurple-400 duration-500 transition-transform"
       />
     ),
   },
@@ -66,8 +66,8 @@ const NavigationBar = () => {
                 <Link href={menu.slug} key={index}>
                   <li
                     className={clsx(
-                      pathname == menu.slug && "bg-scotland-500 text-white",
-                      "duration-500 py-2 px-4 hover:bg-scotland-400 hover:text-white rounded-xl"
+                      pathname == menu.slug && "bg-blurple-300 text-white",
+                      "duration-500 py-2 px-4 hover:bg-blurple-300 hover:text-white rounded-xl"
                     )}
                   >
                     {menu.title}
