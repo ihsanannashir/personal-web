@@ -1,22 +1,13 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import HeroSection from '../components/HeroSection'
-import AboutSection from '../components/AboutSection'
-import ProjectSection from '../components/ProjectSection'
-
-export const metadata = {
-  title: 'Ihsan An-Nashir - Portfolio',
-  description: 'A Portfolio website of Ihsan An-Nashir',
-}
-
-const inter = Inter({ subsets: ['latin'] })
+import HeroSection from "../components/home/hero-section";
+import ProjectSection from "../components/home/project-section";
+import StackSection from "../components/home/stack-section";
 
 export default function Home() {
   return (
-    <main className='mx-auto max-w-3xl px-4 sm:px-6 md:max-w-5xl'>
-      <HeroSection/>
-      <AboutSection/>
-      <ProjectSection/>
-    </main>
-  )
+    <section className="space-y-10 sm:space-y-14">
+      <HeroSection />
+      <StackSection />
+      <ProjectSection />
+    </section>
+  );
 }

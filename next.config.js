@@ -3,16 +3,13 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
-        hostname: 'github.com',
-        port: '',
-        pathname: '/**',
+        protocol: "https",
+        hostname: "github.com",
+        port: "",
+        pathname: "/**",
       },
     ],
   },
-  experimental: {
-    appDir: true,
-  },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
