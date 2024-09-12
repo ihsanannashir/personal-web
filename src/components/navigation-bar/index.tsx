@@ -26,7 +26,7 @@ const SOCIALS: SocialData[] = [
     icon: (
       <BsGithub
         size={22}
-        className="hover:-translate-y-1 hover:text-blurple-400 duration-500 transition-transform"
+        className="sm:hover:-translate-y-1 hover:text-blurple-400 duration-500 transition-transform"
       />
     ),
   },
@@ -36,7 +36,7 @@ const SOCIALS: SocialData[] = [
     icon: (
       <BsLinkedin
         size={22}
-        className="hover:-translate-y-1 hover:text-blurple-400 duration-500 transition-transform"
+        className="sm:hover:-translate-y-1 hover:text-blurple-400 duration-500 transition-transform"
       />
     ),
   },
@@ -46,7 +46,7 @@ const SOCIALS: SocialData[] = [
     icon: (
       <BsChatLeftTextFill
         size={22}
-        className="hover:-translate-y-1 hover:text-blurple-400 duration-500 transition-transform"
+        className="sm:hover:-translate-y-1 hover:text-blurple-400 duration-500 transition-transform"
       />
     ),
   },
