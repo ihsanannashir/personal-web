@@ -50,7 +50,7 @@ const config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-in": "fade-in 0.5s ease-in",
+        "fade-in": "fade-in 1s ease-out",
         "scale-up": "scale-up 0.5s ease-out",
         bounce:
           "bounce 0.5s alternate cubic-bezier(0.95, 0.05, 0.795, 0.035) infinite",

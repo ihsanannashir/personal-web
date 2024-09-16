@@ -7,6 +7,7 @@ export type ProjectData = {
   description?: string;
   thumbnail?: string | StaticImport;
   tech?: any;
+  className?: string;
 };
 
 export type MenuData = {

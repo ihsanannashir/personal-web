@@ -14,6 +14,7 @@ const ProjectSection = () => {
         if (index < 2) {
           return (
             <ProjectCard
+              className="animate-fade-in"
               key={`project-card-${index}`}
               title={project.title}
               slug={project.slug}
