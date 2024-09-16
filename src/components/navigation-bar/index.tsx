@@ -104,7 +104,9 @@ const NavigationBar = () => {
               return (
                 <Tooltip key={index}>
                   <TooltipTrigger>
-                    <Link href={social.url ?? ""}>{social.icon}</Link>
+                    <Link href={social.url ?? ""} target="_blank">
+                      {social.icon}
+                    </Link>
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>{social.title}</p>
