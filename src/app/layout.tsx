@@ -7,6 +7,7 @@ import { Plus_Jakarta_Sans as FontSans } from "next/font/google";
 import NavigationBar from "../components/navigation-bar";
 import { TooltipProvider } from "../components/ui/tooltip";
 import Footer from "../components/footer";
+import Scroll from "../lib/utils/scroll";
 
 const fontSans = FontSans({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -33,6 +34,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <Scroll />
       <TooltipProvider>
         <body
           className={clsx(
