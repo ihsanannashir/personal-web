@@ -1,5 +1,7 @@
+import ComingSoon from "../../../components/coming-soon";
+
 const FaktaDetailPage = () => {
-  return <>Fakta</>;
+  return <ComingSoon />;
 };
 
 export default FaktaDetailPage;
