@@ -1,55 +1,18 @@
 "use client";
 
-import {
-  BsChatLeftTextFill,
-  BsGithub,
-  BsLinkedin,
-  BsList,
-} from "react-icons/bs";
+import { BsList } from "react-icons/bs";
 import Link from "next/link";
-import { MenuData, SocialData } from "../../lib/types/item-data";
+import { MenuData } from "../../lib/types/item-data";
 import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+import { SOCIALS } from "../../lib/data/socials";
 
 const MENUS: MenuData[] = [
   { title: "Home", slug: "/" },
   { title: "About", slug: "/about" },
   { title: "Projects", slug: "/project" },
-];
-
-const SOCIALS: SocialData[] = [
-  {
-    title: "Github",
-    url: "https://github.com/ihsanannashir",
-    icon: (
-      <BsGithub
-        size={22}
-        className="sm:hover:-translate-y-1 hover:text-blurple-400 duration-500 transition-transform"
-      />
-    ),
-  },
-  {
-    title: "LinkedIn",
-    url: "https://linkedin.com/in/ihsanannashir",
-    icon: (
-      <BsLinkedin
-        size={22}
-        className="sm:hover:-translate-y-1 hover:text-blurple-400 duration-500 transition-transform"
-      />
-    ),
-  },
-  {
-    title: "Email",
-    url: "mailto:ihsanannashir@gmail.com",
-    icon: (
-      <BsChatLeftTextFill
-        size={22}
-        className="sm:hover:-translate-y-1 hover:text-blurple-400 duration-500 transition-transform"
-      />
-    ),
-  },
 ];
 
 const NavigationBar = () => {
@@ -104,7 +67,9 @@ const NavigationBar = () => {
               return (
                 <Tooltip key={index}>
                   <TooltipTrigger>
-                    <Link href={social.url ?? ""}>{social.icon}</Link>
+                    <Link href={social.url ?? ""} target="_blank">
+                      {social.icon}
+                    </Link>
                   </TooltipTrigger>
                   <TooltipContent>
                     <p>{social.title}</p>

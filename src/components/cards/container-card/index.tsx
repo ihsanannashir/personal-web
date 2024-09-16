@@ -5,6 +5,7 @@ import { BsChevronRight } from "react-icons/bs";
 interface ContainerCardProps {
   children: React.ReactNode;
   className?: string;
+  parentClassName?: string;
   variant?: "default" | "transparent";
   title?: string;
   moreUrl?: string;
@@ -13,6 +14,7 @@ interface ContainerCardProps {
 const ContainerCard = ({
   children,
   className,
+  parentClassName,
   variant = "default",
   title,
   moreUrl,
@@ -24,7 +26,7 @@ const ContainerCard = ({
   });
 
   return (
-    <section>
+    <section className={clsx(parentClassName)}>
       {title && (
         <div className="flex justify-between mb-6 sm:mb-8">
           <h2 className="font-bold text-xl sm:text-2xl">{title}</h2>

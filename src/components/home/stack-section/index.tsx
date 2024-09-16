@@ -21,7 +21,7 @@ const STACK: StackData[] = [
 
 const StackSection = () => {
   return (
-    <ContainerCard variant="transparent" title="My Current Tech Stack">
+    <ContainerCard title="My Current Tech Stack">
       <div className="flex flex-wrap gap-4">
         {STACK.map((item, index) => {
           return (
@@ -32,7 +32,7 @@ const StackSection = () => {
                   src={item.icon}
                   width={35}
                   height={35}
-                  className="sm:hover:scale-125 transition-transform"
+                  className="sm:hover:scale-125 transition-transform animate-scale-up"
                 />
               </TooltipTrigger>
               <TooltipContent>

@@ -7,6 +7,7 @@ export type ProjectData = {
   description?: string;
   thumbnail?: string | StaticImport;
   tech?: any;
+  className?: string;
 };
 
 export type MenuData = {
@@ -16,6 +17,8 @@ export type MenuData = {
 
 export type SocialData = {
   title: string;
+  display: string;
   url?: string;
   icon: ReactElement;
+  tag: "Github" | "Linkedin" | "Email";
 };
