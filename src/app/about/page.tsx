@@ -11,7 +11,7 @@ const AboutPage = () => {
       {/* Main */}
       <ContainerCard className="text-justify grid grid-cols-1 sm:grid-cols-3 gap-10">
         {/* Image */}
-        <div className="relative mt-2 sm:mt-0 sm:col-span-1 order-1 sm:order-2">
+        <div className="relative mt-2 sm:mt-0 sm:col-span-1 order-1 sm:order-2 sm:animate-scale-up">
           <div className="w-full h-72 sm:h-full absolute z-20">
             <Image
               alt="Ihsan An-Nashir"
