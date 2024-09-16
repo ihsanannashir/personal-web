@@ -16,6 +16,8 @@ export type MenuData = {
 
 export type SocialData = {
   title: string;
+  display: string;
   url?: string;
   icon: ReactElement;
+  tag: "Github" | "Linkedin" | "Email";
 };
