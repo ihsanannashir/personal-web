@@ -24,7 +24,7 @@ const ContainerCard = ({
   });
 
   return (
-    <section>
+    <section className={clsx(!title && className)}>
       {title && (
         <div className="flex justify-between mb-6 sm:mb-8">
           <h2 className="font-bold text-xl sm:text-2xl">{title}</h2>
@@ -39,7 +39,9 @@ const ContainerCard = ({
           )}
         </div>
       )}
-      <div className={clsx(variantClassName, className)}>{children}</div>
+      <div className={clsx(variantClassName, title && className)}>
+        {children}
+      </div>
     </section>
   );
 };
