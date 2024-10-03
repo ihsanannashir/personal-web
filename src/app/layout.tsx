@@ -15,7 +15,7 @@ const fontSans = FontSans({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata: Metadata = {
   title: {
-    template: "Ihsan An-Nashir • %s",
+    template: "%s • Ihsan An-Nashir",
     default: "Ihsan An-Nashir's Portfolio",
   },
   description:
