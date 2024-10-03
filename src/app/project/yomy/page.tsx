@@ -80,7 +80,7 @@ const YomyDetailPage = () => {
       {/* Visuals */}
       <div className="my-6 space-y-6">
         <TitleCard
-          className="mb-6"
+          className="mb-6 text-justify"
           variant="small"
           title="Visuals"
           description={`These are some preview of the project's application ${`(this screenshot was taken during the development, and some cannot be shown due to NDA)`}`}
