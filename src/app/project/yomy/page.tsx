@@ -1,13 +1,30 @@
 import Image from "next/image";
-import TitleCard from "../../../components/cards/title-card";
 import { Metadata } from "next";
-import Link from "next/link";
-import { BsArrowUpRight } from "react-icons/bs";
+
+import OpenGraphYomy from "../../../../public/assets/yomy.png";
+
+import TitleCard from "../../../components/cards/title-card";
 import ViewCard from "../../../components/cards/view-card";
 
 export const metadata: Metadata = {
   title: "Yomy",
   description: "A web based SaaS Customer Feedback Manager Application",
+  keywords:
+    "React, react, ReactJS, React,js, Tailwind, TailwindCSS, CMS, SaaS, Yomy, Yomy App, React Project",
+  openGraph: {
+    title: "Yomy",
+    description: "A web based SaaS Customer Feedback Manager Application",
+    siteName: "Yomy - Ihsan An-Nashir's Portfolio",
+    type: "website",
+    url: `https://ihsanannashir.dev/project/yomy`,
+    images: [
+      {
+        url: OpenGraphYomy.src,
+        width: OpenGraphYomy.width,
+        height: OpenGraphYomy.height,
+      },
+    ],
+  },
 };
 
 const YomyDetailPage = () => {
