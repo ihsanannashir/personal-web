@@ -46,10 +46,9 @@ const YomyDetailPage = () => {
         <TitleCard className="mb-2" variant="small" title="Description" />
         <div className="space-y-2 text-justify">
           <p>
-            <b>Yomy</b> (now called <b>ReviewGo</b>) is a web-based
-            <em>Software-as-a-Service</em> (SaaS) application for managing
-            customer feedback. It includes two parts: a <b>client website</b>{" "}
-            and a <b>dashboard</b>.
+            <b>Yomy</b> is a web-based <em>Software-as-a-Service</em> (SaaS)
+            application for managing customer feedback. It includes two parts: a{" "}
+            <b>client website</b> and a <b>dashboard</b>.
           </p>
           <p>
             The client website allows users to submit rating and reviews for

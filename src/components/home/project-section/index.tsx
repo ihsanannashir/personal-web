@@ -6,7 +6,7 @@ const ProjectSection = () => {
   return (
     <ContainerCard
       variant="transparent"
-      title="My Projects"
+      title="Featured Projects"
       className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-10"
       moreUrl="/project"
     >
