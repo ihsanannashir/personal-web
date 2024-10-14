@@ -20,7 +20,6 @@ const AboutPage = () => {
               height={0}
               sizes="100vw"
               className="w-full h-full rounded-lg object-cover border-b"
-              unoptimized
             />
           </div>
           <div className="w-full h-72 sm:h-full bg-gray-200 rotate-6 rounded-lg z-10" />
