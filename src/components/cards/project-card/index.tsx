@@ -28,7 +28,6 @@ const ProjectCard = ({
             height={0}
             sizes="100vw"
             className="w-full h-52 rounded-t-lg object-cover border-b"
-            unoptimized
           />
         )}
 

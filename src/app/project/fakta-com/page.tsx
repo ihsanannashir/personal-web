@@ -39,7 +39,6 @@ const FaktaDetailPage = () => {
         height={0}
         sizes="100vw"
         className="w-full h-60 rounded-lg object-cover border"
-        unoptimized
       />
 
       {/* Description */}
@@ -116,7 +115,6 @@ const FaktaDetailPage = () => {
             height={0}
             sizes="100vw"
             className="w-full rounded-lg object-cover border"
-            unoptimized
           />
           <p className="text-sm text-gray-600">Landing Page</p>
         </div>
@@ -130,7 +128,6 @@ const FaktaDetailPage = () => {
             height={0}
             sizes="100vw"
             className="w-full rounded-lg object-cover border"
-            unoptimized
           />
           <p className="text-sm text-gray-600">News Detail Page</p>
         </div>
@@ -145,7 +142,6 @@ const FaktaDetailPage = () => {
               height={0}
               sizes="100vw"
               className="w-full rounded-lg object-contain border bg-white"
-              unoptimized
             />
             <Image
               src={"/assets/fakta/video-mobile.png"}
@@ -154,7 +150,6 @@ const FaktaDetailPage = () => {
               height={0}
               sizes="100vw"
               className="w-full rounded-lg object-contain border bg-white"
-              unoptimized
             />
           </div>
 
@@ -170,7 +165,6 @@ const FaktaDetailPage = () => {
             height={0}
             sizes="100vw"
             className="w-full h-full rounded-lg object-contain border bg-white"
-            unoptimized
           />
           <p className="text-sm text-gray-600">Fakta&apos;s Subdomain list</p>
         </div>

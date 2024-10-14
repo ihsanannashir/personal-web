@@ -38,7 +38,6 @@ const YomyDetailPage = () => {
         height={0}
         sizes="100vw"
         className="w-full h-60 rounded-lg object-cover border"
-        unoptimized
       />
 
       {/* Description */}
@@ -111,7 +110,6 @@ const YomyDetailPage = () => {
             height={0}
             sizes="100vw"
             className="w-full rounded-lg object-cover border"
-            unoptimized
           />
           <p className="text-sm text-gray-600">Dashboard Login Page</p>
         </div>
@@ -125,7 +123,6 @@ const YomyDetailPage = () => {
             height={0}
             sizes="100vw"
             className="w-full rounded-lg object-cover border"
-            unoptimized
           />
           <p className="text-sm text-gray-600">Dashboard Main Page</p>
         </div>
@@ -139,7 +136,6 @@ const YomyDetailPage = () => {
             height={0}
             sizes="100vw"
             className="w-full rounded-lg object-cover border"
-            unoptimized
           />
           <p className="text-sm text-gray-600">Dashboard Rating Page</p>
         </div>
@@ -153,7 +149,6 @@ const YomyDetailPage = () => {
             height={0}
             sizes="100vw"
             className="w-full h-full rounded-lg object-contain border bg-white"
-            unoptimized
           />
           <p className="text-sm text-gray-600">Client App Landing Page</p>
         </div>
