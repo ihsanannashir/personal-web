@@ -50,14 +50,14 @@ const AboutPage = () => {
       </ContainerCard>
 
       {/* Fun Fact */}
-      <ContainerCard className="space-y-1 mt-4">
+      {/* <ContainerCard className="space-y-1 mt-4">
         <span className="italic">A little bit fun fact about me:</span>
         <p>
           I&apos;m a <span className="text-red-500">Bayern München</span> fans,
           love reading, and having a huge interest in The Lord of the Rings and
           Narnia 😆
         </p>
-      </ContainerCard>
+      </ContainerCard> */}
 
       <ContainerCard
         title="Hit me up!"
