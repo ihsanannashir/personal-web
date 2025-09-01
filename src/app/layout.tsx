@@ -11,7 +11,20 @@ import Scroll from "../lib/utils/scroll";
 
 import OpenGraphIhsan from "../assets/images/ihsan-main.jpeg";
 
-const fontSans = FontSans({ subsets: ["latin"], variable: "--font-sans" });
+const fontSans = FontSans({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  preload: true,
+  fallback: [
+    "system-ui",
+    "-apple-system",
+    "Segoe UI",
+    "Roboto",
+    "Helvetica Neue",
+    "Arial",
+    "sans-serif",
+  ],
+});
 
 export const metadata: Metadata = {
   title: {
