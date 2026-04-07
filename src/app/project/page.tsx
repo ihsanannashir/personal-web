@@ -1,6 +1,6 @@
-import ProjectCard from "../../components/cards/project-card";
-import TitleCard from "../../components/cards/title-card";
-import { PROJECTS } from "../../lib/data/projects";
+import ProjectCard from "@/components/cards/project-card";
+import TitleCard from "@/components/cards/title-card";
+import { PROJECTS } from "@/lib/data/projects";
 
 const ProjectPage = () => {
   return (

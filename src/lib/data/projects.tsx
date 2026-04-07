@@ -1,5 +1,5 @@
-import StackShowcase from "../../components/stack-showcase";
-import { ProjectData } from "../types/item-data";
+import StackShowcase from "@/components/stack-showcase";
+import { ProjectData } from "@/lib/types/item-data";
 
 export const PROJECTS: ProjectData[] = [
   {

@@ -1,42 +1,35 @@
 import { Metadata } from "next";
 
-import OpenGraphFakta from "../../../../public/assets/fakta.png";
 import Image from "next/image";
-import TitleCard from "../../../components/cards/title-card";
-import ViewCard from "../../../components/cards/view-card";
+import TitleCard from "@/components/cards/title-card";
+import ViewCard from "@/components/cards/view-card";
+import { constructMetadata } from "@/lib/utils/metadata";
 
-export const metadata: Metadata = {
+import FaktaThumbnail from "@public/assets/fakta.png";
+import FaktaLandingPage from "@public/assets/fakta/landing-page.png";
+import FaktaNewsDetail from "@public/assets/fakta/news-detail.png";
+import FaktaVideoDetail from "@public/assets/fakta/video-detail.png";
+import FaktaVideoMobile from "@public/assets/fakta/video-mobile.png";
+import FaktaSubdomainList from "@public/assets/fakta/subdomain-list.png";
+
+export const metadata: Metadata = constructMetadata({
   title: "Fakta.com 2.0",
   description:
     "An Indonesian online media platform that offers news, data, and opinions on a wide range of topics.",
   keywords:
     "React, react, ReactJS, React,js, NextJS, Next.js, News Portal Project, Fakta.com, Tailwind, TailwindCSS, CMS, News Website, Fakta News, React Project, Frontend Project",
-  openGraph: {
-    title: "Yomy",
-    description:
-      "An Indonesian online media platform that offers news, data, and opinions on a wide range of topics.",
-    siteName: "Fakta.com 2.0 - Ihsan An-Nashir's Portfolio",
-    type: "website",
-    url: `https://ihsanannashir.dev/project/fakta-com`,
-    images: [
-      {
-        url: OpenGraphFakta.src,
-        width: OpenGraphFakta.width,
-        height: OpenGraphFakta.height,
-      },
-    ],
-  },
-};
+  slug: "/project/fakta-com",
+  ogImage: FaktaThumbnail,
+});
 
 const FaktaDetailPage = () => {
   return (
     <div>
       {/* Thumbnail */}
       <Image
-        src={"/assets/fakta.png"}
+        src={FaktaThumbnail}
         alt="Fakta.com 2.0"
-        width={0}
-        height={0}
+        placeholder="blur"
         sizes="100vw"
         className="w-full h-60 rounded-lg object-cover border"
       />
@@ -109,10 +102,9 @@ const FaktaDetailPage = () => {
         {/* Landing Page */}
         <div className="space-y-1">
           <Image
-            src={"/assets/fakta/landing-page.png"}
+            src={FaktaLandingPage}
             alt="Fakta.com Landing Page"
-            width={0}
-            height={0}
+            placeholder="blur"
             sizes="100vw"
             className="w-full rounded-lg object-cover border"
           />
@@ -122,10 +114,9 @@ const FaktaDetailPage = () => {
         {/* Landing Page */}
         <div className="space-y-1">
           <Image
-            src={"/assets/fakta/news-detail.png"}
+            src={FaktaNewsDetail}
             alt="Fakta.com News Page"
-            width={0}
-            height={0}
+            placeholder="blur"
             sizes="100vw"
             className="w-full rounded-lg object-cover border"
           />
@@ -136,18 +127,16 @@ const FaktaDetailPage = () => {
         <div className="space-y-1">
           <div className="w-full sm:h-96 flex flex-col sm:flex-row space-y-1 sm:space-y-0 sm:space-x-2">
             <Image
-              src={"/assets/fakta/video-detail.png"}
+              src={FaktaVideoDetail}
               alt="Fakta.com Video Page"
-              width={0}
-              height={0}
+              placeholder="blur"
               sizes="100vw"
               className="w-full rounded-lg object-contain border bg-white"
             />
             <Image
-              src={"/assets/fakta/video-mobile.png"}
+              src={FaktaVideoMobile}
               alt="Fakta.com Video Mobile view"
-              width={0}
-              height={0}
+              placeholder="blur"
               sizes="100vw"
               className="w-full rounded-lg object-contain border bg-white"
             />
@@ -159,10 +148,9 @@ const FaktaDetailPage = () => {
         {/* Subdomain */}
         <div className="space-y-1 w-full sm:h-96">
           <Image
-            src={"/assets/fakta/subdomain-list.png"}
+            src={FaktaSubdomainList}
             alt="Fakta.com Subdomain List"
-            width={0}
-            height={0}
+            placeholder="blur"
             sizes="100vw"
             className="w-full h-full rounded-lg object-contain border bg-white"
           />

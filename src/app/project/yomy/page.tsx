@@ -1,41 +1,33 @@
 import Image from "next/image";
 import { Metadata } from "next";
 
-import OpenGraphYomy from "../../../../public/assets/yomy.png";
+import TitleCard from "@/components/cards/title-card";
+import ViewCard from "@/components/cards/view-card";
+import { constructMetadata } from "@/lib/utils/metadata";
 
-import TitleCard from "../../../components/cards/title-card";
-import ViewCard from "../../../components/cards/view-card";
+import YomyThumbnail from "@public/assets/yomy.png";
+import YomyDashboardLanding from "@public/assets/yomy/yomy-dashboard-landing.png";
+import YomyDashboardMain from "@public/assets/yomy/yomy-dashboard-main.png";
+import YomyRatingPage from "@public/assets/yomy/yomy-rating-page.png";
+import YomyReview from "@public/assets/yomy/yomy-review.png";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = constructMetadata({
   title: "Yomy",
   description: "A web based SaaS Customer Feedback Manager Application",
   keywords:
     "React, react, ReactJS, React,js, Tailwind, TailwindCSS, CMS, SaaS, Yomy, Yomy App, React Project",
-  openGraph: {
-    title: "Yomy",
-    description: "A web based SaaS Customer Feedback Manager Application",
-    siteName: "Yomy - Ihsan An-Nashir's Portfolio",
-    type: "website",
-    url: `https://ihsanannashir.dev/project/yomy`,
-    images: [
-      {
-        url: OpenGraphYomy.src,
-        width: OpenGraphYomy.width,
-        height: OpenGraphYomy.height,
-      },
-    ],
-  },
-};
+  slug: "/project/yomy",
+  ogImage: YomyThumbnail,
+});
 
 const YomyDetailPage = () => {
   return (
     <div>
       {/* Thumbnail */}
       <Image
-        src={"/assets/yomy.png"}
+        src={YomyThumbnail}
         alt="Yomy App"
-        width={0}
-        height={0}
+        placeholder="blur"
         sizes="100vw"
         className="w-full h-60 rounded-lg object-cover border"
       />
@@ -104,10 +96,9 @@ const YomyDetailPage = () => {
         {/* Login Page */}
         <div className="space-y-1">
           <Image
-            src={"/assets/yomy/yomy-dashboard-landing.png"}
+            src={YomyDashboardLanding}
             alt="Yomy App"
-            width={0}
-            height={0}
+            placeholder="blur"
             sizes="100vw"
             className="w-full rounded-lg object-cover border"
           />
@@ -117,10 +108,9 @@ const YomyDetailPage = () => {
         {/* Dashboard */}
         <div className="space-y-1">
           <Image
-            src={"/assets/yomy/yomy-dashboard-main.png"}
+            src={YomyDashboardMain}
             alt="Yomy App"
-            width={0}
-            height={0}
+            placeholder="blur"
             sizes="100vw"
             className="w-full rounded-lg object-cover border"
           />
@@ -130,10 +120,9 @@ const YomyDetailPage = () => {
         {/* Rating */}
         <div className="space-y-1">
           <Image
-            src={"/assets/yomy/yomy-rating-page.png"}
+            src={YomyRatingPage}
             alt="Yomy App"
-            width={0}
-            height={0}
+            placeholder="blur"
             sizes="100vw"
             className="w-full rounded-lg object-cover border"
           />
@@ -143,10 +132,9 @@ const YomyDetailPage = () => {
         {/* Yomy App */}
         <div className="space-y-1 w-full sm:h-96">
           <Image
-            src={"/assets/yomy/yomy-review.png"}
+            src={YomyReview}
             alt="Yomy App"
-            width={0}
-            height={0}
+            placeholder="blur"
             sizes="100vw"
             className="w-full h-full rounded-lg object-contain border bg-white"
           />
@@ -158,3 +146,4 @@ const YomyDetailPage = () => {
 };
 
 export default YomyDetailPage;
+

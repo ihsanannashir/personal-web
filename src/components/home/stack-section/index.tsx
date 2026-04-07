@@ -1,6 +1,6 @@
 import Image from "next/image";
-import ContainerCard from "../../cards/container-card";
-import { Tooltip, TooltipContent } from "../../ui/tooltip";
+import ContainerCard from "@/components/cards/container-card";
+import { Tooltip, TooltipContent } from "@/components/ui/tooltip";
 import { TooltipTrigger } from "@radix-ui/react-tooltip";
 
 type StackData = {

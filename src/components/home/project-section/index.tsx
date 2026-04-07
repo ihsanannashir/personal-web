@@ -1,6 +1,6 @@
-import { PROJECTS } from "../../../lib/data/projects";
-import ContainerCard from "../../cards/container-card";
-import ProjectCard from "../../cards/project-card";
+import { PROJECTS } from "@/lib/data/projects";
+import ContainerCard from "@/components/cards/container-card";
+import ProjectCard from "@/components/cards/project-card";
 
 const ProjectSection = () => {
   return (

@@ -2,12 +2,12 @@
 
 import { BsList } from "react-icons/bs";
 import Link from "next/link";
-import { MenuData } from "../../lib/types/item-data";
-import { Sheet, SheetContent, SheetTrigger } from "../ui/sheet";
+import { MenuData } from "@/lib/types/item-data";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import { SOCIALS } from "../../lib/data/socials";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { SOCIALS } from "@/lib/data/socials";
 
 const MENUS: MenuData[] = [
   { title: "Home", slug: "/" },
