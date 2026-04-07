@@ -1,7 +1,5 @@
 import Image from "next/image";
 import ContainerCard from "@/components/cards/container-card";
-import SocialCard from "@/components/cards/social-card";
-import { SOCIALS } from "@/lib/data/socials";
 
 const AboutSection = () => {
   return (
@@ -47,23 +45,6 @@ const AboutSection = () => {
             myself updated within the industries.
           </p>
         </div>
-      </ContainerCard>
-
-      <ContainerCard
-        title="Hit me up!"
-        parentClassName="mt-10"
-        className="flex justify-between flex-wrap lg:flex-nowrap gap-4"
-      >
-        {SOCIALS.map((social, index) => {
-          return (
-            <SocialCard
-              key={index}
-              display={social.display}
-              url={social.url}
-              icon={social.icon}
-            />
-          );
-        })}
       </ContainerCard>
     </section>
   );
