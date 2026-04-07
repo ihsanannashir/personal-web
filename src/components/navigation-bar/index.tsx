@@ -2,7 +2,6 @@
 
 import { BsList } from "react-icons/bs";
 import Link from "next/link";
-import { MenuData } from "@/lib/types/item-data";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
@@ -13,17 +12,27 @@ import {
 } from "@/components/ui/tooltip";
 import { SOCIALS } from "@/lib/data/socials";
 
-const MENUS: MenuData[] = [
-  { title: "Home", slug: "/" },
-  { title: "About", slug: "/about" },
-  { title: "Projects", slug: "/project" },
+type NavMenu = {
+  title: string;
+  href: string;
+};
+
+const MENUS: NavMenu[] = [
+  { title: "Home", href: "/" },
+  { title: "About", href: "/#about" },
+  { title: "Projects", href: "/#projects" },
 ];
 
 const NavigationBar = () => {
   const pathname = usePathname();
 
-  const isActive = (slug: string) =>
-    slug === "/" ? pathname === "/" : pathname.startsWith(slug);
+  const isActive = (href: string) => {
+    // On the home page, "Home" is always a valid base
+    // On project detail pages, highlight "Projects"
+    if (href === "/") return pathname === "/";
+    if (href === "/#projects") return pathname.startsWith("/project");
+    return false;
+  };
 
   return (
     <nav className="fixed z-50 top-4 w-full">
@@ -33,10 +42,10 @@ const NavigationBar = () => {
           <ul className="hidden sm:flex text-sm">
             {MENUS.map((menu, index) => {
               return (
-                <Link href={menu.slug} key={index}>
+                <Link href={menu.href} key={index}>
                   <li
                     className={clsx(
-                      isActive(menu.slug) && "bg-blurple-300 text-white",
+                      isActive(menu.href) && "bg-blurple-300 text-white",
                       "duration-500 py-2 px-4 hover:bg-blurple-300 hover:text-white rounded-xl",
                     )}
                   >
@@ -58,9 +67,9 @@ const NavigationBar = () => {
                   return (
                     <li
                       key={index}
-                      className={clsx(isActive(menu.slug) && "font-bold")}
+                      className={clsx(isActive(menu.href) && "font-bold")}
                     >
-                      <Link href={menu.slug}>{menu.title}</Link>
+                      <Link href={menu.href}>{menu.title}</Link>
                     </li>
                   );
                 })}

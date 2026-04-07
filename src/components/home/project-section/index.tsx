@@ -4,28 +4,25 @@ import ProjectCard from "@/components/cards/project-card";
 
 const ProjectSection = () => {
   return (
-    <ContainerCard
-      variant="transparent"
-      title="Featured Projects"
-      className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-10"
-      moreUrl="/project"
-    >
-      {PROJECTS.map((project, index) => {
-        if (index < 2) {
-          return (
-            <ProjectCard
-              className="animate-fade-in"
-              key={`project-card-${index}`}
-              title={project.title}
-              slug={project.slug}
-              description={project.description}
-              thumbnail={project.thumbnail}
-              tech={project.tech}
-            />
-          );
-        }
-      })}
-    </ContainerCard>
+    <section id="projects">
+      <ContainerCard
+        variant="transparent"
+        title="Projects"
+        className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-10"
+      >
+        {PROJECTS.map((project, index) => (
+          <ProjectCard
+            className="animate-fade-in"
+            key={`project-card-${index}`}
+            title={project.title}
+            slug={project.slug}
+            description={project.description}
+            thumbnail={project.thumbnail}
+            tech={project.tech}
+          />
+        ))}
+      </ContainerCard>
+    </section>
   );
 };
 
