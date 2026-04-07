@@ -2,9 +2,11 @@
 
 import { BsList } from "react-icons/bs";
 import Link from "next/link";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 import clsx from "clsx";
+
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
   Tooltip,
   TooltipContent,
@@ -23,20 +25,69 @@ const MENUS: NavMenu[] = [
   { title: "Projects", href: "/#projects" },
 ];
 
+// Map section IDs to their nav hrefs
+const SECTION_IDS = ["about", "projects"];
+
 const NavigationBar = () => {
   const pathname = usePathname();
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Only run scroll spy on the home page
+    if (pathname !== "/") return;
+
+    const observers: IntersectionObserver[] = [];
+
+    SECTION_IDS.forEach((id) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            setActiveSection(id);
+          }
+        },
+        { rootMargin: "-40% 0px -55% 0px" }
+      );
+
+      observer.observe(el);
+      observers.push(observer);
+    });
+
+    // Reset to Home when scrolled to top
+    const handleScroll = () => {
+      if (window.scrollY < 100) {
+        setActiveSection(null);
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => {
+      observers.forEach((o) => o.disconnect());
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [pathname]);
 
   const isActive = (href: string) => {
-    // On the home page, "Home" is always a valid base
-    // On project detail pages, highlight "Projects"
-    if (href === "/") return pathname === "/";
-    if (href === "/#projects") return pathname.startsWith("/project");
-    return false;
+    // On project detail pages, highlight "Projects" via route matching
+    if (pathname !== "/") {
+      if (href === "/#projects") return pathname.startsWith("/project");
+      return false;
+    }
+
+    // On home page, use scroll spy
+    if (href === "/") return activeSection === null;
+    const sectionId = href.replace("/#", "");
+    return activeSection === sectionId;
   };
 
   return (
-    <nav className="fixed z-50 top-4 w-full">
-      <div className="sm:max-w-4xl sm:mx-auto">
+    <nav className="fixed z-50 top-0 w-full">
+      {/* Gradient backdrop - fades content scrolling under the navbar */}
+      <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-background via-background/80 to-transparent pointer-events-none" />
+
+      <div className="relative sm:max-w-4xl sm:mx-auto mt-4">
         <div className="flex justify-between mx-6 sm:mx-6 p-4 sm:p-2 bg-white drop-shadow-[4px_4px_0px_rgba(118,116,250,0.75)] rounded-2xl border">
           {/* Navigation Desktop */}
           <ul className="hidden sm:flex text-sm">
