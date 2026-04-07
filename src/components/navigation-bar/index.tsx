@@ -6,7 +6,11 @@ import { MenuData } from "@/lib/types/item-data";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { SOCIALS } from "@/lib/data/socials";
 
 const MENUS: MenuData[] = [
@@ -17,6 +21,9 @@ const MENUS: MenuData[] = [
 
 const NavigationBar = () => {
   const pathname = usePathname();
+
+  const isActive = (slug: string) =>
+    slug === "/" ? pathname === "/" : pathname.startsWith(slug);
 
   return (
     <nav className="fixed z-50 top-4 w-full">
@@ -29,8 +36,8 @@ const NavigationBar = () => {
                 <Link href={menu.slug} key={index}>
                   <li
                     className={clsx(
-                      pathname == menu.slug && "bg-blurple-300 text-white",
-                      "duration-500 py-2 px-4 hover:bg-blurple-300 hover:text-white rounded-xl"
+                      isActive(menu.slug) && "bg-blurple-300 text-white",
+                      "duration-500 py-2 px-4 hover:bg-blurple-300 hover:text-white rounded-xl",
                     )}
                   >
                     {menu.title}
@@ -51,7 +58,7 @@ const NavigationBar = () => {
                   return (
                     <li
                       key={index}
-                      className={clsx(pathname == menu.slug && "font-bold")}
+                      className={clsx(isActive(menu.slug) && "font-bold")}
                     >
                       <Link href={menu.slug}>{menu.title}</Link>
                     </li>
