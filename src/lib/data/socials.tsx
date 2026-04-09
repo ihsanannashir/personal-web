@@ -1,4 +1,5 @@
 import { BsChatLeftTextFill, BsGithub, BsLinkedin } from "react-icons/bs";
+
 import { SocialData } from "@/lib/types/item-data";
 
 export const SOCIALS: SocialData[] = [

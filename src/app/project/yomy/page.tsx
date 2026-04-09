@@ -1,15 +1,15 @@
 import Image from "next/image";
 import { Metadata } from "next";
 
-import TitleCard from "@/components/cards/title-card";
-import ViewCard from "@/components/cards/view-card";
-import { constructMetadata } from "@/lib/utils/metadata";
-
 import YomyThumbnail from "@public/assets/yomy.png";
 import YomyDashboardLanding from "@public/assets/yomy/yomy-dashboard-landing.png";
 import YomyDashboardMain from "@public/assets/yomy/yomy-dashboard-main.png";
 import YomyRatingPage from "@public/assets/yomy/yomy-rating-page.png";
 import YomyReview from "@public/assets/yomy/yomy-review.png";
+
+import TitleCard from "@/components/cards/title-card";
+import ViewCard from "@/components/cards/view-card";
+import { constructMetadata } from "@/lib/utils/metadata";
 
 export const metadata: Metadata = constructMetadata({
   title: "Yomy",

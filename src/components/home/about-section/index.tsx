@@ -1,4 +1,5 @@
 import Image from "next/image";
+
 import ContainerCard from "@/components/cards/container-card";
 
 const AboutSection = () => {

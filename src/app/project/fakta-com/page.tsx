@@ -1,9 +1,5 @@
 import { Metadata } from "next";
-
 import Image from "next/image";
-import TitleCard from "@/components/cards/title-card";
-import ViewCard from "@/components/cards/view-card";
-import { constructMetadata } from "@/lib/utils/metadata";
 
 import FaktaThumbnail from "@public/assets/fakta.png";
 import FaktaLandingPage from "@public/assets/fakta/landing-page.png";
@@ -11,6 +7,10 @@ import FaktaNewsDetail from "@public/assets/fakta/news-detail.png";
 import FaktaVideoDetail from "@public/assets/fakta/video-detail.png";
 import FaktaVideoMobile from "@public/assets/fakta/video-mobile.png";
 import FaktaSubdomainList from "@public/assets/fakta/subdomain-list.png";
+
+import TitleCard from "@/components/cards/title-card";
+import ViewCard from "@/components/cards/view-card";
+import { constructMetadata } from "@/lib/utils/metadata";
 
 export const metadata: Metadata = constructMetadata({
   title: "Fakta.com 2.0",

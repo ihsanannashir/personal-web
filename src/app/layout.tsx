@@ -1,15 +1,14 @@
 import clsx from "clsx";
-import "./globals.css";
-
 import { Metadata } from "next";
 import { Plus_Jakarta_Sans as FontSans } from "next/font/google";
+import "./globals.css";
+
+import OpenGraphIhsan from "@/assets/images/ihsan-main.jpeg";
 
 import NavigationBar from "@/components/navigation-bar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Footer from "@/components/footer";
 import Scroll from "@/lib/utils/scroll";
-
-import OpenGraphIhsan from "@/assets/images/ihsan-main.jpeg";
 
 const fontSans = FontSans({
   subsets: ["latin"],
