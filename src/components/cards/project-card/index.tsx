@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { ProjectData } from "../../../lib/types/item-data";
 import Image from "next/image";
 import clsx from "clsx";
+
+import { ProjectData } from "@/lib/types/item-data";
 
 const ProjectCard = ({
   title,

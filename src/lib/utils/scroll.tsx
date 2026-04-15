@@ -4,13 +4,15 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 
 export default function Scroll() {
-  // when clicking a link, user will not scroll to the top of the page if the header is sticky.
-  // their current scroll position will persist to the next page.
-  // this useEffect is a workaround to 'fix' that behavior.
+  // Scroll to top when navigating to a new page (not on hash changes).
+  // Hash-based scroll is handled natively by the browser via scroll-behavior: smooth.
 
   const pathname = usePathname();
   useEffect(() => {
-    window.scroll(0, 0);
+    // Only scroll to top when the path changes and there's no hash in the URL
+    if (!window.location.hash) {
+      window.scroll(0, 0);
+    }
   }, [pathname]);
   return <></>;
 }

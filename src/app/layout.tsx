@@ -1,15 +1,14 @@
 import clsx from "clsx";
-import "./globals.css";
-
 import { Metadata } from "next";
 import { Plus_Jakarta_Sans as FontSans } from "next/font/google";
+import "./globals.css";
 
-import NavigationBar from "../components/navigation-bar";
-import { TooltipProvider } from "../components/ui/tooltip";
-import Footer from "../components/footer";
-import Scroll from "../lib/utils/scroll";
+import OpenGraphIhsan from "@/assets/images/ihsan-main.jpeg";
 
-import OpenGraphIhsan from "../assets/images/ihsan-main.jpeg";
+import NavigationBar from "@/components/navigation-bar";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import Footer from "@/components/footer";
+import Scroll from "@/lib/utils/scroll";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -32,13 +31,13 @@ export const metadata: Metadata = {
     default: "Ihsan An-Nashir's Portfolio",
   },
   description:
-    "A Portfolio website of Ihsan An-Nashir, Web Developer based in Indonesia",
+    "A Portfolio website of Ihsan An-Nashir, Software and AI Engineer based in Indonesia",
   keywords:
-    "Ihsan An-Nashir, M. Ihsan An-Nashir, Freelance Web Developer, freelance web, frontend, frontend developer",
+    "Ihsan An-Nashir, M. Ihsan An-Nashir, Freelance Web Developer, freelance web, frontend, frontend developer, software engineer, AI Engineer",
   openGraph: {
     title: "Ihsan An-Nashir's Portfolio",
     description:
-      "A Portfolio website of Ihsan An-Nashir, Web Developer based in Indonesia",
+      "A Portfolio website of Ihsan An-Nashir, Software and AI Engineer based in Indonesia",
     siteName: "Ihsan An-Nashir's Portfolio",
     type: "website",
     url: `https://ihsanannashir.dev`,
@@ -64,7 +63,7 @@ export default function RootLayout({
         <body
           className={clsx(
             "relative min-h-screen bg-background font-sans antialiased",
-            fontSans.variable
+            fontSans.variable,
           )}
         >
           <NavigationBar />
