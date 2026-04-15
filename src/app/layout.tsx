@@ -31,13 +31,13 @@ export const metadata: Metadata = {
     default: "Ihsan An-Nashir's Portfolio",
   },
   description:
-    "A Portfolio website of Ihsan An-Nashir, Web Developer based in Indonesia",
+    "A Portfolio website of Ihsan An-Nashir, Software and AI Engineer based in Indonesia",
   keywords:
-    "Ihsan An-Nashir, M. Ihsan An-Nashir, Freelance Web Developer, freelance web, frontend, frontend developer",
+    "Ihsan An-Nashir, M. Ihsan An-Nashir, Freelance Web Developer, freelance web, frontend, frontend developer, software engineer, AI Engineer",
   openGraph: {
     title: "Ihsan An-Nashir's Portfolio",
     description:
-      "A Portfolio website of Ihsan An-Nashir, Web Developer based in Indonesia",
+      "A Portfolio website of Ihsan An-Nashir, Software and AI Engineer based in Indonesia",
     siteName: "Ihsan An-Nashir's Portfolio",
     type: "website",
     url: `https://ihsanannashir.dev`,
@@ -63,7 +63,7 @@ export default function RootLayout({
         <body
           className={clsx(
             "relative min-h-screen bg-background font-sans antialiased",
-            fontSans.variable
+            fontSans.variable,
           )}
         >
           <NavigationBar />

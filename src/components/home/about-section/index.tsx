@@ -27,13 +27,13 @@ const AboutSection = () => {
         {/* Paragraph */}
         <div className="space-y-4 text-justify sm:col-span-2 order-2 sm:order-1">
           <p>
-            Hi there! I am <b>Ihsan</b>, a highly ambitious Web Developer
+            Hi there! I am <b>Ihsan</b>, a highly ambitious Software Engineer
             currently based in Jakarta, Indonesia.
           </p>
           <p>
             I graduated from Brawijaya University, Malang in early 2023 with a
             bachelor degree in Computer Engineering and have prior experiences
-            working as a web developer in several companies.
+            working as a software engineer in several companies.
           </p>
           <p>
             Experienced in Web Development, I have developed software with
@@ -41,7 +41,7 @@ const AboutSection = () => {
             frameworks like NextJS and ExpressJS.
           </p>
           <p>
-            My expertise spans in frontend development, especially React.
+            My expertise spans in web development and artificial intelligence.
             I&apos;m open to explore many new stacks in order to learn and keep
             myself updated within the industries.
           </p>
