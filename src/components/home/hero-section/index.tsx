@@ -22,8 +22,9 @@ const HeroSection = () => {
           >
             Ihsan An-Nashir
           </h1>
-          <p className="text-center text-base">
-            Software and AI Engineer based in Indonesia
+          <p className="text-center sm:text-start text-base">
+            Software Engineer with production experience in web applications,
+            now focused on AI and data engineering.
           </p>
         </div>
       </div>
