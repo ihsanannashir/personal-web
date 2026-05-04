@@ -14,7 +14,7 @@ const AboutSection = () => {
           <div className="w-full h-72 sm:h-full absolute z-20">
             <Image
               alt="Ihsan An-Nashir"
-              src={"/Ihsan-cv.jpg"}
+              src={"/Ihsan-prau.jpg"}
               width={0}
               height={0}
               sizes="100vw"
