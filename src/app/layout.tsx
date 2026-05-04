@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import { Plus_Jakarta_Sans as FontSans } from "next/font/google";
 import "./globals.css";
 
-import OpenGraphIhsan from "@/assets/images/ihsan-cv.jpg";
+import OpenGraphIhsan from "@/assets/images/Ihsan-cv.jpg";
 
 import NavigationBar from "@/components/navigation-bar";
 import { TooltipProvider } from "@/components/ui/tooltip";
