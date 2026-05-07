@@ -4,11 +4,11 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 
 const GREETINGS = [
-  { text: "Hello", lang: "English" },
-  { text: "Halo", lang: "Indonesian" },
-  { text: "Bia doh", lang: "Minang" },
+  { text: "Welcome", lang: "English" },
+  { text: "Selamat Datang", lang: "Indonesian" },
+  { text: "Salamaik Datang", lang: "Minang" },
   { text: "Sugeng rawuh", lang: "Javanese" },
-  { text: "Hallo", lang: "German" },
+  { text: "Willkommen", lang: "German" },
 ];
 
 const HeroSection = () => {
@@ -51,7 +51,7 @@ const HeroSection = () => {
       <h1 className="font-serif text-display-sm sm:text-display max-w-3xl mb-6">
         Software & AI Engineer.
         <br />
-        Builder. Polyglot. Runner.
+        Reader. Traveller.
       </h1>
 
       {/* Subtext */}

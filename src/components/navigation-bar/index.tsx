@@ -35,7 +35,7 @@ const NavigationBar = () => {
               href="/"
               className="font-serif text-heading-sm text-foreground hover:opacity-70 transition-opacity"
             >
-              ihsan.
+              Ihsan An-Nashir.
             </Link>
 
             {/* Desktop nav */}
@@ -48,7 +48,7 @@ const NavigationBar = () => {
                     "text-body-sm transition-colors relative py-1",
                     isActive(item.href)
                       ? "text-foreground"
-                      : "text-muted hover:text-foreground"
+                      : "text-muted hover:text-foreground",
                   )}
                 >
                   {item.label}
@@ -74,19 +74,19 @@ const NavigationBar = () => {
               <span
                 className={clsx(
                   "block w-5 h-px bg-foreground transition-transform duration-300",
-                  mobileOpen && "rotate-45 translate-y-[3.5px]"
+                  mobileOpen && "rotate-45 translate-y-[3.5px]",
                 )}
               />
               <span
                 className={clsx(
                   "block w-5 h-px bg-foreground transition-opacity duration-300",
-                  mobileOpen && "opacity-0"
+                  mobileOpen && "opacity-0",
                 )}
               />
               <span
                 className={clsx(
                   "block w-5 h-px bg-foreground transition-transform duration-300",
-                  mobileOpen && "-rotate-45 -translate-y-[3.5px]"
+                  mobileOpen && "-rotate-45 -translate-y-[3.5px]",
                 )}
               />
             </button>
@@ -107,7 +107,7 @@ const NavigationBar = () => {
                   "font-serif text-display-sm transition-colors",
                   isActive(item.href)
                     ? "text-foreground"
-                    : "text-muted hover:text-foreground"
+                    : "text-muted hover:text-foreground",
                 )}
               >
                 {item.label}

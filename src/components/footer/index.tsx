@@ -7,8 +7,11 @@ const Footer = () => {
         <div className="flex flex-col sm:flex-row justify-between gap-10">
           {/* Left */}
           <div className="flex flex-col gap-2">
-            <Link href="/" className="font-serif text-heading-sm text-foreground">
-              ihsan.
+            <Link
+              href="/"
+              className="font-serif text-heading-sm text-foreground"
+            >
+              Ihsan An-Nashir.
             </Link>
             <p className="text-body-sm text-muted max-w-xs">
               Software & AI Engineer based in Jakarta, Indonesia.
