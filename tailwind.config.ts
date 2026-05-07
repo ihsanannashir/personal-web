@@ -1,8 +1,6 @@
 import type { Config } from "tailwindcss";
-import { fontFamily } from "tailwindcss/defaultTheme";
 
 const config = {
-  darkMode: ["class"],
   content: [
     "./pages/**/*.{ts,tsx}",
     "./components/**/*.{ts,tsx}",
@@ -13,73 +11,70 @@ const config = {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: "1.5rem",
       screens: {
-        "2xl": "1400px",
+        "2xl": "1152px",
       },
     },
     extend: {
       fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
+        sans: ["var(--font-plus-jakarta)", "system-ui", "-apple-system", "sans-serif"],
+        serif: ["var(--font-dm-serif)", "Georgia", "serif"],
       },
       colors: {
-        background: "#F5F7F8",
-        brand: {
-          primary: "#1792C3",
-        },
-        scotland: {
-          "100": "#CCDBE6",
-          "200": "#99B7CE",
-          "300": "#6693B5",
-          "400": "#336F9D",
-          "500": "#004B84",
-        },
-        blurple: {
-          "100": "#BEB6ED",
-          "200": "#9092E7",
-          "300": "#7674FA",
-          "400": "#283FB9",
-          "500": "#002FA7",
+        background: "#F5F2EB",
+        foreground: "#1A1A1A",
+        muted: "#6B6B6B",
+        subtle: "#999999",
+        border: "#D4D0C8",
+        "border-light": "#E8E5DE",
+        accent: "#1A1A1A",
+        card: "#FFFFFF",
+        tag: {
+          ai: "#3B82F6",
+          "ai-bg": "#EFF6FF",
+          frontend: "#22C55E",
+          "frontend-bg": "#F0FDF4",
+          backend: "#F59E0B",
+          "backend-bg": "#FFFBEB",
+          default: "#6B7280",
+          "default-bg": "#F3F4F6",
         },
       },
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      fontSize: {
+        "display": ["3rem", { lineHeight: "1.1", letterSpacing: "-0.02em" }],
+        "display-sm": ["2.25rem", { lineHeight: "1.15", letterSpacing: "-0.02em" }],
+        "heading": ["1.875rem", { lineHeight: "1.2", letterSpacing: "-0.02em" }],
+        "heading-sm": ["1.5rem", { lineHeight: "1.25", letterSpacing: "-0.01em" }],
+        "body-lg": ["1.125rem", { lineHeight: "1.6" }],
+        "body": ["1rem", { lineHeight: "1.6" }],
+        "body-sm": ["0.875rem", { lineHeight: "1.5" }],
+        "caption": ["0.75rem", { lineHeight: "1.4" }],
+        "label": ["0.6875rem", { lineHeight: "1.3", letterSpacing: "0.15em" }],
+      },
+      spacing: {
+        "18": "4.5rem",
+        "22": "5.5rem",
+        "26": "6.5rem",
+        "30": "7.5rem",
       },
       animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
-        "fade-in": "fade-in 1s ease-out",
-        "scale-up": "scale-up 0.5s ease-out",
-        bounce:
-          "bounce 0.5s alternate cubic-bezier(0.95, 0.05, 0.795, 0.035) infinite",
-        slideUpCubiBezier: "slideUp 1s cubic-bezier(0.165, 0.84, 0.44, 1)",
+        "fade-in-up": "fade-in-up 0.6s ease-out forwards",
+        "fade-in": "fade-in 0.5s ease-out forwards",
+        "slide-up": "slide-up 0.4s ease-out forwards",
       },
       keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
-        },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
-        },
-        "fade-in": {
-          "0%": { opacity: "0", transform: "translateY(-50px)" },
+        "fade-in-up": {
+          "0%": { opacity: "0", transform: "translateY(16px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
-        "scale-up": {
-          "0%": { transform: "scale(0.5)" },
-          "100%": { transform: "scale(1)" },
+        "fade-in": {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
         },
-        bounce: {
-          from: { transform: "translateY(10px)" },
-          to: { transform: "translateY(0)" },
-        },
-        slideUp: {
-          from: { transform: "translateY(100%)" },
-          to: { transform: "translateY(0)" },
+        "slide-up": {
+          "0%": { opacity: "0", transform: "translateY(8px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
         },
       },
     },

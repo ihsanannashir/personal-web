@@ -1,18 +1,62 @@
 import { ReactElement } from "react";
-import { IconType } from "react-icons";
+
+export type TagDomain = "ai" | "frontend" | "backend" | "default";
+
+export type TechTagData = {
+  label: string;
+  domain: TagDomain;
+};
+
+export type ExperienceEntry = {
+  company: string;
+  role: string;
+  location: string;
+  flag: string;
+  period: string;
+  bullets: string[];
+  tags: TechTagData[];
+};
+
+export type LanguageEntry = {
+  name: string;
+  flag: string;
+  proficiency: string;
+  note?: string;
+  progress: number; // 0-100
+};
 
 export type ProjectData = {
   title: string;
   slug: string;
   description?: string;
-  thumbnail?: string | StaticImport;
-  tech?: any;
+  thumbnail?: string;
+  period?: string;
+  tags: TechTagData[];
   className?: string;
 };
 
-export type MenuData = {
-  title: string;
-  slug: string;
+export type NowData = {
+  lastUpdated: string;
+  city: string;
+  focus: {
+    company: string;
+    role: string;
+    description: string;
+    highlights: string[];
+  };
+  running: {
+    goal: string;
+    runsPerWeek: number;
+    longestRun: string;
+    raceMonth: string;
+    progress: number; // 0-100
+  };
+  reading: {
+    title: string;
+    author: string;
+    note: string;
+  };
+  thinkingAbout: string[];
 };
 
 export type SocialData = {
