@@ -25,7 +25,7 @@
 
   /* Fonts */
   --font-serif: var(--font-dm-serif), 'Georgia', serif;
-  --font-sans: var(--font-inter), 'system-ui', '-apple-system', sans-serif;
+  --font-sans: var(--font-plus-jakarta), 'system-ui', '-apple-system', sans-serif;
 }
 
 /* ─── Base Reset ─── */
