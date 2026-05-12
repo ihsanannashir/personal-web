@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 
 import FaktaThumbnail from "@public/assets/fakta.png";
 import FaktaLandingPage from "@public/assets/fakta/landing-page.png";
@@ -9,7 +8,11 @@ import FaktaVideoDetail from "@public/assets/fakta/video-detail.png";
 import FaktaVideoMobile from "@public/assets/fakta/video-mobile.png";
 import FaktaSubdomainList from "@public/assets/fakta/subdomain-list.png";
 
-import SectionLabel from "@/components/ui/section-label";
+import ProjectDetailLayout, {
+  ProjectSection,
+  FeatureGrid,
+  ImageFigure,
+} from "@/components/project/project-detail-layout";
 import { constructMetadata } from "@/lib/utils/metadata";
 
 export const metadata: Metadata = constructMetadata({
@@ -24,38 +27,26 @@ export const metadata: Metadata = constructMetadata({
 
 const FaktaDetailPage = () => {
   return (
-    <div className="editorial-container pt-16 sm:pt-24 pb-20">
-      {/* Back link */}
-      <Link
-        href="/work"
-        className="text-body-sm text-muted hover:text-foreground transition-colors inline-flex items-center gap-1 mb-8"
-      >
-        ← Back to work
-      </Link>
-
-      {/* Thumbnail */}
-      <Image
-        src={FaktaThumbnail}
-        alt="Fakta.com 2.0"
-        placeholder="blur"
-        sizes="100vw"
-        className="w-full h-60 sm:h-80 rounded-lg object-cover thin-border"
-      />
-
-      {/* Header */}
-      <div className="mt-8 mb-12">
-        <h1 className="font-serif text-display-sm sm:text-display mb-4">
-          Fakta.com 2.0
-        </h1>
-        <p className="text-body-lg text-muted max-w-xl">
-          An Indonesian online media platform that offers news, data, and
-          opinions on a wide range of topics.
-        </p>
-      </div>
-
+    <ProjectDetailLayout
+      title="Fakta.com 2.0"
+      subtitle="An Indonesian online media platform that offers news, data, and opinions on a wide range of topics."
+      heroImage={FaktaThumbnail}
+      heroAlt="Fakta.com 2.0"
+      period="Feb 2024 – Aug 2024"
+      role="Frontend Developer"
+      stack={[
+        { label: "TypeScript", domain: "frontend" },
+        { label: "Next.js", domain: "frontend" },
+        { label: "TailwindCSS", domain: "frontend" },
+        { label: "Express.js", domain: "backend" },
+        { label: "MySQL", domain: "backend" },
+        { label: "Kubernetes", domain: "backend" },
+      ]}
+      liveUrl="https://fakta.com"
+      liveLabel="fakta.com"
+    >
       {/* Description */}
-      <section className="mb-12">
-        <SectionLabel className="mb-6">Description</SectionLabel>
+      <ProjectSection label="Description">
         <div className="space-y-4 text-body text-muted leading-relaxed max-w-2xl">
           <p>
             <strong className="text-foreground">Fakta.com</strong> is an
@@ -79,23 +70,12 @@ const FaktaDetailPage = () => {
             main website.
           </p>
         </div>
-      </section>
-
-      {/* Demo Link */}
-      <a
-        href="https://fakta.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-flex items-center px-6 py-3 text-body-sm font-medium rounded-full thin-border text-foreground hover:bg-foreground hover:text-background transition-colors mb-12"
-      >
-        View live ↗
-      </a>
+      </ProjectSection>
 
       {/* Features */}
-      <section className="mb-12">
-        <SectionLabel className="mb-6">Key features</SectionLabel>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          {[
+      <ProjectSection label="Key features">
+        <FeatureGrid
+          features={[
             "Detailed and categorized news",
             "Interactive slider",
             "Content management system",
@@ -104,99 +84,64 @@ const FaktaDetailPage = () => {
             "Comments",
             "Mobile views",
             "Automatic sub-domains",
-          ].map((feature) => (
-            <li
-              key={feature}
-              className="text-body-sm text-muted pl-4 relative before:absolute before:left-0 before:top-[0.55em] before:w-1.5 before:h-1.5 before:rounded-full before:bg-border"
-            >
-              {feature}
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      {/* Tech Stack */}
-      <section className="mb-12">
-        <SectionLabel className="mb-6">Tech stack</SectionLabel>
-        <ul className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-          {["TypeScript", "TailwindCSS", "Next.js", "Express.js", "MySQL", "Kubernetes"].map(
-            (tech) => (
-              <li
-                key={tech}
-                className="text-body-sm text-muted pl-4 relative before:absolute before:left-0 before:top-[0.55em] before:w-1.5 before:h-1.5 before:rounded-full before:bg-border"
-              >
-                {tech}
-              </li>
-            )
-          )}
-        </ul>
-      </section>
+          ]}
+        />
+      </ProjectSection>
 
       {/* Visuals */}
-      <section>
-        <SectionLabel className="mb-2">Visuals</SectionLabel>
+      <ProjectSection label="Visuals">
         <p className="text-body-sm text-subtle mb-8">
           Some previews of the live project (some cannot be shown due to NDA)
         </p>
 
         <div className="space-y-8">
-          <div className="space-y-2">
-            <Image
-              src={FaktaLandingPage}
-              alt="Fakta.com Landing Page"
-              placeholder="blur"
-              sizes="100vw"
-              className="w-full rounded-lg object-cover thin-border"
-            />
-            <p className="text-caption text-subtle">Landing page</p>
-          </div>
+          <ImageFigure
+            src={FaktaLandingPage}
+            alt="Fakta.com Landing Page"
+            caption="Landing page"
+          />
 
-          <div className="space-y-2">
-            <Image
-              src={FaktaNewsDetail}
-              alt="Fakta.com News Page"
-              placeholder="blur"
-              sizes="100vw"
-              className="w-full rounded-lg object-cover thin-border"
-            />
-            <p className="text-caption text-subtle">News detail page</p>
-          </div>
+          <ImageFigure
+            src={FaktaNewsDetail}
+            alt="Fakta.com News Page"
+            caption="News detail page"
+          />
 
-          <div className="space-y-2">
-            <div className="w-full sm:h-96 flex flex-col sm:flex-row gap-2">
-              <Image
-                src={FaktaVideoDetail}
-                alt="Fakta.com Video Page"
-                placeholder="blur"
-                sizes="100vw"
-                className="w-full rounded-lg object-contain thin-border bg-card"
-              />
-              <Image
-                src={FaktaVideoMobile}
-                alt="Fakta.com Video Mobile view"
-                placeholder="blur"
-                sizes="100vw"
-                className="w-full rounded-lg object-contain thin-border bg-card"
-              />
+          <figure className="rounded-lg thin-border overflow-hidden">
+            <div className="grid grid-cols-1 sm:grid-cols-2 sm:aspect-video">
+              <div className="relative overflow-hidden">
+                <Image
+                  src={FaktaVideoDetail}
+                  alt="Fakta.com Video Page"
+                  placeholder="blur"
+                  sizes="(min-width: 640px) 50vw, 100vw"
+                  className="w-full h-full object-cover bg-card"
+                />
+              </div>
+              <div className="relative overflow-hidden thin-border-t sm:border-t-0 sm:border-l sm:border-border/50">
+                <Image
+                  src={FaktaVideoMobile}
+                  alt="Fakta.com Video Mobile view"
+                  placeholder="blur"
+                  sizes="(min-width: 640px) 50vw, 100vw"
+                  className="w-full h-full object-contain bg-card"
+                />
+              </div>
             </div>
-            <p className="text-caption text-subtle">Video detail page</p>
-          </div>
+            <figcaption className="px-4 py-2.5 text-caption text-subtle bg-card/30 thin-border-t">
+              Video detail page — desktop and mobile
+            </figcaption>
+          </figure>
 
-          <div className="space-y-2 w-full sm:h-96">
-            <Image
-              src={FaktaSubdomainList}
-              alt="Fakta.com Subdomain List"
-              placeholder="blur"
-              sizes="100vw"
-              className="w-full h-full rounded-lg object-contain thin-border bg-card"
-            />
-            <p className="text-caption text-subtle">
-              Fakta&apos;s subdomain list
-            </p>
-          </div>
+          <ImageFigure
+            src={FaktaSubdomainList}
+            alt="Fakta.com Subdomain List"
+            caption="Fakta's subdomain list"
+            contain
+          />
         </div>
-      </section>
-    </div>
+      </ProjectSection>
+    </ProjectDetailLayout>
   );
 };
 
