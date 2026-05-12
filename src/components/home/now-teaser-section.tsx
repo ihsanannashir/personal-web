@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import Section from "@/components/ui/section";
 import SectionLabel from "@/components/ui/section-label";
 
 const NOW_TEASERS = [
@@ -27,7 +28,7 @@ const NOW_TEASERS = [
 
 const NowTeaserSection = () => {
   return (
-    <section className="editorial-container py-20 sm:py-26">
+    <Section>
       <SectionLabel className="mb-10">Now</SectionLabel>
 
       <h2 className="font-serif text-heading sm:text-heading mb-10">
@@ -62,7 +63,7 @@ const NowTeaserSection = () => {
           <span className="ml-0.5">→</span>
         </Link>
       </div>
-    </section>
+    </Section>
   );
 };
 

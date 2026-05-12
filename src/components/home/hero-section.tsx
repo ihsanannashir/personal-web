@@ -28,7 +28,7 @@ const HeroSection = () => {
   }, []);
 
   return (
-    <section className="editorial-container pt-16 sm:pt-24 pb-16 sm:pb-20">
+    <section className="editorial-container pt-16 sm:pt-24 pb-12 sm:pb-16">
       {/* Greeting pill */}
       <div className="mb-8">
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full thin-border">
@@ -56,9 +56,8 @@ const HeroSection = () => {
 
       {/* Subtext */}
       <p className="text-body-lg text-muted max-w-2xl mb-10 leading-relaxed">
-        Based in Jakarta, Indonesia. Building AI systems by day, learning German
-        and training for a half marathon in between. Curiosity drives me beyond
-        the screen.
+        Based in Jakarta, Indonesia. Building AI systems by day, exploring the
+        world beyond the screen in between.
       </p>
 
       {/* CTAs */}
@@ -69,12 +68,6 @@ const HeroSection = () => {
         >
           See my work
         </Link>
-        <a
-          href="mailto:ihsanannashir@gmail.com"
-          className="inline-flex items-center px-6 py-3 text-body-sm font-medium rounded-full thin-border text-foreground hover:bg-foreground hover:text-background transition-colors"
-        >
-          Say hello
-        </a>
       </div>
     </section>
   );

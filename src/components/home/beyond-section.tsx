@@ -1,3 +1,4 @@
+import Section from "@/components/ui/section";
 import SectionLabel from "@/components/ui/section-label";
 
 const INTERESTS = [
@@ -20,7 +21,7 @@ const INTERESTS = [
 
 const BeyondSection = () => {
   return (
-    <section className="editorial-container py-20 sm:py-26">
+    <Section>
       <SectionLabel className="mb-10">Beyond the screen</SectionLabel>
 
       <div className="space-y-10 max-w-2xl">
@@ -35,7 +36,7 @@ const BeyondSection = () => {
           </div>
         ))}
       </div>
-    </section>
+    </Section>
   );
 };
 

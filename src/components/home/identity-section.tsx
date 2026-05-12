@@ -1,3 +1,4 @@
+import Section from "@/components/ui/section";
 import SectionLabel from "@/components/ui/section-label";
 import TechTag from "@/components/ui/tech-tag";
 
@@ -43,7 +44,7 @@ const DOMAIN_TAGS = [
 
 const IdentitySection = () => {
   return (
-    <section className="editorial-container py-20 sm:py-26">
+    <Section>
       <SectionLabel className="mb-10">About</SectionLabel>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20">
@@ -67,7 +68,8 @@ const IdentitySection = () => {
             <p>
               Now I&apos;m in AI Engineering — building RAG systems, optimizing
               LLM-powered platforms, and figuring out how to make AI genuinely
-              useful inside large organizations. I haven&apos;t left my frontend roots;
+              useful inside large organizations. I also hold an IELTS C1
+              certification in English. I haven&apos;t left my frontend roots;
               I&apos;m expanding my domain.
             </p>
           </div>
@@ -121,7 +123,7 @@ const IdentitySection = () => {
           </div>
         </div>
       </div>
-    </section>
+    </Section>
   );
 };
 

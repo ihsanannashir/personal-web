@@ -1,8 +1,9 @@
+import Section from "@/components/ui/section";
 import SectionLabel from "@/components/ui/section-label";
 
 const ContactSection = () => {
   return (
-    <section className="editorial-container py-20 sm:py-26">
+    <Section>
       <SectionLabel className="mb-10">Say hello</SectionLabel>
 
       <div className="max-w-xl">
@@ -42,7 +43,7 @@ const ContactSection = () => {
           </a>
         </div>
       </div>
-    </section>
+    </Section>
   );
 };
 
