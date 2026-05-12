@@ -16,6 +16,8 @@ export type ExperienceEntry = {
   location: string;
   flag: string;
   period: string;
+  factual: string;
+  narrative: string;
   bullets: string[];
   tags: TechTagData[];
 };
