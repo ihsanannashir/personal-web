@@ -9,11 +9,18 @@ export const LANGUAGES: LanguageEntry[] = [
     progress: 100,
   },
   {
-    name: "Minang",
+    name: "Minangkabau",
     flag: "🇮🇩",
     greeting: "Salamaik Datang",
     proficiency: "Mother tongue",
     progress: 95,
+  },
+  {
+    name: "Javanese",
+    flag: "🇮🇩",
+    greeting: "Sugeng rawuh",
+    proficiency: "Conversational",
+    progress: 50,
   },
   {
     name: "English",
@@ -22,13 +29,6 @@ export const LANGUAGES: LanguageEntry[] = [
     proficiency: "C1 / Professional",
     note: "IELTS Academic Band 7.0",
     progress: 85,
-  },
-  {
-    name: "Javanese",
-    flag: "🇮🇩",
-    greeting: "Sugeng rawuh",
-    proficiency: "Conversational",
-    progress: 50,
   },
   {
     name: "German",

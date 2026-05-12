@@ -14,7 +14,7 @@ export const NOW_TEASERS: NowTeaser[] = [
   {
     emoji: "📖",
     title: "Reading",
-    description: "Thinking, Fast and Slow — Daniel Kahneman",
+    description: "The Visual MBA — Jason Barron",
   },
   {
     emoji: "🇩🇪",

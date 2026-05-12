@@ -19,8 +19,7 @@ const StatsSection = () => {
         <StatCard
           value="5"
           label="Languages spoken"
-          sublabel="Indonesian, Minang, English, Javanese, German"
-          className="border-b sm:border-b-0 sm:border-r border-[var(--border)]"
+          sublabel="Indonesian, Minangkabau, Javanese, English, German"
         />
       </div>
     </section>

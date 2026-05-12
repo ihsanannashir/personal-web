@@ -11,7 +11,7 @@ const LanguagesSection = () => {
         {LANGUAGES.map((lang, i) => (
           <span key={lang.name}>
             {i > 0 && <span className="mx-1.5">·</span>}
-            {lang.flag} {lang.name}
+            {lang.name}
           </span>
         ))}
       </p>
