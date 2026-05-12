@@ -2,29 +2,7 @@ import Link from "next/link";
 
 import Section from "@/components/ui/section";
 import SectionLabel from "@/components/ui/section-label";
-
-const NOW_TEASERS = [
-  {
-    emoji: "🔧",
-    title: "Building",
-    description: "AI knowledge management system at CIMB Niaga",
-  },
-  {
-    emoji: "🏃",
-    title: "Running",
-    description: "Training for first half marathon, June 2026",
-  },
-  {
-    emoji: "📖",
-    title: "Reading",
-    description: "Thinking, Fast and Slow — Daniel Kahneman",
-  },
-  {
-    emoji: "🇩🇪",
-    title: "Learning",
-    description: "German, working toward B1",
-  },
-];
+import { NOW_TEASERS } from "@/lib/data/now";
 
 const NowTeaserSection = () => {
   return (
@@ -35,7 +13,6 @@ const NowTeaserSection = () => {
         What I&apos;m up to right now
       </h2>
 
-      {/* 2×2 grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {NOW_TEASERS.map((item) => (
           <div
@@ -53,7 +30,6 @@ const NowTeaserSection = () => {
         ))}
       </div>
 
-      {/* Link to /now */}
       <div className="mt-8">
         <Link
           href="/now"

@@ -1,46 +1,7 @@
 import Section from "@/components/ui/section";
 import SectionLabel from "@/components/ui/section-label";
 import TechTag from "@/components/ui/tech-tag";
-
-const CAREER_ARC = [
-  {
-    company: "CIMB Niaga",
-    role: "AI Enablement & Automation",
-    period: "2025 – Present",
-    domain: "ai" as const,
-  },
-  {
-    company: "Bloom Alternance",
-    role: "Frontend Engineer",
-    period: "2024 – 2025",
-    domain: "frontend" as const,
-  },
-  {
-    company: "KB Bank",
-    role: "Core Banking System",
-    period: "2023 – 2024",
-    domain: "backend" as const,
-  },
-  {
-    company: "NoscAi GmbH",
-    role: "Frontend Developer",
-    period: "2023",
-    domain: "frontend" as const,
-  },
-  {
-    company: "Hukumonline.com",
-    role: "Frontend Intern",
-    period: "2022",
-    domain: "frontend" as const,
-  },
-];
-
-const DOMAIN_TAGS = [
-  { label: "Frontend", domain: "frontend" as const },
-  { label: "Backend", domain: "backend" as const },
-  { label: "AI / ML", domain: "ai" as const },
-  { label: "Core Banking", domain: "default" as const },
-];
+import { EXPERIENCE, DOMAIN_TAGS } from "@/lib/data/experience";
 
 const IdentitySection = () => {
   return (
@@ -88,13 +49,11 @@ const IdentitySection = () => {
             Career arc
           </h3>
           <div className="relative">
-            {/* Vertical line */}
             <div className="absolute left-[5px] top-2 bottom-2 w-px bg-border" />
 
             <div className="space-y-8">
-              {CAREER_ARC.map((entry, index) => (
+              {EXPERIENCE.map((entry, index) => (
                 <div key={index} className="flex gap-5">
-                  {/* Dot */}
                   <div className="relative flex-shrink-0 mt-2">
                     <div
                       className={`w-[11px] h-[11px] rounded-full border-2 ${
@@ -105,16 +64,18 @@ const IdentitySection = () => {
                     />
                   </div>
 
-                  {/* Content */}
                   <div className="flex-1 min-w-0">
                     <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
                       <span className="text-body font-medium text-foreground">
                         {entry.company}
                       </span>
-                      <TechTag label={entry.role} domain={entry.domain} />
+                      <TechTag
+                        label={entry.shortRole}
+                        domain={entry.primaryDomain}
+                      />
                     </div>
                     <span className="text-caption text-subtle mt-1 block">
-                      {entry.period}
+                      {entry.shortPeriod}
                     </span>
                   </div>
                 </div>

@@ -3,13 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-const GREETINGS = [
-  { text: "Welcome", lang: "English" },
-  { text: "Selamat Datang", lang: "Indonesian" },
-  { text: "Salamaik Datang", lang: "Minang" },
-  { text: "Sugeng rawuh", lang: "Javanese" },
-  { text: "Willkommen", lang: "German" },
-];
+import { LANGUAGES } from "@/lib/data/languages";
 
 const HeroSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -19,7 +13,7 @@ const HeroSection = () => {
     const interval = setInterval(() => {
       setIsVisible(false);
       setTimeout(() => {
-        setCurrentIndex((prev) => (prev + 1) % GREETINGS.length);
+        setCurrentIndex((prev) => (prev + 1) % LANGUAGES.length);
         setIsVisible(true);
       }, 300);
     }, 2500);
@@ -39,10 +33,10 @@ const HeroSection = () => {
                 : "opacity-0 -translate-y-1"
             }`}
           >
-            {GREETINGS[currentIndex].text}
+            {LANGUAGES[currentIndex].greeting}
           </span>
           <span className="text-caption text-muted">
-            · {GREETINGS[currentIndex].lang}
+            · {LANGUAGES[currentIndex].name}
           </span>
         </div>
       </div>

@@ -1,9 +1,12 @@
-import { ExperienceEntry } from "@/lib/types/item-data";
+import { ExperienceEntry, TechTagData } from "@/lib/types/item-data";
 
 export const EXPERIENCE: ExperienceEntry[] = [
   {
     company: "CIMB Niaga",
     role: "Software Engineer, AI Enablement & Automation",
+    shortRole: "AI Enablement & Automation",
+    shortPeriod: "2025 – Present",
+    primaryDomain: "ai",
     location: "Jakarta, Indonesia",
     flag: "🇮🇩",
     period: "Jul 2025 – Present",
@@ -25,6 +28,9 @@ export const EXPERIENCE: ExperienceEntry[] = [
   {
     company: "Bloom Alternance",
     role: "Frontend Engineer",
+    shortRole: "Frontend Engineer",
+    shortPeriod: "2024 – 2025",
+    primaryDomain: "frontend",
     location: "Paris, France (Remote)",
     flag: "🇫🇷",
     period: "Nov 2024 – Jan 2025",
@@ -43,6 +49,9 @@ export const EXPERIENCE: ExperienceEntry[] = [
   {
     company: "KB Bank",
     role: "Software Engineer, Core Banking System",
+    shortRole: "Core Banking System",
+    shortPeriod: "2023 – 2024",
+    primaryDomain: "backend",
     location: "Jakarta, Indonesia",
     flag: "🇮🇩",
     period: "Dec 2023 – Sept 2024",
@@ -60,6 +69,9 @@ export const EXPERIENCE: ExperienceEntry[] = [
   {
     company: "NoscAi GmbH",
     role: "Frontend Developer",
+    shortRole: "Frontend Developer",
+    shortPeriod: "2023",
+    primaryDomain: "frontend",
     location: "Hamburg, Germany (Remote)",
     flag: "🇩🇪",
     period: "Jun 2023 – Oct 2023",
@@ -78,6 +90,9 @@ export const EXPERIENCE: ExperienceEntry[] = [
   {
     company: "Hukumonline.com",
     role: "Frontend Engineer Intern",
+    shortRole: "Frontend Intern",
+    shortPeriod: "2022",
+    primaryDomain: "frontend",
     location: "Jakarta, Indonesia",
     flag: "🇮🇩",
     period: "Feb 2022 – Jul 2022",
@@ -90,4 +105,11 @@ export const EXPERIENCE: ExperienceEntry[] = [
       { label: "React", domain: "frontend" },
     ],
   },
+];
+
+export const DOMAIN_TAGS: TechTagData[] = [
+  { label: "Frontend", domain: "frontend" },
+  { label: "Backend", domain: "backend" },
+  { label: "AI / ML", domain: "ai" },
+  { label: "Core Banking", domain: "default" },
 ];

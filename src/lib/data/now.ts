@@ -1,4 +1,27 @@
-import { NowData } from "@/lib/types/item-data";
+import { NowData, NowTeaser } from "@/lib/types/item-data";
+
+export const NOW_TEASERS: NowTeaser[] = [
+  {
+    emoji: "🔧",
+    title: "Building",
+    description: "AI knowledge management system at CIMB Niaga",
+  },
+  {
+    emoji: "🏃",
+    title: "Running",
+    description: "Training for first half marathon, June 2026",
+  },
+  {
+    emoji: "📖",
+    title: "Reading",
+    description: "Thinking, Fast and Slow — Daniel Kahneman",
+  },
+  {
+    emoji: "🇩🇪",
+    title: "Learning",
+    description: "German, working toward B1",
+  },
+];
 
 export const NOW_DATA: NowData = {
   lastUpdated: "May 2026",

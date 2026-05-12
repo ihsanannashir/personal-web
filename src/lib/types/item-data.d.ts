@@ -10,6 +10,9 @@ export type TechTagData = {
 export type ExperienceEntry = {
   company: string;
   role: string;
+  shortRole: string;
+  shortPeriod: string;
+  primaryDomain: TagDomain;
   location: string;
   flag: string;
   period: string;
@@ -20,6 +23,7 @@ export type ExperienceEntry = {
 export type LanguageEntry = {
   name: string;
   flag: string;
+  greeting: string;
   proficiency: string;
   note?: string;
   progress: number; // 0-100
@@ -57,6 +61,17 @@ export type NowData = {
     note: string;
   };
   thinkingAbout: string[];
+};
+
+export type NowTeaser = {
+  emoji: string;
+  title: string;
+  description: string;
+};
+
+export type Interest = {
+  label: string;
+  description: string;
 };
 
 export type SocialData = {

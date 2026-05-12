@@ -1,13 +1,6 @@
 import Section from "@/components/ui/section";
 import SectionLabel from "@/components/ui/section-label";
-
-const LANGUAGES = [
-  { flag: "🇬🇧", name: "English" },
-  { flag: "🇮🇩", name: "Indonesian" },
-  { flag: "🇮🇩", name: "Minang" },
-  { flag: "🇮🇩", name: "Javanese" },
-  { flag: "🇩🇪", name: "German" },
-];
+import { LANGUAGES } from "@/lib/data/languages";
 
 const LanguagesSection = () => {
   return (
