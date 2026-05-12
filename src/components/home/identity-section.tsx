@@ -24,14 +24,14 @@ const IdentitySection = () => {
               From there, I grew through full-stack engineering and spent a year
               deep in core banking — migrating legacy AS400 systems to modern
               Java-based platforms. It taught me how critical software can be,
-              and what it means to build systems that can&apos;t afford to break.
+              and what it means to build systems that can&apos;t afford to
+              break.
             </p>
             <p>
               Now I&apos;m in AI Engineering — building RAG systems, optimizing
               LLM-powered platforms, and figuring out how to make AI genuinely
-              useful inside large organizations. I also hold an IELTS C1
-              certification in English. I haven&apos;t left my frontend roots;
-              I&apos;m expanding my domain.
+              useful inside large organizations. I haven&apos;t left my frontend
+              roots; I&apos;m expanding my domain.
             </p>
           </div>
 

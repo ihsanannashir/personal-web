@@ -43,9 +43,9 @@ const HeroSection = () => {
 
       {/* Headline */}
       <h1 className="font-serif text-display-sm sm:text-display max-w-3xl mb-6">
-        Software & AI Engineer.
+        I&apos;m Ihsan An-Nashir,
         <br />
-        Reader. Traveller.
+        <p className="italic">Software Engineer. Reader. Traveller.</p>
       </h1>
 
       {/* Subtext */}

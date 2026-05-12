@@ -5,9 +5,9 @@ const StatsSection = () => {
     <section className="editorial-container">
       <div className="grid grid-cols-1 sm:grid-cols-3 thin-border rounded-lg">
         <StatCard
-          value="5"
-          label="Languages spoken"
-          sublabel="Indonesian, Minang, English, Javanese, German"
+          value="3+"
+          label="Years of experience"
+          sublabel="Across multiple industries"
           className="border-b sm:border-b-0 sm:border-r border-[var(--border)]"
         />
         <StatCard
@@ -17,9 +17,10 @@ const StatsSection = () => {
           className="border-b sm:border-b-0 sm:border-r border-[var(--border)]"
         />
         <StatCard
-          value="21km"
-          label="Half marathon goal"
-          sublabel="June 2026"
+          value="5"
+          label="Languages spoken"
+          sublabel="Indonesian, Minang, English, Javanese, German"
+          className="border-b sm:border-b-0 sm:border-r border-[var(--border)]"
         />
       </div>
     </section>
