@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { Interest } from "@/lib/types/item-data";
 
 export const INTERESTS: Interest[] = [
@@ -12,8 +14,19 @@ export const INTERESTS: Interest[] = [
       "Training for my first half marathon in June 2026. The discipline of running teaches patience — something engineering also demands.",
   },
   {
-    label: "Languages",
-    description:
-      "Five languages and counting. Each one opens a different way of seeing the world. Currently working on German.",
+    label: "Travelling",
+    description: (
+      <>
+        From city streets to volcano summits. Every trip is a chance to be lost,
+        then found. Documented in the{" "}
+        <Link
+          href="/atlas"
+          className="underline text-foreground hover:opacity-70 transition-opacity"
+        >
+          atlas
+        </Link>
+        .
+      </>
+    ),
   },
 ];

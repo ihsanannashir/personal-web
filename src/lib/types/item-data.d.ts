@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, ReactNode } from "react";
 
 export type TagDomain = "ai" | "frontend" | "backend" | "default";
 
@@ -71,7 +71,7 @@ export type NowTeaser = {
 
 export type Interest = {
   label: string;
-  description: string;
+  description: ReactNode;
 };
 
 export type SocialData = {
