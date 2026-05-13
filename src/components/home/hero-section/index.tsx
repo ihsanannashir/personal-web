@@ -7,10 +7,6 @@ const dmSerifDisplay = DM_Serif_Display({
   weight: "400",
 });
 
-/* TODO
- * - add icon or image signature
- */
-
 const HeroSection = () => {
   return (
     <ContainerCard className="w-full items-center">
