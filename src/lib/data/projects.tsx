@@ -6,7 +6,7 @@ export const PROJECTS: ProjectData[] = [
     slug: "fakta-com",
     description:
       "Indonesian online media platform with news, data, and opinions. Built with CMS, multi-role authorization, and dynamic content delivery.",
-    thumbnail: "/assets/fakta.png",
+    thumbnail: "/assets/project/fakta/fakta.png",
     period: "Feb 2024 – Aug 2024",
     tags: [
       { label: "Next.js", domain: "frontend" },
@@ -19,7 +19,7 @@ export const PROJECTS: ProjectData[] = [
     slug: "yomy",
     description:
       "SaaS customer feedback manager with Stripe payments, QR-based reviews, and business dashboards.",
-    thumbnail: "/assets/yomy.png",
+    thumbnail: "/assets/project/yomy/yomy.png",
     period: "Aug 2023 – Jan 2024",
     tags: [
       { label: "React", domain: "frontend" },

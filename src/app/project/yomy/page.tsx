@@ -1,10 +1,10 @@
 import { Metadata } from "next";
 
-import YomyThumbnail from "@public/assets/yomy.png";
-import YomyDashboardLanding from "@public/assets/yomy/yomy-dashboard-landing.png";
-import YomyDashboardMain from "@public/assets/yomy/yomy-dashboard-main.png";
-import YomyRatingPage from "@public/assets/yomy/yomy-rating-page.png";
-import YomyReview from "@public/assets/yomy/yomy-review.png";
+import YomyThumbnail from "@public/assets/project/yomy/yomy.png";
+import YomyDashboardLanding from "@public/assets/project/yomy/yomy-dashboard-landing.png";
+import YomyDashboardMain from "@public/assets/project/yomy/yomy-dashboard-main.png";
+import YomyRatingPage from "@public/assets/project/yomy/yomy-rating-page.png";
+import YomyReview from "@public/assets/project/yomy/yomy-review.png";
 
 import ProjectDetailLayout, {
   ProjectSection,

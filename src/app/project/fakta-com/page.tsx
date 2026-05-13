@@ -1,12 +1,12 @@
 import { Metadata } from "next";
 import Image from "next/image";
 
-import FaktaThumbnail from "@public/assets/fakta.png";
-import FaktaLandingPage from "@public/assets/fakta/landing-page.png";
-import FaktaNewsDetail from "@public/assets/fakta/news-detail.png";
-import FaktaVideoDetail from "@public/assets/fakta/video-detail.png";
-import FaktaVideoMobile from "@public/assets/fakta/video-mobile.png";
-import FaktaSubdomainList from "@public/assets/fakta/subdomain-list.png";
+import FaktaThumbnail from "@public/assets/project/fakta/fakta.png";
+import FaktaLandingPage from "@public/assets/project/fakta/landing-page.png";
+import FaktaNewsDetail from "@public/assets/project/fakta/news-detail.png";
+import FaktaVideoDetail from "@public/assets/project/fakta/video-detail.png";
+import FaktaVideoMobile from "@public/assets/project/fakta/video-mobile.png";
+import FaktaSubdomainList from "@public/assets/project/fakta/subdomain-list.png";
 
 import ProjectDetailLayout, {
   ProjectSection,
