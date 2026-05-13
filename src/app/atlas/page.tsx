@@ -38,11 +38,11 @@ export default function AtlasPage() {
             className="border-b sm:border-b-0 sm:border-r border-[var(--border)]"
           />
           <StatCard
-            value={String(ATLAS_STATS.soloAdventures)}
-            label="Solo adventures"
+            value={String(ATLAS_STATS.mountainsClimbed)}
+            label="Mountains climbed"
             className="sm:border-r border-[var(--border)]"
           />
-          <StatCard value={ATLAS_STATS.firstEntry} label="First entry" />
+          <StatCard value={String(ATLAS_STATS.nightsAway)} label="Nights away" />
         </div>
       </section>
 

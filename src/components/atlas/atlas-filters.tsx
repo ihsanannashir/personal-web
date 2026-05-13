@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import clsx from "clsx";
-import { Trip, TripRegionTag } from "@/lib/types/item-data";
+import { Trip, TripCategory } from "@/lib/types/item-data";
 import FeaturedTripCard from "@/components/atlas/featured-trip-card";
 import TripCard from "@/components/atlas/trip-card";
 
@@ -10,7 +10,7 @@ interface AtlasFiltersProps {
   trips: Trip[];
 }
 
-const FILTERS = ["All", "Southeast Asia", "Indonesia", "Hiking", "Solo"] as const;
+const FILTERS = ["All", "City", "Hiking"] as const;
 type FilterValue = (typeof FILTERS)[number];
 
 const AtlasFilters = ({ trips }: AtlasFiltersProps) => {
@@ -19,9 +19,7 @@ const AtlasFilters = ({ trips }: AtlasFiltersProps) => {
   const filteredTrips =
     activeFilter === "All"
       ? trips
-      : trips.filter((t) =>
-          t.regionTags.includes(activeFilter as TripRegionTag),
-        );
+      : trips.filter((t) => t.category === (activeFilter as TripCategory));
 
   const featuredTrip = filteredTrips.find((t) => t.featured);
   const standardTrips = filteredTrips.filter((t) => !t.featured);

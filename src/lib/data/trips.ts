@@ -2,10 +2,10 @@ import { Trip } from "@/lib/types/item-data";
 
 export const TRIPS: Trip[] = [
   {
-    slug: "mount-prau-2026",
+    slug: "prau-2026",
     title: "Mount Prau, Central Java",
     date: "April 2026",
-    regionTags: ["Indonesia", "Hiking"],
+    category: "Hiking",
     coverEmoji: "⛰️",
     description:
       "The Dieng plateau at sunrise, with five volcanoes lined up on the horizon like a postcard no one would believe was real.",
@@ -20,7 +20,7 @@ export const TRIPS: Trip[] = [
       { value: "∞", label: "Times I said wow" },
     ],
     journal:
-      "We summited just before 5am and waited in the cold for the light to come. When it did — slowly, then all at once — the entire Dieng plateau turned gold below us and the volcano silhouettes sharpened against a pink sky. Someone in our group said \"this is why we do this.\" I think they were right. The descent was steep and my knees complained the whole way down. Worth it.",
+      'We summited just before 5am and waited in the cold for the light to come. When it did — slowly, then all at once — the entire Dieng plateau turned gold below us and the volcano silhouettes sharpened against a pink sky. Someone in our group said "this is why we do this." I think they were right. The descent was steep and my knees complained the whole way down. Worth it.',
     places: [
       {
         name: "Patak Banteng Trailhead",
@@ -46,10 +46,10 @@ export const TRIPS: Trip[] = [
     photoSlots: 6,
   },
   {
-    slug: "mount-merbabu-2025",
+    slug: "merbabu-2025",
     title: "Mount Merbabu, Central Java",
     date: "October 2025",
-    regionTags: ["Indonesia", "Hiking", "Solo"],
+    category: "Hiking",
     coverEmoji: "🏔️",
     description:
       "3,145 metres above sea level. Summit at 3am, clouds below, stars above. A mountain that earns everything it gives you.",
@@ -93,7 +93,7 @@ export const TRIPS: Trip[] = [
     slug: "kuala-lumpur-2025",
     title: "Kuala Lumpur, Malaysia",
     date: "April 2025",
-    regionTags: ["Southeast Asia", "Solo"],
+    category: "City",
     coverEmoji: "🇲🇾",
     description:
       "A long weekend across the causeway. Petronas at golden hour, Brickfields at noon, and roti canai for every meal.",
@@ -144,14 +144,8 @@ export const TRIPS: Trip[] = [
 export const ATLAS_STATS = {
   tripsLogged: TRIPS.length,
   countriesVisited: 3,
-  soloAdventures: TRIPS.filter((t) => t.regionTags.includes("Solo")).length,
-  firstEntry: "April 2025",
+  mountainsClimbed: 2,
+  nightsAway: 8,
 };
 
-export const REGION_FILTERS = [
-  "All",
-  "Southeast Asia",
-  "Indonesia",
-  "Hiking",
-  "Solo",
-] as const;
+export const TRIP_FILTERS = ["All", "City", "Hiking"] as const;

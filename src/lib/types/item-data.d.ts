@@ -84,11 +84,7 @@ export type SocialData = {
   tag: "Github" | "Linkedin" | "Email";
 };
 
-export type TripRegionTag =
-  | "Southeast Asia"
-  | "Indonesia"
-  | "Hiking"
-  | "Solo";
+export type TripCategory = "City" | "Hiking";
 
 export type TripPlace = {
   name: string;
@@ -105,7 +101,7 @@ export type Trip = {
   slug: string;
   title: string;
   date: string;
-  regionTags: TripRegionTag[];
+  category: TripCategory;
   coverEmoji: string;
   description: string;
   featured: boolean;

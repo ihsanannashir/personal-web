@@ -26,16 +26,11 @@ const TripCard = ({ trip }: TripCardProps) => {
           {trip.description}
         </p>
 
-        {/* Region tags */}
+        {/* Category tag */}
         <div className="flex flex-wrap gap-1.5">
-          {trip.regionTags.map((tag) => (
-            <span
-              key={tag}
-              className="text-caption text-subtle px-2.5 py-0.5 rounded-full thin-border"
-            >
-              {tag}
-            </span>
-          ))}
+          <span className="text-caption text-subtle px-2.5 py-0.5 rounded-full thin-border">
+            {trip.category}
+          </span>
         </div>
       </div>
     </Link>
