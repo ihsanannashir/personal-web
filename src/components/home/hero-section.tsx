@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Title from "@/components/ui/title";
 
 import { LANGUAGES } from "@/lib/data/languages";
 
@@ -42,11 +43,11 @@ const HeroSection = () => {
       </div>
 
       {/* Headline */}
-      <h1 className="font-serif text-display-sm sm:text-display max-w-3xl mb-6">
+      <Title className="max-w-3xl mb-6">
         I&apos;m Ihsan An-Nashir,
         <br />
         <p className="italic">Software Engineer. Reader. Traveller.</p>
-      </h1>
+      </Title>
 
       {/* Subtext */}
       <p className="text-body-lg text-muted max-w-2xl mb-10 leading-relaxed">

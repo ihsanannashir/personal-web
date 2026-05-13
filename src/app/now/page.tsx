@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 
 import SectionLabel from "@/components/ui/section-label";
+import Title from "@/components/ui/title";
 import ProgressBar from "@/components/ui/progress-bar";
 import { LANGUAGES } from "@/lib/data/languages";
 import { NOW_DATA } from "@/lib/data/now";
@@ -23,7 +24,7 @@ export default function NowPage() {
           <span className="w-1.5 h-1.5 rounded-full bg-green-500" />
           Updated {lastUpdated} · {city}
         </div>
-        <h1 className="font-serif text-display-sm sm:text-display mb-4">Now</h1>
+        <Title>Now</Title>
         <p className="text-body-lg text-muted max-w-xl">
           A living snapshot of what I&apos;m focused on, training for, reading,
           and thinking about.
@@ -153,10 +154,7 @@ export default function NowPage() {
 
         <div className="space-y-4">
           {thinkingAbout.map((question, i) => (
-            <div
-              key={i}
-              className="pl-5 py-2 border-l-2 border-border"
-            >
+            <div key={i} className="pl-5 py-2 border-l-2 border-border">
               <p className="text-body text-muted italic leading-relaxed">
                 {question}
               </p>

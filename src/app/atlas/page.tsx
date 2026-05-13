@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 
 import SectionLabel from "@/components/ui/section-label";
+import Title from "@/components/ui/title";
 import StatCard from "@/components/ui/stat-card";
 import AtlasFilters from "@/components/atlas/atlas-filters";
 import { TRIPS, ATLAS_STATS } from "@/lib/data/trips";
@@ -17,9 +18,7 @@ export default function AtlasPage() {
       {/* Page header */}
       <div className="mb-12 sm:mb-16">
         <SectionLabel className="mb-4">Places I&apos;ve been</SectionLabel>
-        <h1 className="font-serif text-display-sm sm:text-display mb-4">
-          The atlas.
-        </h1>
+        <Title>The atlas.</Title>
         <p className="text-body-lg text-muted max-w-xl">
           A living journal of trips — what I saw, what I thought, what I ate.
         </p>
@@ -43,10 +42,7 @@ export default function AtlasPage() {
             label="Solo adventures"
             className="sm:border-r border-[var(--border)]"
           />
-          <StatCard
-            value={ATLAS_STATS.firstEntry}
-            label="First entry"
-          />
+          <StatCard value={ATLAS_STATS.firstEntry} label="First entry" />
         </div>
       </section>
 

@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 
 import SectionLabel from "@/components/ui/section-label";
+import Title from "@/components/ui/title";
 import TechTag from "@/components/ui/tech-tag";
 import { EXPERIENCE } from "@/lib/data/experience";
 import { PROJECTS } from "@/lib/data/projects";
@@ -17,9 +18,7 @@ export default function WorkPage() {
     <div className="editorial-container pt-16 sm:pt-24 pb-20">
       {/* Page header */}
       <div className="mb-16 sm:mb-20">
-        <h1 className="font-serif text-display-sm sm:text-display mb-4">
-          Work
-        </h1>
+        <Title>Work</Title>
         <p className="text-body-lg text-muted max-w-xl">
           Career timeline, projects, and education. From frontend to AI
           engineering, here&apos;s where I&apos;ve been.

@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 
 import SectionLabel from "@/components/ui/section-label";
+import Title from "@/components/ui/title";
 import { TRIPS } from "@/lib/data/trips";
 
 type Props = {
@@ -45,9 +46,7 @@ export default function TripDetailPage({ params }: Props) {
       {/* Kicker + Title */}
       <div className="mb-12">
         <SectionLabel className="mb-3">{trip.kicker}</SectionLabel>
-        <h1 className="font-serif text-display-sm sm:text-display mb-4">
-          {trip.title}
-        </h1>
+        <Title>{trip.title}</Title>
         <p className="text-body-lg text-muted max-w-2xl leading-relaxed">
           {trip.opening}
         </p>
