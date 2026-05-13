@@ -14,7 +14,7 @@ const AboutSection = () => {
           <div className="w-full h-72 sm:h-full absolute z-20">
             <Image
               alt="Ihsan An-Nashir"
-              src={"/Ihsan-cv.jpg"}
+              src={"/Ihsan-prau.jpg"}
               width={0}
               height={0}
               sizes="100vw"
@@ -27,8 +27,8 @@ const AboutSection = () => {
         {/* Paragraph */}
         <div className="space-y-4 text-justify sm:col-span-2 order-2 sm:order-1">
           <p>
-            Hi there! I am <b>Ihsan</b>, a highly ambitious Software Engineer
-            currently based in Jakarta, Indonesia.
+            Hi there! I am <b>Ihsan</b>, a Software Engineer currently based in
+            Jakarta, Indonesia.
           </p>
           <p>
             I graduated from Brawijaya University, Malang in early 2023 with a
@@ -36,9 +36,9 @@ const AboutSection = () => {
             working as a software engineer in several companies.
           </p>
           <p>
-            Experienced in Web Development, I have developed software with
-            various technologies like Javascript/Typescript, Java, and
-            frameworks like NextJS and ExpressJS.
+            Recently, I&apos;ve been expanding into AI engineering and
+            data-driven systems, focusing on building intelligent workflows and
+            automation.
           </p>
           <p>
             My expertise spans in web development and artificial intelligence.

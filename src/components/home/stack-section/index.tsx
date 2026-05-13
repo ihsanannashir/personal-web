@@ -11,6 +11,7 @@ type StackData = {
 
 const STACK: StackData[] = [
   { title: "Typescript", icon: "/icons/typescript.svg" },
+  { title: "Python", icon: "/icons/python.svg" },
   { title: "ReactJS", icon: "/icons/react.svg" },
   { title: "NextJS", icon: "/icons/nextjs.svg" },
   { title: "TailwindCSS", icon: "/icons/tailwindcss.svg" },
