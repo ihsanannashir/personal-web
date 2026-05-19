@@ -4,8 +4,10 @@ import Link from "next/link";
 import SectionLabel from "@/components/ui/section-label";
 import Title from "@/components/ui/title";
 import TechTag from "@/components/ui/tech-tag";
-import { EXPERIENCE } from "@/lib/data/experience";
-import { PROJECTS } from "@/lib/data/projects";
+import { supabase } from "@/lib/supabase";
+import type { Project, Experience } from "@/lib/types/database";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Work",
@@ -13,7 +15,34 @@ export const metadata: Metadata = {
     "Career timeline, projects, and education of Ihsan An-Nashir — Software & AI Engineer.",
 };
 
-export default function WorkPage() {
+function formatPeriod(start: string, end: string | null): string {
+  const startDate = new Date(start);
+  const startStr = startDate.toLocaleDateString("en-US", {
+    month: "short",
+    year: "numeric",
+  });
+  if (!end) return `${startStr} – Present`;
+  const endDate = new Date(end);
+  const endStr = endDate.toLocaleDateString("en-US", {
+    month: "short",
+    year: "numeric",
+  });
+  return `${startStr} – ${endStr}`;
+}
+
+export default async function WorkPage() {
+  const [{ data: projects }, { data: experiences }] = await Promise.all([
+    supabase
+      .from("projects")
+      .select("*")
+      .eq("status", "published")
+      .order("created_at", { ascending: false }),
+    supabase
+      .from("experiences")
+      .select("*")
+      .order("display_order", { ascending: true }),
+  ]);
+
   return (
     <div className="editorial-container pt-16 sm:pt-24 pb-20">
       {/* Page header */}
@@ -30,10 +59,10 @@ export default function WorkPage() {
         <SectionLabel className="mb-10">Projects</SectionLabel>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {PROJECTS.map((project) => (
+          {(projects ?? []).map((project: Project) => (
             <Link
               key={project.slug}
-              href={`/project/${project.slug}`}
+              href={project.external_url ?? `/project/${project.slug}`}
               className="group block p-6 rounded-lg thin-border bg-card/50 hover:bg-card transition-colors"
             >
               <div className="flex items-baseline justify-between mb-3">
@@ -42,21 +71,14 @@ export default function WorkPage() {
                 </h3>
                 <span className="text-body-sm text-subtle">↗</span>
               </div>
-              {project.period && (
-                <p className="text-caption text-subtle mb-3">
-                  {project.period}
+              {project.description && (
+                <p className="text-body-sm text-muted mb-4 leading-relaxed">
+                  {project.description}
                 </p>
               )}
-              <p className="text-body-sm text-muted mb-4 leading-relaxed">
-                {project.description}
-              </p>
               <div className="flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
-                  <TechTag
-                    key={tag.label}
-                    label={tag.label}
-                    domain={tag.domain}
-                  />
+                {project.tech_tags.map((tag) => (
+                  <TechTag key={tag} label={tag} domain="default" />
                 ))}
               </div>
             </Link>
@@ -73,11 +95,13 @@ export default function WorkPage() {
           <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-border-light lg:left-1/2 lg:-translate-x-1/2" />
 
           <div className="space-y-8 lg:space-y-16">
-            {EXPERIENCE.map((entry, index) => {
+            {(experiences ?? []).map((entry: Experience, index: number) => {
               const isLeft = index % 2 === 0;
+              const period = formatPeriod(entry.start_date, entry.end_date);
+              const location = `${entry.flag_emoji} ${entry.country_code}`;
 
               return (
-                <div key={index} className="relative pl-5 lg:pl-0">
+                <div key={entry.id} className="relative pl-5 lg:pl-0">
                   {/* Dot — mobile: left edge | desktop: center */}
                   <div className="absolute left-0 top-1 -translate-x-1/2 z-10 lg:left-1/2 lg:top-8">
                     <div className="w-2 h-2 rounded-full bg-foreground" />
@@ -94,14 +118,14 @@ export default function WorkPage() {
                               {entry.company}
                             </h3>
                             <p className="text-[12px] lg:text-body-sm text-subtle lg:text-muted mt-0.5 lg:mt-1">
-                              {entry.period}
+                              {period}
                               <span className="lg:hidden">
                                 {" "}
-                                · {entry.location}
+                                · {location}
                               </span>
                             </p>
                             <p className="hidden lg:block text-caption text-subtle mt-0.5">
-                              {entry.location}
+                              {location}
                             </p>
                           </div>
                         </div>
@@ -112,17 +136,19 @@ export default function WorkPage() {
                             {entry.role}
                           </h4>
                           <p className="text-[13px] lg:text-body-sm text-muted leading-[1.7] mb-2">
-                            {entry.factual}
+                            {entry.factual_line}
                           </p>
-                          <p className="text-[13px] lg:text-body-sm text-muted italic leading-[1.7] mb-4">
-                            {entry.narrative}
-                          </p>
+                          {entry.personal_note && (
+                            <p className="text-[13px] lg:text-body-sm text-muted italic leading-[1.7] mb-4">
+                              {entry.personal_note}
+                            </p>
+                          )}
                           <div className="flex flex-wrap gap-1.5">
-                            {entry.tags.map((tag) => (
+                            {entry.tech_tags.map((tag) => (
                               <TechTag
-                                key={tag.label}
-                                label={tag.label}
-                                domain={tag.domain}
+                                key={tag}
+                                label={tag}
+                                domain="default"
                               />
                             ))}
                           </div>
@@ -137,14 +163,14 @@ export default function WorkPage() {
                               {entry.company}
                             </h3>
                             <p className="text-[12px] lg:text-body-sm text-subtle lg:text-muted mt-0.5 lg:mt-1">
-                              {entry.period}
+                              {period}
                               <span className="lg:hidden">
                                 {" "}
-                                · {entry.location}
+                                · {location}
                               </span>
                             </p>
                             <p className="hidden lg:block text-caption text-subtle mt-0.5">
-                              {entry.location}
+                              {location}
                             </p>
                           </div>
                         </div>
@@ -155,17 +181,19 @@ export default function WorkPage() {
                             {entry.role}
                           </h4>
                           <p className="text-[13px] lg:text-body-sm text-muted leading-[1.7] mb-2">
-                            {entry.factual}
+                            {entry.factual_line}
                           </p>
-                          <p className="text-[13px] lg:text-body-sm text-muted italic leading-[1.7] mb-4">
-                            {entry.narrative}
-                          </p>
+                          {entry.personal_note && (
+                            <p className="text-[13px] lg:text-body-sm text-muted italic leading-[1.7] mb-4">
+                              {entry.personal_note}
+                            </p>
+                          )}
                           <div className="flex flex-wrap gap-1.5 lg:justify-end">
-                            {entry.tags.map((tag) => (
+                            {entry.tech_tags.map((tag) => (
                               <TechTag
-                                key={tag.label}
-                                label={tag.label}
-                                domain={tag.domain}
+                                key={tag}
+                                label={tag}
+                                domain="default"
                               />
                             ))}
                           </div>
@@ -179,36 +207,6 @@ export default function WorkPage() {
           </div>
         </div>
       </section>
-
-      {/* ─── Education ─── */}
-      {/* <section>
-        <SectionLabel className="mb-10">Education</SectionLabel>
-
-        <div className="p-6 sm:p-8 rounded-lg thin-border bg-card/50">
-          <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-4">
-            <h3 className="text-body-lg font-medium text-foreground">
-              Brawijaya University
-            </h3>
-            <span className="text-body-sm text-subtle">
-              Aug 2019 – Feb 2023
-            </span>
-          </div>
-          <p className="text-body text-muted mb-2">
-            B.Eng. Computer Engineering, Computer Science Faculty
-          </p>
-          <p className="text-body-sm text-subtle mb-4">GPA: 3.76 / 4.00</p>
-          <div className="thin-border-t pt-4">
-            <span className="text-caption text-subtle uppercase tracking-wide">
-              Thesis
-            </span>
-            <p className="text-body-sm text-muted mt-1 leading-relaxed">
-              Intensity Detection of Angry Emotion Through Speech Using
-              Wavelet-Based Frequency Cepstral Coefficients and K-Nearest
-              Neighbor Algorithm on Raspberry Pi 4
-            </p>
-          </div>
-        </div>
-      </section> */}
     </div>
   );
 }

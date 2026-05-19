@@ -1,32 +1,50 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 
 import SectionLabel from "@/components/ui/section-label";
 import Title from "@/components/ui/title";
-import { TRIPS } from "@/lib/data/trips";
+import { supabase } from "@/lib/supabase";
+import type { TripWithRelations } from "@/lib/types/database";
+
+export const revalidate = 60;
 
 type Props = {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 };
 
-export function generateStaticParams() {
-  return TRIPS.map((trip) => ({ slug: trip.slug }));
-}
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
 
-export function generateMetadata({ params }: Props): Metadata {
-  const trip = TRIPS.find((t) => t.slug === params.slug);
+  const { data: trip } = await supabase
+    .from("trips")
+    .select("title, opening_paragraph")
+    .eq("slug", slug)
+    .single();
+
   if (!trip) return { title: "Trip not found" };
 
   return {
     title: trip.title,
-    description: trip.description,
+    description: trip.opening_paragraph ?? "",
   };
 }
 
-export default function TripDetailPage({ params }: Props) {
-  const trip = TRIPS.find((t) => t.slug === params.slug);
-  if (!trip) notFound();
+export default async function TripDetailPage({ params }: Props) {
+  const { slug } = await params;
+
+  const { data, error } = await supabase
+    .from("trips")
+    .select("*, trip_photos(*), trip_places(*)")
+    .eq("slug", slug)
+    .single();
+
+  if (error || !data) notFound();
+
+  const trip = data as TripWithRelations;
+  trip.trip_photos.sort((a, b) => a.display_order - b.display_order);
+  trip.trip_places.sort((a, b) => a.display_order - b.display_order);
 
   return (
     <div className="editorial-container pt-16 sm:pt-24 pb-20">
@@ -39,87 +57,90 @@ export default function TripDetailPage({ params }: Props) {
       </Link>
 
       {/* Hero image area */}
-      <div className="w-full h-64 sm:h-80 rounded-lg bg-border-light flex items-center justify-center mb-8">
-        <span className="text-7xl sm:text-8xl">{trip.coverEmoji}</span>
-      </div>
+      {trip.hero_image_url ? (
+        <div className="w-full h-64 sm:h-80 rounded-lg overflow-hidden mb-8 relative">
+          <Image
+            src={trip.hero_image_url}
+            alt={trip.title}
+            fill
+            className="object-cover"
+          />
+        </div>
+      ) : (
+        <div className="w-full h-64 sm:h-80 rounded-lg bg-border-light flex items-center justify-center mb-8">
+          <span className="text-7xl sm:text-8xl">🗺️</span>
+        </div>
+      )}
 
       {/* Kicker + Title */}
       <div className="mb-12">
-        <SectionLabel className="mb-3">{trip.kicker}</SectionLabel>
+        {trip.kicker && (
+          <SectionLabel className="mb-3">{trip.kicker}</SectionLabel>
+        )}
         <Title>{trip.title}</Title>
-        <p className="text-body-lg text-muted max-w-2xl leading-relaxed">
-          {trip.opening}
-        </p>
+        {trip.opening_paragraph && (
+          <p className="text-body-lg text-muted max-w-2xl leading-relaxed">
+            {trip.opening_paragraph}
+          </p>
+        )}
       </div>
 
-      {/* Stats row */}
-      <section className="mb-14 sm:mb-16">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-          {trip.stats.map((stat) => (
-            <div
-              key={stat.label}
-              className="p-4 sm:p-5 rounded-lg bg-card/50 thin-border"
-            >
-              <span className="font-serif text-heading-sm sm:text-heading block mb-1">
-                {stat.value}
-              </span>
-              <span className="text-caption text-muted">{stat.label}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* Journal */}
-      <section className="mb-14 sm:mb-16">
-        <SectionLabel className="mb-6">Journal</SectionLabel>
-        <div className="border-l-2 border-border pl-6 sm:pl-8 max-w-2xl">
-          <p className="text-body text-muted leading-relaxed italic">
-            {trip.journal}
-          </p>
-        </div>
-      </section>
+      {trip.journal_entry && (
+        <section className="mb-14 sm:mb-16">
+          <SectionLabel className="mb-6">Journal</SectionLabel>
+          <div className="border-l-2 border-border pl-6 sm:pl-8 max-w-2xl">
+            <p className="text-body text-muted leading-relaxed italic">
+              {trip.journal_entry}
+            </p>
+          </div>
+        </section>
+      )}
 
       {/* Photo grid */}
-      <section className="mb-14 sm:mb-16">
-        <SectionLabel className="mb-6">Photos</SectionLabel>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
-          {Array.from({ length: trip.photoSlots }).map((_, i) => (
-            <div
-              key={i}
-              className="aspect-[4/3] rounded-lg border border-dashed border-border flex items-center justify-center bg-border-light/30"
-            >
-              <span className="text-2xl opacity-30">📷</span>
-            </div>
-          ))}
-        </div>
-      </section>
+      {trip.trip_photos.length > 0 && (
+        <section className="mb-14 sm:mb-16">
+          <SectionLabel className="mb-6">Photos</SectionLabel>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+            {trip.trip_photos.map((photo) => (
+              <div
+                key={photo.id}
+                className="aspect-[4/3] rounded-lg overflow-hidden relative"
+              >
+                <Image
+                  src={photo.url}
+                  alt={photo.caption ?? "Trip photo"}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Places visited */}
-      <section>
-        <SectionLabel className="mb-6">Places visited</SectionLabel>
-        <div className="space-y-0">
-          {trip.places.map((place, index) => (
-            <div
-              key={place.name}
-              className={`flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 py-4 ${
-                index < trip.places.length - 1 ? "thin-border-b" : ""
-              }`}
-            >
-              <div className="flex items-baseline gap-3 flex-1">
-                <h4 className="text-body font-medium text-foreground">
-                  {place.name}
-                </h4>
-                <span className="text-caption text-subtle px-2 py-0.5 rounded-full thin-border flex-shrink-0">
-                  {place.type}
-                </span>
+      {trip.trip_places.length > 0 && (
+        <section>
+          <SectionLabel className="mb-6">Places visited</SectionLabel>
+          <div className="space-y-0">
+            {trip.trip_places.map((place, index) => (
+              <div
+                key={place.id}
+                className={`flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 py-4 ${
+                  index < trip.trip_places.length - 1 ? "thin-border-b" : ""
+                }`}
+              >
+                <div className="flex items-baseline gap-3 flex-1">
+                  <h4 className="text-body font-medium text-foreground">
+                    {place.name}
+                  </h4>
+                </div>
               </div>
-              <p className="text-body-sm text-muted sm:text-right sm:max-w-xs">
-                {place.note}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   );
 }
