@@ -2,8 +2,7 @@ import { Metadata } from "next";
 import { Plus_Jakarta_Sans, DM_Serif_Display } from "next/font/google";
 import "./globals.css";
 
-import NavigationBar from "@/components/navigation-bar";
-import Footer from "@/components/footer";
+
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -47,9 +46,7 @@ export default function RootLayout({
       <body
         className={`${plusJakartaSans.variable} ${dmSerifDisplay.variable} min-h-screen bg-background font-sans antialiased`}
       >
-        <NavigationBar />
-        <main className="pt-20">{children}</main>
-        <Footer />
+        {children}
       </body>
     </html>
   );
