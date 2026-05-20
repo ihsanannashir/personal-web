@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { uploadImage } from "@/lib/utils/storage";
 
-type PhotoInput = { url: string; caption: string; display_order: number };
+type PhotoInput = { url: string; caption: string; display_order: number; file?: File };
 type PlaceInput = { name: string; display_order: number };
 
 export default function NewTripPage() {
@@ -26,21 +27,67 @@ export default function NewTripPage() {
   });
   const [photos, setPhotos] = useState<PhotoInput[]>([]);
   const [places, setPlaces] = useState<PlaceInput[]>([]);
+  const [heroFile, setHeroFile] = useState<File | null>(null);
+  const [heroPreview, setHeroPreview] = useState<string | null>(null);
 
   function updateField(field: string, value: string | boolean) {
     setForm((prev) => ({ ...prev, [field]: value }));
+  }
+
+  function handleHeroFile(file: File | undefined) {
+    if (!file) return;
+    setHeroFile(file);
+    setHeroPreview(URL.createObjectURL(file));
+  }
+
+  function handlePhotoFile(index: number, file: File | undefined) {
+    if (!file) return;
+    const next = [...photos];
+    next[index].file = file;
+    // Temporarily set url to the object URL for preview
+    next[index].url = URL.createObjectURL(file);
+    setPhotos(next);
   }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSaving(true);
 
-    // Create trip
-    const res = await fetch("/api/trips", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
+    try {
+      // Upload hero image if selected
+      const submittedForm = { ...form };
+      if (heroFile) {
+        const ext = heroFile.name.split(".").pop() || "jpg";
+        const heroUrl = await uploadImage(
+          "images",
+          `trips/${form.slug}/hero.${ext}`,
+          heroFile
+        );
+        submittedForm.hero_image_url = heroUrl;
+      }
+
+      // Upload photo files
+      const uploadedPhotos = await Promise.all(
+        photos.map(async (photo) => {
+          if (photo.file) {
+            const ext = photo.file.name.split(".").pop() || "jpg";
+            const photoUrl = await uploadImage(
+              "images",
+              `trips/${form.slug}/photo-${photo.display_order}.${ext}`,
+              photo.file
+            );
+            return { url: photoUrl, caption: photo.caption, display_order: photo.display_order };
+          }
+          return { url: photo.url, caption: photo.caption, display_order: photo.display_order };
+        })
+      );
+
+      // Create trip
+      const res = await fetch("/api/trips", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(submittedForm),
+      });
 
     if (!res.ok) {
       alert("Failed to create trip");
@@ -48,36 +95,30 @@ export default function NewTripPage() {
       return;
     }
 
-    const trip = await res.json();
+      const trip = await res.json();
 
-    // Create photos
-    for (const photo of photos) {
-      await fetch("/api/trips/" + trip.slug, {
-        method: "PUT",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({}),
-      });
-      // Insert photos directly via separate fetch
-    }
-
-    // Insert photos and places via supabase through a batch endpoint
-    // For now, we'll use individual inserts via the trip slug
-    if (photos.length > 0 || places.length > 0) {
-      const batchRes = await fetch(`/api/trips/${trip.slug}/relations`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          trip_id: trip.id,
-          photos: photos.filter((p) => p.url),
-          places: places.filter((p) => p.name),
-        }),
-      });
-      if (!batchRes.ok) {
-        console.warn("Failed to save photos/places");
+      // Insert photos and places via batch endpoint
+      const validPhotos = uploadedPhotos.filter((p) => p.url);
+      if (validPhotos.length > 0 || places.length > 0) {
+        const batchRes = await fetch(`/api/trips/${trip.slug}/relations`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            trip_id: trip.id,
+            photos: validPhotos,
+            places: places.filter((p) => p.name),
+          }),
+        });
+        if (!batchRes.ok) {
+          console.warn("Failed to save photos/places");
+        }
       }
-    }
 
-    router.push("/admin/trips");
+      router.push("/admin/trips");
+    } catch (err) {
+      alert(err instanceof Error ? err.message : "Upload failed");
+      setSaving(false);
+    }
   }
 
   return (
@@ -130,10 +171,22 @@ export default function NewTripPage() {
           <input value={form.kicker} onChange={(e) => updateField("kicker", e.target.value)} style={inputStyle} />
         </label>
 
-        <label style={{ display: "block", marginBottom: 16 }}>
-          <span style={{ fontSize: 13, fontWeight: 600, display: "block", marginBottom: 4 }}>Hero Image URL</span>
-          <input value={form.hero_image_url} onChange={(e) => updateField("hero_image_url", e.target.value)} style={inputStyle} />
-        </label>
+        <div style={{ marginBottom: 16 }}>
+          <span style={{ fontSize: 13, fontWeight: 600, display: "block", marginBottom: 4 }}>Hero Image</span>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => handleHeroFile(e.target.files?.[0])}
+            style={{ ...inputStyle, padding: "6px 10px" }}
+          />
+          {heroPreview && (
+            <img
+              src={heroPreview}
+              alt="Hero preview"
+              style={{ marginTop: 8, maxWidth: 320, maxHeight: 200, borderRadius: 6, objectFit: "cover" }}
+            />
+          )}
+        </div>
 
         <label style={{ display: "block", marginBottom: 16 }}>
           <span style={{ fontSize: 13, fontWeight: 600, display: "block", marginBottom: 4 }}>Opening Paragraph</span>
@@ -154,11 +207,25 @@ export default function NewTripPage() {
         <fieldset style={{ border: "1px solid #ddd", borderRadius: 8, padding: 16, marginBottom: 24 }}>
           <legend style={{ fontWeight: 600, fontSize: 14, padding: "0 8px" }}>Photos</legend>
           {photos.map((photo, i) => (
-            <div key={i} style={{ display: "flex", gap: 8, marginBottom: 8 }}>
-              <input placeholder="URL" value={photo.url} onChange={(e) => { const next = [...photos]; next[i].url = e.target.value; setPhotos(next); }} style={{ ...inputStyle, flex: 2 }} />
-              <input placeholder="Caption" value={photo.caption} onChange={(e) => { const next = [...photos]; next[i].caption = e.target.value; setPhotos(next); }} style={{ ...inputStyle, flex: 2 }} />
-              <input type="number" placeholder="#" value={photo.display_order} onChange={(e) => { const next = [...photos]; next[i].display_order = Number(e.target.value); setPhotos(next); }} style={{ ...inputStyle, width: 60 }} />
-              <button type="button" onClick={() => setPhotos(photos.filter((_, j) => j !== i))} style={{ color: "#e00", background: "none", border: "none", cursor: "pointer" }}>✕</button>
+            <div key={i} style={{ marginBottom: 12, padding: 12, border: "1px solid #eee", borderRadius: 6 }}>
+              <div style={{ display: "flex", gap: 8, marginBottom: 8 }}>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => handlePhotoFile(i, e.target.files?.[0])}
+                  style={{ ...inputStyle, flex: 2, padding: "6px 10px" }}
+                />
+                <input placeholder="Caption" value={photo.caption} onChange={(e) => { const next = [...photos]; next[i].caption = e.target.value; setPhotos(next); }} style={{ ...inputStyle, flex: 2 }} />
+                <input type="number" placeholder="#" value={photo.display_order} onChange={(e) => { const next = [...photos]; next[i].display_order = Number(e.target.value); setPhotos(next); }} style={{ ...inputStyle, width: 60 }} />
+                <button type="button" onClick={() => setPhotos(photos.filter((_, j) => j !== i))} style={{ color: "#e00", background: "none", border: "none", cursor: "pointer" }}>✕</button>
+              </div>
+              {photo.url && (
+                <img
+                  src={photo.url}
+                  alt={photo.caption || `Photo ${photo.display_order}`}
+                  style={{ maxWidth: 200, maxHeight: 120, borderRadius: 4, objectFit: "cover" }}
+                />
+              )}
             </div>
           ))}
           <button type="button" onClick={() => setPhotos([...photos, { url: "", caption: "", display_order: photos.length + 1 }])} style={{ fontSize: 13, padding: "4px 12px", borderRadius: 4, border: "1px solid #ccc", background: "#fff", cursor: "pointer" }}>
@@ -181,8 +248,8 @@ export default function NewTripPage() {
           </button>
         </fieldset>
 
-        <button type="submit" disabled={saving} style={{ padding: "10px 24px", background: "#111", color: "#fff", border: "none", borderRadius: 6, cursor: "pointer", fontSize: 14 }}>
-          {saving ? "Saving…" : "Create Trip"}
+        <button type="submit" disabled={saving} style={{ padding: "10px 24px", background: saving ? "#666" : "#111", color: "#fff", border: "none", borderRadius: 6, cursor: saving ? "not-allowed" : "pointer", fontSize: 14 }}>
+          {saving ? "Uploading & Saving…" : "Create Trip"}
         </button>
       </form>
     </div>
