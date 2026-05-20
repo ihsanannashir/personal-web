@@ -7,6 +7,7 @@ export type Project = {
   description: string | null;
   tech_tags: string[];
   external_url: string | null;
+  cover_image_url: string | null;
   status: string;
   created_at: string;
   updated_at: string;

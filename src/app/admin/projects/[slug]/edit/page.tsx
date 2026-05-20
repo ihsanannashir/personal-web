@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import type { Project } from "@/lib/types/database";
+import { uploadImage } from "@/lib/utils/storage";
 
 export default function EditProjectPage() {
   const router = useRouter();
@@ -15,8 +16,11 @@ export default function EditProjectPage() {
     description: "",
     tech_tags: "",
     external_url: "",
+    cover_image_url: "",
     status: "draft",
   });
+  const [coverFile, setCoverFile] = useState<File | null>(null);
+  const [coverPreview, setCoverPreview] = useState<string | null>(null);
 
   useEffect(() => {
     fetch(`/api/projects/${params.slug}`)
@@ -28,8 +32,13 @@ export default function EditProjectPage() {
           description: project.description ?? "",
           tech_tags: project.tech_tags.join(", "),
           external_url: project.external_url ?? "",
+          cover_image_url: project.cover_image_url ?? "",
           status: project.status,
         });
+        // Show existing cover image as preview
+        if (project.cover_image_url) {
+          setCoverPreview(project.cover_image_url);
+        }
         setLoading(false);
       })
       .catch(() => setLoading(false));
@@ -39,30 +48,55 @@ export default function EditProjectPage() {
     setForm((prev) => ({ ...prev, [field]: value }));
   }
 
+  function handleCoverFile(file: File | undefined) {
+    if (!file) return;
+    setCoverFile(file);
+    setCoverPreview(URL.createObjectURL(file));
+  }
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     setSaving(true);
 
-    const payload = {
-      ...form,
-      tech_tags: form.tech_tags.split(",").map((t) => t.trim()).filter(Boolean),
-      external_url: form.external_url || null,
-      description: form.description || null,
-    };
+    try {
+      // Upload cover image if a new file is selected
+      const submittedForm = { ...form };
+      if (coverFile) {
+        const ext = coverFile.name.split(".").pop() || "jpg";
+        const coverUrl = await uploadImage(
+          "images",
+          `projects/${form.slug}/cover.${ext}`,
+          coverFile
+        );
+        submittedForm.cover_image_url = coverUrl;
+      }
+      // If no coverFile selected, submittedForm.cover_image_url keeps the existing value
 
-    const res = await fetch(`/api/projects/${params.slug}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(payload),
-    });
+      const payload = {
+        ...submittedForm,
+        tech_tags: submittedForm.tech_tags.split(",").map((t) => t.trim()).filter(Boolean),
+        external_url: submittedForm.external_url || null,
+        description: submittedForm.description || null,
+        cover_image_url: submittedForm.cover_image_url || null,
+      };
 
-    if (!res.ok) {
-      alert("Failed to update project");
+      const res = await fetch(`/api/projects/${params.slug}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) {
+        alert("Failed to update project");
+        setSaving(false);
+        return;
+      }
+
+      router.push("/admin/projects");
+    } catch (err) {
+      alert(err instanceof Error ? err.message : "Upload failed");
       setSaving(false);
-      return;
     }
-
-    router.push("/admin/projects");
   }
 
   if (loading) return <p>Loading…</p>;
@@ -91,6 +125,22 @@ export default function EditProjectPage() {
           <span style={{ fontSize: 13, fontWeight: 600, display: "block", marginBottom: 4 }}>External URL</span>
           <input value={form.external_url} onChange={(e) => updateField("external_url", e.target.value)} placeholder="https://..." style={inputStyle} />
         </label>
+        <div style={{ marginBottom: 16 }}>
+          <span style={{ fontSize: 13, fontWeight: 600, display: "block", marginBottom: 4 }}>Cover Image</span>
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => handleCoverFile(e.target.files?.[0])}
+            style={{ ...inputStyle, padding: "6px 10px" }}
+          />
+          {coverPreview && (
+            <img
+              src={coverPreview}
+              alt="Cover preview"
+              style={{ marginTop: 8, maxWidth: 320, maxHeight: 200, borderRadius: 6, objectFit: "cover" }}
+            />
+          )}
+        </div>
         <label style={{ display: "block", marginBottom: 24 }}>
           <span style={{ fontSize: 13, fontWeight: 600, display: "block", marginBottom: 4 }}>Status</span>
           <select value={form.status} onChange={(e) => updateField("status", e.target.value)} style={inputStyle}>
@@ -98,8 +148,8 @@ export default function EditProjectPage() {
             <option value="published">Published</option>
           </select>
         </label>
-        <button type="submit" disabled={saving} style={{ padding: "10px 24px", background: "#111", color: "#fff", border: "none", borderRadius: 6, cursor: "pointer", fontSize: 14 }}>
-          {saving ? "Saving…" : "Update Project"}
+        <button type="submit" disabled={saving} style={{ padding: "10px 24px", background: saving ? "#666" : "#111", color: "#fff", border: "none", borderRadius: 6, cursor: saving ? "not-allowed" : "pointer", fontSize: 14 }}>
+          {saving ? "Uploading & Saving…" : "Update Project"}
         </button>
       </form>
     </div>
