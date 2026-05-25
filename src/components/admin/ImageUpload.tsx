@@ -28,8 +28,7 @@ export default function ImageUpload({
     setUploading(true);
 
     try {
-      const ext = file.name.split(".").pop() || "jpg";
-      const fullPath = path.endsWith(`.${ext}`) ? path : `${path}.${ext}`;
+      const fullPath = path.endsWith(".jpg") ? path : `${path}.jpg`;
       const publicUrl = await uploadImage(bucket, fullPath, file);
       onUpload(publicUrl);
     } catch (err) {

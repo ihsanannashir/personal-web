@@ -58,10 +58,9 @@ export default function NewTripPage() {
       // Upload hero image if selected
       const submittedForm = { ...form };
       if (heroFile) {
-        const ext = heroFile.name.split(".").pop() || "jpg";
         const heroUrl = await uploadImage(
           "images",
-          `trips/${form.slug}/hero.${ext}`,
+          `trips/${form.slug}/hero.jpg`,
           heroFile
         );
         submittedForm.hero_image_url = heroUrl;
@@ -71,10 +70,9 @@ export default function NewTripPage() {
       const uploadedPhotos = await Promise.all(
         photos.map(async (photo) => {
           if (photo.file) {
-            const ext = photo.file.name.split(".").pop() || "jpg";
             const photoUrl = await uploadImage(
               "images",
-              `trips/${form.slug}/photo-${photo.display_order}.${ext}`,
+              `trips/${form.slug}/photo-${photo.display_order}.jpg`,
               photo.file
             );
             return { url: photoUrl, caption: photo.caption, display_order: photo.display_order };
