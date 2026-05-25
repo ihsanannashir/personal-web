@@ -11,7 +11,7 @@ export default function AdminProjectsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/projects")
+    fetch("/api/projects?all=true")
       .then((r) => r.json())
       .then((data) => { setProjects(data); setLoading(false); })
       .catch(() => setLoading(false));

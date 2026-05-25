@@ -11,7 +11,7 @@ export default function AdminTripsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("/api/trips")
+    fetch("/api/trips?all=true")
       .then((r) => r.json())
       .then((data) => { setTrips(data); setLoading(false); })
       .catch(() => setLoading(false));

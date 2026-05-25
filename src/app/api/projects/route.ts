@@ -3,13 +3,18 @@ import { NextResponse } from "next/server";
 import { supabase } from "@/lib/supabase";
 import type { Project } from "@/lib/types/database";
 
-// GET /api/projects — all published projects
-export async function GET() {
-  const { data, error } = await supabase
-    .from("projects")
-    .select("*")
-    .eq("status", "published")
-    .order("created_at", { ascending: false });
+// GET /api/projects — all published projects (or all if ?all=true)
+export async function GET(request: Request) {
+  const { searchParams } = new URL(request.url);
+  const all = searchParams.get("all") === "true";
+
+  let query = supabase.from("projects").select("*");
+
+  if (!all) {
+    query = query.eq("status", "published");
+  }
+
+  const { data, error } = await query.order("created_at", { ascending: false });
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
