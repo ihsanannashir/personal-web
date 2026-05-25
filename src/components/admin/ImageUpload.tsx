@@ -44,6 +44,7 @@ export default function ImageUpload({
   return (
     <div className="space-y-2">
       {preview && (
+        /* eslint-disable-next-line @next/next/no-img-element */
         <img
           src={preview}
           alt="Preview"

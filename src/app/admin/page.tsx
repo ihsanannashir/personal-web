@@ -4,31 +4,44 @@ import { Metadata } from "next";
 export const metadata: Metadata = { title: "Dashboard" };
 
 const sections = [
-  { label: "Trips", href: "/admin/trips", description: "Manage travel journal entries" },
-  { label: "Projects", href: "/admin/projects", description: "Manage portfolio projects" },
-  { label: "Experiences", href: "/admin/experiences", description: "Manage career timeline" },
+  {
+    label: "Trips",
+    href: "/admin/trips",
+    description: "Manage travel journal entries",
+    icon: "✈",
+  },
+  {
+    label: "Projects",
+    href: "/admin/projects",
+    description: "Manage portfolio projects",
+    icon: "◫",
+  },
+  {
+    label: "Experiences",
+    href: "/admin/experiences",
+    description: "Manage career timeline",
+    icon: "◉",
+  },
 ];
 
 export default function AdminDashboard() {
   return (
     <div>
-      <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 24 }}>Dashboard</h1>
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(250px, 1fr))", gap: 16 }}>
+      <h1 className="text-xl font-bold text-gray-900 mb-6">Dashboard</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {sections.map((s) => (
           <Link
             key={s.href}
             href={s.href}
-            style={{
-              display: "block",
-              padding: 20,
-              border: "1px solid #ddd",
-              borderRadius: 8,
-              textDecoration: "none",
-              color: "#111",
-            }}
+            className="group block bg-white rounded-lg border border-gray-200 p-5 hover:border-gray-300 hover:shadow-sm transition-all"
           >
-            <h2 style={{ fontSize: 18, fontWeight: 600, marginBottom: 4 }}>{s.label}</h2>
-            <p style={{ fontSize: 14, color: "#666", margin: 0 }}>{s.description}</p>
+            <div className="flex items-center gap-3 mb-2">
+              <span className="text-xl">{s.icon}</span>
+              <h2 className="text-base font-semibold text-gray-900 group-hover:text-gray-700">
+                {s.label}
+              </h2>
+            </div>
+            <p className="text-sm text-gray-500">{s.description}</p>
           </Link>
         ))}
       </div>

@@ -2,6 +2,9 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import AdminForm from "@/components/admin/AdminForm";
+import FormField from "@/components/admin/FormField";
+import TagInput from "@/components/admin/TagInput";
 
 export default function NewExperiencePage() {
   const router = useRouter();
@@ -15,9 +18,9 @@ export default function NewExperiencePage() {
     end_date: "",
     factual_line: "",
     personal_note: "",
-    tech_tags: "",
     display_order: 0,
   });
+  const [techTags, setTechTags] = useState<string[]>([]);
 
   function updateField(field: string, value: string | number) {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -29,7 +32,7 @@ export default function NewExperiencePage() {
 
     const payload = {
       ...form,
-      tech_tags: form.tech_tags.split(",").map((t) => t.trim()).filter(Boolean),
+      tech_tags: techTags,
       end_date: form.end_date || null,
       personal_note: form.personal_note || null,
     };
@@ -49,66 +52,101 @@ export default function NewExperiencePage() {
     router.push("/admin/experiences");
   }
 
+  const inputClasses =
+    "w-full rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-gray-500 focus:ring-1 focus:ring-gray-500 focus:outline-none";
+
   return (
-    <div>
-      <h1 style={{ fontSize: 24, fontWeight: 700, marginBottom: 24 }}>New Experience</h1>
-      <form onSubmit={handleSubmit} style={{ maxWidth: 600 }}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, marginBottom: 16 }}>
-          <label style={{ display: "block" }}>
-            <span style={{ fontSize: 13, fontWeight: 600, display: "block", marginBottom: 4 }}>Company *</span>
-            <input required value={form.company} onChange={(e) => updateField("company", e.target.value)} style={inputStyle} />
-          </label>
-          <label style={{ display: "block" }}>
-            <span style={{ fontSize: 13, fontWeight: 600, display: "block", marginBottom: 4 }}>Role *</span>
-            <input required value={form.role} onChange={(e) => updateField("role", e.target.value)} style={inputStyle} />
-          </label>
-          <label style={{ display: "block" }}>
-            <span style={{ fontSize: 13, fontWeight: 600, display: "block", marginBottom: 4 }}>Country Code *</span>
-            <input required value={form.country_code} onChange={(e) => updateField("country_code", e.target.value)} placeholder="ID" style={inputStyle} />
-          </label>
-          <label style={{ display: "block" }}>
-            <span style={{ fontSize: 13, fontWeight: 600, display: "block", marginBottom: 4 }}>Flag Emoji *</span>
-            <input required value={form.flag_emoji} onChange={(e) => updateField("flag_emoji", e.target.value)} placeholder="🇮🇩" style={inputStyle} />
-          </label>
-          <label style={{ display: "block" }}>
-            <span style={{ fontSize: 13, fontWeight: 600, display: "block", marginBottom: 4 }}>Start Date *</span>
-            <input required type="date" value={form.start_date} onChange={(e) => updateField("start_date", e.target.value)} style={inputStyle} />
-          </label>
-          <label style={{ display: "block" }}>
-            <span style={{ fontSize: 13, fontWeight: 600, display: "block", marginBottom: 4 }}>End Date</span>
-            <input type="date" value={form.end_date} onChange={(e) => updateField("end_date", e.target.value)} style={inputStyle} />
-            <span style={{ fontSize: 11, color: "#999" }}>Leave empty for &quot;Present&quot;</span>
-          </label>
-        </div>
-        <label style={{ display: "block", marginBottom: 16 }}>
-          <span style={{ fontSize: 13, fontWeight: 600, display: "block", marginBottom: 4 }}>Factual Line *</span>
-          <textarea required value={form.factual_line} onChange={(e) => updateField("factual_line", e.target.value)} rows={2} style={inputStyle} />
-        </label>
-        <label style={{ display: "block", marginBottom: 16 }}>
-          <span style={{ fontSize: 13, fontWeight: 600, display: "block", marginBottom: 4 }}>Personal Note</span>
-          <textarea value={form.personal_note} onChange={(e) => updateField("personal_note", e.target.value)} rows={2} style={inputStyle} />
-        </label>
-        <label style={{ display: "block", marginBottom: 16 }}>
-          <span style={{ fontSize: 13, fontWeight: 600, display: "block", marginBottom: 4 }}>Tech Tags (comma-separated)</span>
-          <input value={form.tech_tags} onChange={(e) => updateField("tech_tags", e.target.value)} placeholder="React, Node.js" style={inputStyle} />
-        </label>
-        <label style={{ display: "block", marginBottom: 24 }}>
-          <span style={{ fontSize: 13, fontWeight: 600, display: "block", marginBottom: 4 }}>Display Order</span>
-          <input type="number" value={form.display_order} onChange={(e) => updateField("display_order", Number(e.target.value))} style={{ ...inputStyle, width: 100 }} />
-        </label>
-        <button type="submit" disabled={saving} style={{ padding: "10px 24px", background: "#111", color: "#fff", border: "none", borderRadius: 6, cursor: "pointer", fontSize: 14 }}>
-          {saving ? "Saving…" : "Create Experience"}
-        </button>
-      </form>
-    </div>
+    <AdminForm
+      title="New Experience"
+      onSubmit={handleSubmit}
+      submitLabel="Create Experience"
+      saving={saving}
+    >
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+        <FormField label="Company" required>
+          <input
+            required
+            value={form.company}
+            onChange={(e) => updateField("company", e.target.value)}
+            className={inputClasses}
+          />
+        </FormField>
+        <FormField label="Role" required>
+          <input
+            required
+            value={form.role}
+            onChange={(e) => updateField("role", e.target.value)}
+            className={inputClasses}
+          />
+        </FormField>
+        <FormField label="Country Code" required>
+          <input
+            required
+            value={form.country_code}
+            onChange={(e) => updateField("country_code", e.target.value)}
+            placeholder="ID"
+            className={inputClasses}
+          />
+        </FormField>
+        <FormField label="Flag Emoji" required>
+          <input
+            required
+            value={form.flag_emoji}
+            onChange={(e) => updateField("flag_emoji", e.target.value)}
+            placeholder="🇮🇩"
+            className={inputClasses}
+          />
+        </FormField>
+        <FormField label="Start Date" required>
+          <input
+            required
+            type="date"
+            value={form.start_date}
+            onChange={(e) => updateField("start_date", e.target.value)}
+            className={inputClasses}
+          />
+        </FormField>
+        <FormField label="End Date" hint='Leave empty for "Present"'>
+          <input
+            type="date"
+            value={form.end_date}
+            onChange={(e) => updateField("end_date", e.target.value)}
+            className={inputClasses}
+          />
+        </FormField>
+      </div>
+
+      <FormField label="Factual Line" required>
+        <textarea
+          required
+          value={form.factual_line}
+          onChange={(e) => updateField("factual_line", e.target.value)}
+          rows={2}
+          className={inputClasses}
+        />
+      </FormField>
+
+      <FormField label="Personal Note">
+        <textarea
+          value={form.personal_note}
+          onChange={(e) => updateField("personal_note", e.target.value)}
+          rows={2}
+          className={inputClasses}
+        />
+      </FormField>
+
+      <FormField label="Tech Tags">
+        <TagInput value={techTags} onChange={setTechTags} />
+      </FormField>
+
+      <FormField label="Display Order">
+        <input
+          type="number"
+          value={form.display_order}
+          onChange={(e) => updateField("display_order", Number(e.target.value))}
+          className={`${inputClasses} w-24`}
+        />
+      </FormField>
+    </AdminForm>
   );
 }
-
-const inputStyle: React.CSSProperties = {
-  width: "100%",
-  padding: "8px 10px",
-  border: "1px solid #ccc",
-  borderRadius: 6,
-  fontSize: 14,
-  boxSizing: "border-box",
-};

@@ -4,15 +4,13 @@ import { ReactNode } from "react";
 import Link from "next/link";
 import ConfirmDelete from "./ConfirmDelete";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Column<T = any> = {
+type Column<T = Record<string, unknown>> = {
   key: string;
   label: string;
   render?: (value: T[keyof T], row: T) => ReactNode;
 };
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type AdminTableProps<T = any> = {
+type AdminTableProps<T = Record<string, unknown>> = {
   columns: Column<T>[];
   rows: T[];
   getEditHref?: (row: T) => string;
