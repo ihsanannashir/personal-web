@@ -11,6 +11,7 @@ export function isAllowedImageType(file: File): boolean {
 
 /**
  * Converts a File to a JPEG Blob (90% quality) using Canvas API.
+ * Caps maximum dimension at 1600px to optimize file sizes while maintaining extreme clarity.
  * Fills transparency with white to avoid black background artifacts.
  */
 export function convertImageToJpeg(file: File | Blob): Promise<Blob> {
@@ -19,9 +20,23 @@ export function convertImageToJpeg(file: File | Blob): Promise<Blob> {
     const objectUrl = URL.createObjectURL(file);
 
     img.onload = () => {
+      const MAX_DIMENSION = 1600;
+      let width = img.naturalWidth;
+      let height = img.naturalHeight;
+
+      if (width > MAX_DIMENSION || height > MAX_DIMENSION) {
+        if (width > height) {
+          height = Math.round((height * MAX_DIMENSION) / width);
+          width = MAX_DIMENSION;
+        } else {
+          width = Math.round((width * MAX_DIMENSION) / height);
+          height = MAX_DIMENSION;
+        }
+      }
+
       const canvas = document.createElement("canvas");
-      canvas.width = img.naturalWidth;
-      canvas.height = img.naturalHeight;
+      canvas.width = width;
+      canvas.height = height;
 
       const ctx = canvas.getContext("2d");
       if (!ctx) {
@@ -32,10 +47,10 @@ export function convertImageToJpeg(file: File | Blob): Promise<Blob> {
 
       // Fill background with white (so transparent PNGs/WebPs don't turn black in JPEG)
       ctx.fillStyle = "#ffffff";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillRect(0, 0, width, height);
 
-      // Draw the image
-      ctx.drawImage(img, 0, 0);
+      // Draw the image scaled to the new dimensions
+      ctx.drawImage(img, 0, 0, width, height);
 
       // Export as image/jpeg
       canvas.toBlob(

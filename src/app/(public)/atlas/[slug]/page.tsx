@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import Image from "next/image";
 
 import SectionLabel from "@/components/ui/section-label";
 import Title from "@/components/ui/title";
@@ -59,11 +58,10 @@ export default async function TripDetailPage({ params }: Props) {
       {/* Hero image area */}
       {trip.hero_image_url ? (
         <div className="w-full h-64 sm:h-80 rounded-lg overflow-hidden mb-8 relative">
-          <Image
+          <img
             src={trip.hero_image_url}
             alt={trip.title}
-            fill
-            className="object-cover"
+            className="w-full h-full object-cover"
           />
         </div>
       ) : (
@@ -110,11 +108,10 @@ export default async function TripDetailPage({ params }: Props) {
                 key={photo.id}
                 className="aspect-[4/3] rounded-lg overflow-hidden relative"
               >
-                <Image
+                <img
                   src={photo.url}
                   alt={photo.caption ?? "Trip photo"}
-                  fill
-                  className="object-cover"
+                  className="w-full h-full object-cover"
                 />
               </div>
             ))}
