@@ -7,7 +7,7 @@ import Title from "@/components/ui/title";
 import { supabase } from "@/lib/supabase";
 import type { TripWithRelations } from "@/lib/types/database";
 
-export const revalidate = 60;
+export const revalidate = 0;
 
 type Props = {
   params: Promise<{ slug: string }>;

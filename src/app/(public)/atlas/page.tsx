@@ -8,7 +8,7 @@ import { supabase } from "@/lib/supabase";
 import type { Trip as DBTrip } from "@/lib/types/database";
 import type { Trip } from "@/lib/types/item-data";
 
-export const revalidate = 60;
+export const revalidate = 0;
 
 export const metadata: Metadata = {
   title: "Atlas",
