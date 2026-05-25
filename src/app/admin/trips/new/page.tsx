@@ -129,6 +129,7 @@ export default function NewTripPage() {
       onSubmit={handleSubmit}
       submitLabel="Create Trip"
       saving={saving}
+      cancelHref="/admin/trips"
     >
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <FormField label="Slug" required>

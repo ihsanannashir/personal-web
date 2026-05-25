@@ -23,6 +23,7 @@ function mapTrip(t: DBTrip): Trip {
     date: t.location,
     category: t.type as Trip["category"],
     coverEmoji: "🗺️",
+    hero_image_url: t.hero_image_url ?? "",
     description: t.opening_paragraph ?? "",
     featured: t.is_featured,
     kicker: t.kicker ?? "",

@@ -12,8 +12,17 @@ const TripCard = ({ trip }: TripCardProps) => {
       className="group block rounded-lg thin-border bg-card/50 hover:bg-card transition-colors overflow-hidden"
     >
       {/* Cover area */}
-      <div className="h-44 sm:h-52 bg-border-light flex items-center justify-center">
-        <span className="text-6xl">{trip.coverEmoji}</span>
+      <div className="h-44 sm:h-52 bg-border-light flex items-center justify-center relative overflow-hidden">
+        {trip.hero_image_url ? (
+          /* eslint-disable-next-line @next/next/no-img-element */
+          <img 
+            src={trip.hero_image_url} 
+            alt={trip.title} 
+            className="absolute inset-0 w-full h-full object-cover" 
+          />
+        ) : (
+          <span className="text-6xl">{trip.coverEmoji}</span>
+        )}
       </div>
 
       {/* Content */}

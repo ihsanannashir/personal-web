@@ -103,6 +103,7 @@ export type Trip = {
   date: string;
   category: TripCategory;
   coverEmoji: string;
+  hero_image_url?: string;
   description: string;
   featured: boolean;
   kicker: string;

@@ -13,8 +13,17 @@ const FeaturedTripCard = ({ trip }: FeaturedTripCardProps) => {
     >
       <div className="flex flex-col sm:flex-row">
         {/* Cover area — left */}
-        <div className="h-52 sm:h-auto sm:w-1/2 bg-border-light flex items-center justify-center flex-shrink-0">
-          <span className="text-7xl sm:text-8xl">{trip.coverEmoji}</span>
+        <div className="h-52 sm:h-auto sm:w-1/2 bg-border-light flex items-center justify-center flex-shrink-0 relative overflow-hidden">
+          {trip.hero_image_url ? (
+            /* eslint-disable-next-line @next/next/no-img-element */
+            <img 
+              src={trip.hero_image_url} 
+              alt={trip.title} 
+              className="absolute inset-0 w-full h-full object-cover" 
+            />
+          ) : (
+            <span className="text-7xl sm:text-8xl">{trip.coverEmoji}</span>
+          )}
         </div>
 
         {/* Content — right */}

@@ -87,6 +87,7 @@ export default function EditProjectPage() {
       onSubmit={handleSubmit}
       submitLabel="Update Project"
       saving={saving}
+      cancelHref="/admin/projects"
     >
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
         <FormField label="Slug" required>
