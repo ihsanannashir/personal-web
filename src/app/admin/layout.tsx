@@ -79,7 +79,7 @@ export default function AdminLayout({
 
       {/* ─── Main content ─── */}
       <main className="flex-1 min-h-screen overflow-auto">
-        <div className="p-6 lg:p-8 max-w-5xl">{children}</div>
+        <div className="p-6 lg:px-10 lg:py-8 w-full">{children}</div>
       </main>
     </div>
   );

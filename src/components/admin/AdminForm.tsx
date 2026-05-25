@@ -16,7 +16,7 @@ export default function AdminForm({
   saving = false,
 }: AdminFormProps) {
   return (
-    <div className="max-w-2xl">
+    <div className="w-full">
       <h1 className="text-xl font-bold text-gray-900 mb-6">{title}</h1>
       <form onSubmit={onSubmit}>
         <div className="bg-white rounded-lg border border-gray-200 p-6 space-y-5">
