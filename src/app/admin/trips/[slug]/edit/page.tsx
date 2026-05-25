@@ -149,7 +149,12 @@ export default function EditTripPage() {
         body: JSON.stringify({
           trip_id: tripId,
           photos: validPhotos,
-          places: places.filter((p) => p.name),
+          places: places
+            .filter((p) => p.name)
+            .map((p, idx) => ({
+              name: p.name,
+              display_order: idx + 1,
+            })),
         }),
       });
 
@@ -375,6 +380,7 @@ export default function EditTripPage() {
         </legend>
         {places.map((place, i) => (
           <div key={i} className="flex items-center gap-2">
+            <span className="text-sm font-medium text-gray-400 w-6">#{i + 1}</span>
             <input
               placeholder="Place name"
               value={place.name}
@@ -384,17 +390,6 @@ export default function EditTripPage() {
                 setPlaces(next);
               }}
               className={`${inputClasses} flex-1`}
-            />
-            <input
-              type="number"
-              placeholder="#"
-              value={place.display_order}
-              onChange={(e) => {
-                const next = [...places];
-                next[i].display_order = Number(e.target.value);
-                setPlaces(next);
-              }}
-              className={`${inputClasses} w-16`}
             />
             <button
               type="button"
