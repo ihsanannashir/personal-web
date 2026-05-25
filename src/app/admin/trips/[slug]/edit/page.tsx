@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import type { TripWithRelations } from "@/lib/types/database";
-import { uploadImage, convertImageToJpeg } from "@/lib/utils/storage";
+import { uploadImage, convertImageToJpeg, isAllowedImageType } from "@/lib/utils/storage";
 import AdminForm from "@/components/admin/AdminForm";
 import FormField from "@/components/admin/FormField";
 
@@ -16,6 +16,8 @@ export default function EditTripPage() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [dateErrors, setDateErrors] = useState({ start: "", end: "" });
+  const [heroFileError, setHeroFileError] = useState("");
+  const [photoFileErrors, setPhotoFileErrors] = useState<Record<number, string>>({});
   const [tripId, setTripId] = useState<number>(0);
   const [form, setForm] = useState({
     slug: "",
@@ -82,14 +84,26 @@ export default function EditTripPage() {
     setForm((prev) => ({ ...prev, [field]: value }));
   }
 
-  function handleHeroFile(file: File | undefined) {
+  function handleHeroFile(file: File | undefined, inputEl?: HTMLInputElement | null) {
     if (!file) return;
+    if (!isAllowedImageType(file)) {
+      setHeroFileError("Please upload a JPG, JPEG, or PNG file only.");
+      if (inputEl) inputEl.value = "";
+      return;
+    }
+    setHeroFileError("");
     setHeroFile(file);
     setHeroPreview(URL.createObjectURL(file));
   }
 
-  async function handlePhotoFile(index: number, file: File | undefined) {
+  async function handlePhotoFile(index: number, file: File | undefined, inputEl?: HTMLInputElement | null) {
     if (!file) return;
+    if (!isAllowedImageType(file)) {
+      setPhotoFileErrors((prev) => ({ ...prev, [index]: "Please upload a JPG, JPEG, or PNG file only." }));
+      if (inputEl) inputEl.value = "";
+      return;
+    }
+    setPhotoFileErrors((prev) => ({ ...prev, [index]: "" }));
     try {
       const convertedBlob = await convertImageToJpeg(file);
       const previewUrl = URL.createObjectURL(convertedBlob);
@@ -302,12 +316,16 @@ export default function EditTripPage() {
       </FormField>
 
       <FormField label="Hero Image">
+        <p className="text-xs text-gray-400 mb-1">Only JPG/JPEG and PNG files are accepted.</p>
         <input
           type="file"
-          accept="image/*"
-          onChange={(e) => handleHeroFile(e.target.files?.[0])}
+          accept=".jpg,.jpeg,.png,image/jpeg,image/png"
+          onChange={(e) => handleHeroFile(e.target.files?.[0], e.target)}
           className="block w-full text-sm text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-md file:border file:border-gray-300 file:text-sm file:font-medium file:bg-white file:text-gray-700 hover:file:bg-gray-50 file:cursor-pointer"
         />
+        {heroFileError && (
+          <p className="text-xs text-red-500 mt-1">{heroFileError}</p>
+        )}
         {heroPreview && (
           <div className="mt-2 flex items-start gap-3">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -367,13 +385,14 @@ export default function EditTripPage() {
         <legend className="text-sm font-semibold text-gray-700 px-2">
           Photos
         </legend>
+        <p className="text-xs text-gray-400">Only JPG/JPEG and PNG files are accepted.</p>
         {photos.map((photo, i) => (
           <div key={i} className="p-3 border border-gray-100 rounded-md space-y-2">
             <div className="flex items-center gap-2">
               <input
                 type="file"
-                accept="image/*"
-                onChange={(e) => handlePhotoFile(i, e.target.files?.[0])}
+                accept=".jpg,.jpeg,.png,image/jpeg,image/png"
+                onChange={(e) => handlePhotoFile(i, e.target.files?.[0], e.target)}
                 className="flex-2 text-sm text-gray-500 file:mr-2 file:py-1 file:px-2 file:rounded file:border file:border-gray-300 file:text-xs file:bg-white file:text-gray-700 file:cursor-pointer"
               />
               <input
@@ -405,6 +424,9 @@ export default function EditTripPage() {
                 ✕
               </button>
             </div>
+            {photoFileErrors[i] && (
+              <p className="text-xs text-red-500">{photoFileErrors[i]}</p>
+            )}
             {photo.url && (
               /* eslint-disable-next-line @next/next/no-img-element */
               <img

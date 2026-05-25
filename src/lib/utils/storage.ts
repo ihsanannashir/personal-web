@@ -1,5 +1,14 @@
 import { supabase } from "@/lib/supabase";
 
+const ALLOWED_IMAGE_TYPES = ["image/jpeg", "image/png"];
+
+/**
+ * Check whether a file is an allowed image type (JPG/JPEG or PNG).
+ */
+export function isAllowedImageType(file: File): boolean {
+  return ALLOWED_IMAGE_TYPES.includes(file.type);
+}
+
 /**
  * Converts a File to a JPEG Blob (90% quality) using Canvas API.
  * Fills transparency with white to avoid black background artifacts.
