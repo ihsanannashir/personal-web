@@ -264,12 +264,25 @@ export default function EditTripPage() {
           className="block w-full text-sm text-gray-500 file:mr-3 file:py-1.5 file:px-3 file:rounded-md file:border file:border-gray-300 file:text-sm file:font-medium file:bg-white file:text-gray-700 hover:file:bg-gray-50 file:cursor-pointer"
         />
         {heroPreview && (
-          /* eslint-disable-next-line @next/next/no-img-element */
-          <img
-            src={heroPreview}
-            alt="Hero preview"
-            className="mt-2 max-w-xs max-h-48 rounded-md object-cover border border-gray-200"
-          />
+          <div className="mt-2 flex items-start gap-3">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={heroPreview}
+              alt="Hero preview"
+              className="max-w-xs max-h-48 rounded-md object-cover border border-gray-200"
+            />
+            <button
+              type="button"
+              onClick={() => {
+                setHeroPreview(null);
+                setHeroFile(null);
+                updateField("hero_image_url", "");
+              }}
+              className="text-sm text-red-500 hover:text-red-700 font-medium px-2 py-1 rounded bg-red-50 hover:bg-red-100 transition-colors cursor-pointer"
+            >
+              Remove image
+            </button>
+          </div>
         )}
       </FormField>
 
