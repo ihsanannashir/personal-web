@@ -12,6 +12,7 @@ type PlaceInput = { name: string; display_order: number };
 export default function NewTripPage() {
   const router = useRouter();
   const [saving, setSaving] = useState(false);
+  const [dateErrors, setDateErrors] = useState({ start: "", end: "" });
   const [form, setForm] = useState({
     slug: "",
     title: "",
@@ -52,6 +53,14 @@ export default function NewTripPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+
+    // Validate dates
+    const errors = { start: "", end: "" };
+    if (!form.trip_start_date) errors.start = "Start date is required";
+    if (!form.trip_end_date) errors.end = "End date is required";
+    setDateErrors(errors);
+    if (errors.start || errors.end) return;
+
     setSaving(true);
 
     try {
@@ -184,21 +193,35 @@ export default function NewTripPage() {
             <option value="published">Published</option>
           </select>
         </FormField>
-        <FormField label="Start Date">
+        <FormField label="Start Date" required>
           <input
+            required
             type="date"
             value={form.trip_start_date}
-            onChange={(e) => updateField("trip_start_date", e.target.value)}
+            onChange={(e) => {
+              updateField("trip_start_date", e.target.value);
+              if (e.target.value) setDateErrors((prev) => ({ ...prev, start: "" }));
+            }}
             className={inputClasses}
           />
+          {dateErrors.start && (
+            <p className="text-xs text-red-500 mt-1">{dateErrors.start}</p>
+          )}
         </FormField>
-        <FormField label="End Date">
+        <FormField label="End Date" required>
           <input
+            required
             type="date"
             value={form.trip_end_date}
-            onChange={(e) => updateField("trip_end_date", e.target.value)}
+            onChange={(e) => {
+              updateField("trip_end_date", e.target.value);
+              if (e.target.value) setDateErrors((prev) => ({ ...prev, end: "" }));
+            }}
             className={inputClasses}
           />
+          {dateErrors.end && (
+            <p className="text-xs text-red-500 mt-1">{dateErrors.end}</p>
+          )}
         </FormField>
       </div>
 
@@ -345,6 +368,7 @@ export default function NewTripPage() {
         </legend>
         {places.map((place, i) => (
           <div key={i} className="flex items-center gap-2">
+            <span className="text-sm font-medium text-gray-400 w-6">#{i + 1}</span>
             <input
               placeholder="Place name"
               value={place.name}
@@ -354,17 +378,6 @@ export default function NewTripPage() {
                 setPlaces(next);
               }}
               className={`${inputClasses} flex-1`}
-            />
-            <input
-              type="number"
-              placeholder="#"
-              value={place.display_order}
-              onChange={(e) => {
-                const next = [...places];
-                next[i].display_order = Number(e.target.value);
-                setPlaces(next);
-              }}
-              className={`${inputClasses} w-16`}
             />
             <button
               type="button"

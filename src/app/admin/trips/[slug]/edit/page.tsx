@@ -15,6 +15,7 @@ export default function EditTripPage() {
   const params = useParams<{ slug: string }>();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [dateErrors, setDateErrors] = useState({ start: "", end: "" });
   const [tripId, setTripId] = useState<number>(0);
   const [form, setForm] = useState({
     slug: "",
@@ -97,6 +98,14 @@ export default function EditTripPage() {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+
+    // Validate dates
+    const errors = { start: "", end: "" };
+    if (!form.trip_start_date) errors.start = "Start date is required";
+    if (!form.trip_end_date) errors.end = "End date is required";
+    setDateErrors(errors);
+    if (errors.start || errors.end) return;
+
     setSaving(true);
 
     try {
@@ -231,21 +240,35 @@ export default function EditTripPage() {
             <option value="published">Published</option>
           </select>
         </FormField>
-        <FormField label="Start Date">
+        <FormField label="Start Date" required>
           <input
+            required
             type="date"
             value={form.trip_start_date}
-            onChange={(e) => updateField("trip_start_date", e.target.value)}
+            onChange={(e) => {
+              updateField("trip_start_date", e.target.value);
+              if (e.target.value) setDateErrors((prev) => ({ ...prev, start: "" }));
+            }}
             className={inputClasses}
           />
+          {dateErrors.start && (
+            <p className="text-xs text-red-500 mt-1">{dateErrors.start}</p>
+          )}
         </FormField>
-        <FormField label="End Date">
+        <FormField label="End Date" required>
           <input
+            required
             type="date"
             value={form.trip_end_date}
-            onChange={(e) => updateField("trip_end_date", e.target.value)}
+            onChange={(e) => {
+              updateField("trip_end_date", e.target.value);
+              if (e.target.value) setDateErrors((prev) => ({ ...prev, end: "" }));
+            }}
             className={inputClasses}
           />
+          {dateErrors.end && (
+            <p className="text-xs text-red-500 mt-1">{dateErrors.end}</p>
+          )}
         </FormField>
       </div>
 
