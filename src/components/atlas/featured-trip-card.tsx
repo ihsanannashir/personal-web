@@ -31,7 +31,9 @@ const FeaturedTripCard = ({ trip }: FeaturedTripCardProps) => {
           <span className="text-label uppercase tracking-[0.15em] text-subtle mb-3">
             Latest trip
           </span>
-          <span className="text-caption text-subtle">{trip.date}</span>
+          <span className="text-caption text-subtle">
+            {trip.country} · {trip.category}
+          </span>
           <h3 className="font-serif text-heading sm:text-heading text-foreground mt-1 mb-3 group-hover:opacity-70 transition-opacity">
             {trip.title}
           </h3>

@@ -32,6 +32,7 @@ function mapTrip(t: DBTrip): Trip {
     journal: t.journal_entry ?? "",
     places: [],
     photoSlots: 0,
+    country: t.country ?? "",
   };
 }
 
@@ -45,13 +46,21 @@ export default async function AtlasPage() {
   const mappedTrips: Trip[] = (trips ?? []).map(mapTrip);
   const uniqueCountries = new Set((trips ?? []).map((t: DBTrip) => t.country));
 
+  const totalNights = (trips ?? []).reduce((sum, trip) => {
+    if (!trip.trip_start_date || !trip.trip_end_date) return sum;
+    const start = new Date(trip.trip_start_date);
+    const end = new Date(trip.trip_end_date);
+    const nights = Math.round((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+    return sum + nights;
+  }, 0);
+
   const stats = {
     tripsLogged: mappedTrips.length,
     countriesVisited: uniqueCountries.size,
     mountainsClimbed: (trips ?? []).filter(
       (t: DBTrip) => t.type === "Hiking",
     ).length,
-    nightsAway: "—",
+    nightsAway: totalNights,
   };
 
   return (

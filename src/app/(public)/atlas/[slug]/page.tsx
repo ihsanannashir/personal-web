@@ -78,6 +78,9 @@ export default async function TripDetailPage({ params }: Props) {
           <SectionLabel className="mb-3">{trip.kicker}</SectionLabel>
         )}
         <Title>{trip.title}</Title>
+        <div className="text-body-sm text-muted mt-2 mb-6">
+          {formatTripDates(trip.trip_start_date, trip.trip_end_date)} &middot; {trip.country} &middot; {trip.type}
+        </div>
         {trip.opening_paragraph && (
           <p className="text-body-lg text-muted max-w-2xl leading-relaxed">
             {trip.opening_paragraph}
@@ -143,4 +146,47 @@ export default async function TripDetailPage({ params }: Props) {
       )}
     </div>
   );
+}
+
+function formatTripDates(startDateStr?: string | null, endDateStr?: string | null): string {
+  if (!startDateStr) return "";
+  
+  const parseLocalDate = (dateStr: string) => {
+    const parts = dateStr.slice(0, 10).split("-");
+    return new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
+  };
+
+  const start = parseLocalDate(startDateStr);
+  const end = endDateStr ? parseLocalDate(endDateStr) : null;
+
+  const months = [
+    "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  const startMonth = months[start.getMonth()];
+  const startDay = start.getDate();
+  const startYear = start.getFullYear();
+
+  if (!end) {
+    return `${startMonth} ${startDay}, ${startYear}`;
+  }
+
+  const endMonth = months[end.getMonth()];
+  const endDay = end.getDate();
+  const endYear = end.getFullYear();
+
+  if (startYear !== endYear) {
+    return `${startMonth} ${startDay}, ${startYear} – ${endMonth} ${endDay}, ${endYear}`;
+  }
+
+  if (startMonth !== endMonth) {
+    return `${startMonth} ${startDay} – ${endMonth} ${endDay}, ${startYear}`;
+  }
+
+  if (startDay !== endDay) {
+    return `${startMonth} ${startDay} – ${endDay}, ${startYear}`;
+  }
+
+  return `${startMonth} ${startDay}, ${startYear}`;
 }

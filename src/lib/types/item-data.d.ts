@@ -112,4 +112,5 @@ export type Trip = {
   journal: string;
   places: TripPlace[];
   photoSlots: number;
+  country?: string;
 };
