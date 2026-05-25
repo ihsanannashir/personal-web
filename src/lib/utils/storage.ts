@@ -77,7 +77,10 @@ export function convertImageToJpeg(file: File | Blob): Promise<Blob> {
 }
 
 /**
- * Upload a file to Supabase Storage, converting to JPEG first.
+ * Upload a file to Supabase Storage.
+ * - PNG files are uploaded as-is (preserving transparency and lossless quality).
+ * - JPEG files are converted/resized via convertImageToJpeg for optimization.
+ * - Any other file type is rejected.
  * Uses upsert so re-uploads overwrite existing files at the same path.
  *
  * @returns The public URL of the uploaded file.
@@ -87,25 +90,37 @@ export async function uploadImage(
   path: string,
   file: File | Blob
 ): Promise<string> {
-  // Always save the file with a .jpg extension
-  const jpgPath = path.replace(/\.[^/.]+$/, "") + ".jpg";
+  const fileType = file instanceof File ? file.type : (file as Blob).type;
 
   let uploadData: Blob | File = file;
-  try {
-    uploadData = await convertImageToJpeg(file);
-  } catch (err) {
-    console.warn("JPEG conversion failed, falling back to original file upload:", err);
+  let extension: string;
+
+  if (fileType === "image/png") {
+    // Upload PNG as-is — no conversion
+    extension = ".png";
+  } else if (fileType === "image/jpeg" || fileType === "image/jpg") {
+    // Convert/resize JPEG for optimization
+    extension = ".jpg";
+    try {
+      uploadData = await convertImageToJpeg(file);
+    } catch (err) {
+      console.warn("JPEG conversion failed, falling back to original file upload:", err);
+    }
+  } else {
+    throw new Error("Unsupported file type. Only JPG and PNG are accepted.");
   }
+
+  const finalPath = path.replace(/\.[^/.]+$/, "") + extension;
 
   const { error } = await supabase.storage
     .from(bucket)
-    .upload(jpgPath, uploadData, { upsert: true });
+    .upload(finalPath, uploadData, { upsert: true });
 
   if (error) {
     throw new Error(`Upload failed: ${error.message}`);
   }
 
-  return getPublicUrl(bucket, jpgPath);
+  return getPublicUrl(bucket, finalPath);
 }
 
 /**
