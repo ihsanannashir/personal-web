@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react";
 import { useRouter, useParams } from "next/navigation";
 import type { TripWithRelations } from "@/lib/types/database";
-import { uploadImage } from "@/lib/utils/storage";
+import { uploadImage, convertImageToJpeg } from "@/lib/utils/storage";
 import AdminForm from "@/components/admin/AdminForm";
 import FormField from "@/components/admin/FormField";
 
-type PhotoInput = { url: string; caption: string; display_order: number; file?: File };
+type PhotoInput = { url: string; caption: string; display_order: number; file?: File | Blob };
 type PlaceInput = { name: string; display_order: number };
 
 export default function EditTripPage() {
@@ -88,12 +88,33 @@ export default function EditTripPage() {
     setHeroPreview(URL.createObjectURL(file));
   }
 
-  function handlePhotoFile(index: number, file: File | undefined) {
+  async function handlePhotoFile(index: number, file: File | undefined) {
     if (!file) return;
-    const next = [...photos];
-    next[index].file = file;
-    next[index].url = URL.createObjectURL(file);
-    setPhotos(next);
+    try {
+      const convertedBlob = await convertImageToJpeg(file);
+      const previewUrl = URL.createObjectURL(convertedBlob);
+      setPhotos((prev) => {
+        const next = [...prev];
+        next[index] = {
+          ...next[index],
+          file: convertedBlob,
+          url: previewUrl,
+        };
+        return next;
+      });
+    } catch (err) {
+      console.error("Failed to convert image to JPEG for preview:", err);
+      const previewUrl = URL.createObjectURL(file);
+      setPhotos((prev) => {
+        const next = [...prev];
+        next[index] = {
+          ...next[index],
+          file,
+          url: previewUrl,
+        };
+        return next;
+      });
+    }
   }
 
   async function handleSubmit(e: React.FormEvent) {

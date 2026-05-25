@@ -4,7 +4,7 @@ import { supabase } from "@/lib/supabase";
  * Converts a File to a JPEG Blob (90% quality) using Canvas API.
  * Fills transparency with white to avoid black background artifacts.
  */
-function convertImageToJpeg(file: File): Promise<Blob> {
+export function convertImageToJpeg(file: File | Blob): Promise<Blob> {
   return new Promise((resolve, reject) => {
     const img = new Image();
     const objectUrl = URL.createObjectURL(file);
@@ -61,7 +61,7 @@ function convertImageToJpeg(file: File): Promise<Blob> {
 export async function uploadImage(
   bucket: string,
   path: string,
-  file: File
+  file: File | Blob
 ): Promise<string> {
   // Always save the file with a .jpg extension
   const jpgPath = path.replace(/\.[^/.]+$/, "") + ".jpg";
