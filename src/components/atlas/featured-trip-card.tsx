@@ -16,10 +16,10 @@ const FeaturedTripCard = ({ trip }: FeaturedTripCardProps) => {
         <div className="h-52 sm:h-auto sm:w-1/2 bg-border-light flex items-center justify-center flex-shrink-0 relative overflow-hidden">
           {trip.hero_image_url ? (
             /* eslint-disable-next-line @next/next/no-img-element */
-            <img 
-              src={trip.hero_image_url} 
-              alt={trip.title} 
-              className="absolute inset-0 w-full h-full object-cover" 
+            <img
+              src={trip.hero_image_url}
+              alt={trip.title}
+              className="absolute inset-0 w-full h-full object-cover"
             />
           ) : (
             <span className="text-7xl sm:text-8xl">{trip.coverEmoji}</span>
@@ -29,7 +29,7 @@ const FeaturedTripCard = ({ trip }: FeaturedTripCardProps) => {
         {/* Content — right */}
         <div className="p-6 sm:p-8 flex flex-col justify-center">
           <span className="text-label uppercase tracking-[0.15em] text-subtle mb-3">
-            Latest trip
+            Featured
           </span>
           <span className="text-caption text-subtle">
             {trip.country} · {trip.year}
