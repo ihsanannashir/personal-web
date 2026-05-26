@@ -9,7 +9,7 @@ export default function PublicLayout({
   return (
     <>
       <NavigationBar />
-      <main className="pt-20">{children}</main>
+      <main className="pt-10">{children}</main>
       <Footer />
     </>
   );
