@@ -113,4 +113,5 @@ export type Trip = {
   places: TripPlace[];
   photoSlots: number;
   country?: string;
+  year?: number;
 };

@@ -28,7 +28,7 @@ const TripCard = ({ trip }: TripCardProps) => {
       {/* Content */}
       <div className="p-5 sm:p-6">
         <span className="text-caption text-subtle">
-          {trip.country} · {trip.category}
+          {trip.country} · {trip.year}
         </span>
         <h3 className="text-body-lg font-medium text-foreground mt-1 mb-2 group-hover:opacity-70 transition-opacity">
           {trip.title}

@@ -63,24 +63,39 @@ export default async function TripDetailPage({ params }: Props) {
             alt={trip.title}
             className="w-full h-full object-cover"
           />
+          {trip.kicker && (
+            <span className="absolute bottom-3 left-3 text-caption uppercase tracking-[0.15em] text-white bg-black/50 px-3 py-1 rounded-full">
+              {trip.kicker}
+            </span>
+          )}
         </div>
       ) : (
-        <div className="w-full h-64 sm:h-80 rounded-lg bg-border-light flex items-center justify-center mb-8">
+        <div className="w-full h-64 sm:h-80 rounded-lg bg-border-light flex items-center justify-center mb-8 relative">
           <span className="text-7xl sm:text-8xl">🗺️</span>
+          {trip.kicker && (
+            <span className="absolute bottom-3 left-3 text-caption uppercase tracking-[0.15em] text-white bg-black/50 px-3 py-1 rounded-full">
+              {trip.kicker}
+            </span>
+          )}
         </div>
       )}
 
-      {/* Kicker + Title */}
+      {/* Title + metadata */}
       <div className="mb-12">
-        {trip.kicker && (
-          <SectionLabel className="mb-3">{trip.kicker}</SectionLabel>
-        )}
+        <SectionLabel className="mb-3">
+          {trip.country} &middot; {trip.type}
+        </SectionLabel>
+
         <Title>{trip.title}</Title>
-        <div className="text-body-sm text-muted mt-2 mb-6">
-          {formatTripDates(trip.trip_start_date, trip.trip_end_date)} &middot; {trip.country} &middot; {trip.type}
+
+        <div className="mt-3 space-y-0.5">
+          <p className="text-body-sm text-muted">
+            {formatTripDates(trip.trip_start_date, trip.trip_end_date)}
+          </p>
         </div>
+
         {trip.opening_paragraph && (
-          <p className="text-body-lg text-muted max-w-2xl leading-relaxed">
+          <p className="text-body-lg text-muted max-w-2xl leading-relaxed mt-6">
             {trip.opening_paragraph}
           </p>
         )}
@@ -145,9 +160,12 @@ export default async function TripDetailPage({ params }: Props) {
   );
 }
 
-function formatTripDates(startDateStr?: string | null, endDateStr?: string | null): string {
+function formatTripDates(
+  startDateStr?: string | null,
+  endDateStr?: string | null,
+): string {
   if (!startDateStr) return "";
-  
+
   const parseLocalDate = (dateStr: string) => {
     const parts = dateStr.slice(0, 10).split("-");
     return new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2]));
@@ -157,8 +175,18 @@ function formatTripDates(startDateStr?: string | null, endDateStr?: string | nul
   const end = endDateStr ? parseLocalDate(endDateStr) : null;
 
   const months = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December"
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
 
   const startMonth = months[start.getMonth()];

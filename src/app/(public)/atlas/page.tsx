@@ -17,6 +17,7 @@ export const metadata: Metadata = {
 };
 
 function mapTrip(t: DBTrip): Trip {
+  const year = new Date(t.trip_start_date).getFullYear();
   return {
     slug: t.slug,
     title: t.title,
@@ -33,6 +34,7 @@ function mapTrip(t: DBTrip): Trip {
     places: [],
     photoSlots: 0,
     country: t.country ?? "",
+    year,
   };
 }
 

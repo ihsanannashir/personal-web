@@ -32,7 +32,7 @@ const FeaturedTripCard = ({ trip }: FeaturedTripCardProps) => {
             Latest trip
           </span>
           <span className="text-caption text-subtle">
-            {trip.country} · {trip.category}
+            {trip.country} · {trip.year}
           </span>
           <h3 className="font-serif text-heading sm:text-heading text-foreground mt-1 mb-3 group-hover:opacity-70 transition-opacity">
             {trip.title}
