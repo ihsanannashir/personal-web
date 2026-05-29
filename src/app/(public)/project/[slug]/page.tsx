@@ -80,12 +80,14 @@ export default async function ProjectDetailPage({ params }: Props) {
     >
       {project.description && (
         <ProjectSection label="Description">
-          <div className="space-y-4 text-body leading-relaxed">
+          <div className="space-y-4">
             {project.description
               .split("\n")
               .filter(Boolean)
               .map((para, i) => (
-                <p key={i}>{para}</p>
+                <p key={i} className="text-body leading-relaxed">
+                  {para}
+                </p>
               ))}
           </div>
         </ProjectSection>
