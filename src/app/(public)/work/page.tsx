@@ -48,7 +48,7 @@ export default async function WorkPage() {
       {/* Page header */}
       <div className="mb-16 sm:mb-20">
         <Title>Work</Title>
-        <p className="text-body-lg text-muted max-w-xl">
+        <p className="text-body-lg text-muted">
           Career timeline, projects, and education. From frontend to AI
           engineering, here&apos;s where I&apos;ve been.
         </p>
@@ -90,7 +90,7 @@ export default async function WorkPage() {
                   <span className="text-body-sm text-subtle">↗</span>
                 </div>
                 {project.short_description && (
-                  <p className="text-body-sm text-muted mb-4 leading-relaxed line-clamp-2">
+                  <p className="text-body-sm text-muted mb-4 leading-relaxed line-clamp-3">
                     {project.short_description}
                   </p>
                 )}
@@ -142,10 +142,7 @@ export default async function WorkPage() {
                             </h3>
                             <p className="text-[12px] lg:text-body-sm text-subtle lg:text-muted mt-0.5 lg:mt-1">
                               {period}
-                              <span className="lg:hidden">
-                                {" "}
-                                · {location}
-                              </span>
+                              <span className="lg:hidden"> · {location}</span>
                             </p>
                             <p className="hidden lg:block text-caption text-subtle mt-0.5">
                               {location}
@@ -168,11 +165,7 @@ export default async function WorkPage() {
                           )}
                           <div className="flex flex-wrap gap-1.5">
                             {entry.tech_tags.map((tag) => (
-                              <TechTag
-                                key={tag}
-                                label={tag}
-                                domain="default"
-                              />
+                              <TechTag key={tag} label={tag} domain="default" />
                             ))}
                           </div>
                         </div>
@@ -187,10 +180,7 @@ export default async function WorkPage() {
                             </h3>
                             <p className="text-[12px] lg:text-body-sm text-subtle lg:text-muted mt-0.5 lg:mt-1">
                               {period}
-                              <span className="lg:hidden">
-                                {" "}
-                                · {location}
-                              </span>
+                              <span className="lg:hidden"> · {location}</span>
                             </p>
                             <p className="hidden lg:block text-caption text-subtle mt-0.5">
                               {location}
@@ -213,11 +203,7 @@ export default async function WorkPage() {
                           )}
                           <div className="flex flex-wrap gap-1.5 lg:justify-end">
                             {entry.tech_tags.map((tag) => (
-                              <TechTag
-                                key={tag}
-                                label={tag}
-                                domain="default"
-                              />
+                              <TechTag key={tag} label={tag} domain="default" />
                             ))}
                           </div>
                         </div>
