@@ -102,7 +102,7 @@ export default async function ProjectDetailPage({ params }: Props) {
       {visuals && visuals.length > 0 && (
         <ProjectSection label="Visuals">
           <div className="space-y-4 mb-4 text-body leading-relaxed">
-            These are some preview of the project's application (some cannot be
+            These are some preview of the project&apos;s application (some cannot be
             shown due to NDA)
           </div>
 
