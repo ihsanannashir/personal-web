@@ -52,16 +52,17 @@ export default async function AtlasPage() {
     if (!trip.trip_start_date || !trip.trip_end_date) return sum;
     const start = new Date(trip.trip_start_date);
     const end = new Date(trip.trip_end_date);
-    const nights = Math.round((end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24));
+    const nights = Math.round(
+      (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24),
+    );
     return sum + nights;
   }, 0);
 
   const stats = {
     tripsLogged: mappedTrips.length,
     countriesVisited: uniqueCountries.size,
-    mountainsClimbed: (trips ?? []).filter(
-      (t: DBTrip) => t.type === "Hiking",
-    ).length,
+    mountainsClimbed: (trips ?? []).filter((t: DBTrip) => t.type === "Hiking")
+      .length,
     nightsAway: totalNights,
   };
 
@@ -71,7 +72,7 @@ export default async function AtlasPage() {
       <div className="mb-12 sm:mb-16">
         <SectionLabel className="mb-4">Places I&apos;ve been</SectionLabel>
         <Title>The atlas.</Title>
-        <p className="text-body-lg text-muted max-w-xl">
+        <p className="text-body-lg text-muted">
           A living journal of trips — what I saw, what I thought, what I ate.
         </p>
       </div>

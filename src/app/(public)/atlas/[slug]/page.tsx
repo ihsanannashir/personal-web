@@ -95,9 +95,13 @@ export default async function TripDetailPage({ params }: Props) {
         </div>
 
         {trip.opening_paragraph && (
-          <p className="text-body-lg text-muted max-w-2xl leading-relaxed mt-6">
-            {trip.opening_paragraph}
-          </p>
+          <div className="mt-6 space-y-4">
+            {trip.opening_paragraph.split("\n").filter(Boolean).map((para, i) => (
+              <p key={i} className="text-body-lg text-muted leading-relaxed">
+                {para}
+              </p>
+            ))}
+          </div>
         )}
       </div>
 
@@ -105,10 +109,12 @@ export default async function TripDetailPage({ params }: Props) {
       {trip.journal_entry && (
         <section className="mb-14 sm:mb-16">
           <SectionLabel className="mb-6">Journal</SectionLabel>
-          <div className="border-l-2 border-border pl-6 sm:pl-8 max-w-2xl">
-            <p className="text-body text-muted leading-relaxed italic">
-              {trip.journal_entry}
-            </p>
+          <div className="border-l-2 border-border pl-6 sm:pl-8 space-y-4">
+            {trip.journal_entry.split("\n").filter(Boolean).map((para, i) => (
+              <p key={i} className="text-body text-muted leading-relaxed italic">
+                {para}
+              </p>
+            ))}
           </div>
         </section>
       )}
