@@ -1,17 +1,17 @@
 import { NextResponse } from "next/server";
 
 import { supabase } from "@/lib/supabase";
-import type { Project } from "@/lib/types/database";
+import type { Project, ProjectWithVisuals } from "@/lib/types/database";
 
 type RouteParams = { params: Promise<{ slug: string }> };
 
-// GET /api/projects/[slug] — single project by slug
+// GET /api/projects/[slug] — single project by slug (with visuals)
 export async function GET(_request: Request, { params }: RouteParams) {
   const { slug } = await params;
 
   const { data, error } = await supabase
     .from("projects")
-    .select("*")
+    .select("*, project_visuals(*)")
     .eq("slug", slug)
     .single();
 
@@ -20,7 +20,13 @@ export async function GET(_request: Request, { params }: RouteParams) {
     return NextResponse.json({ error: error.message }, { status });
   }
 
-  return NextResponse.json(data as Project);
+  // Sort visuals by display_order
+  const project = data as ProjectWithVisuals;
+  project.project_visuals.sort(
+    (a, b) => (a.display_order ?? 0) - (b.display_order ?? 0)
+  );
+
+  return NextResponse.json(project);
 }
 
 // PUT /api/projects/[slug] — update a project

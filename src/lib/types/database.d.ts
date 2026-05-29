@@ -1,16 +1,37 @@
 // ─── Individual Row Types ───────────────────────────────────────────
 
+export type StackItem = {
+  label: string;
+  domain: "frontend" | "backend" | "other";
+};
+
 export type Project = {
-  id: number;
+  id: string;
   slug: string;
   title: string;
+  subtitle: string | null;
+  short_description: string | null;
   description: string | null;
-  tech_tags: string[];
-  external_url: string | null;
+  period: string | null;
+  role: string | null;
+  tech_tags: StackItem[];
+  features: string[];
+  live_url: string | null;
+  live_label: string | null;
   cover_image_url: string | null;
+  repo_url: string | null;
   status: string;
   created_at: string;
   updated_at: string;
+};
+
+export type ProjectVisual = {
+  id: string;
+  project_id: string;
+  url: string;
+  caption: string | null;
+  contain: boolean;
+  display_order: number | null;
 };
 
 export type Experience = {
@@ -71,7 +92,11 @@ export type NowEntry = {
   city: string | null;
 };
 
-// ─── Trip with relations (for detail pages) ─────────────────────────
+// ─── With relations (for detail pages) ──────────────────────────────
+
+export type ProjectWithVisuals = Project & {
+  project_visuals: ProjectVisual[];
+};
 
 export type TripWithRelations = Trip & {
   trip_photos: TripPhoto[];
@@ -107,6 +132,11 @@ export interface Database {
         Row: TripPlace;
         Insert: Omit<TripPlace, "id">;
         Update: Partial<Omit<TripPlace, "id">>;
+      };
+      project_visuals: {
+        Row: ProjectVisual;
+        Insert: Omit<ProjectVisual, "id">;
+        Update: Partial<Omit<ProjectVisual, "id">>;
       };
       now_entries: {
         Row: NowEntry;

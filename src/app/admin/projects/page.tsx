@@ -63,7 +63,7 @@ export default function AdminProjectsPage() {
             label: "Tags",
             render: (val) => (
               <span className="text-xs text-gray-500">
-                {(val as string[]).join(", ")}
+                {(val as { label: string }[]).map((t) => t.label).join(", ")}
               </span>
             ),
           },

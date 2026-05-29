@@ -62,7 +62,7 @@ export default async function WorkPage() {
           {(projects ?? []).map((project: Project) => (
             <Link
               key={project.slug}
-              href={project.external_url ?? `/project/${project.slug}`}
+              href={`/project/${project.slug}`}
               className="group block p-6 rounded-lg thin-border bg-card/50 hover:bg-card transition-colors"
             >
               <div className="flex items-baseline justify-between mb-3">
@@ -71,14 +71,18 @@ export default async function WorkPage() {
                 </h3>
                 <span className="text-body-sm text-subtle">↗</span>
               </div>
-              {project.description && (
+              {project.short_description && (
                 <p className="text-body-sm text-muted mb-4 leading-relaxed">
-                  {project.description}
+                  {project.short_description}
                 </p>
               )}
               <div className="flex flex-wrap gap-2">
                 {project.tech_tags.map((tag) => (
-                  <TechTag key={tag} label={tag} domain="default" />
+                  <TechTag
+                    key={tag.label}
+                    label={tag.label}
+                    domain={tag.domain === "other" ? "default" : tag.domain}
+                  />
                 ))}
               </div>
             </Link>

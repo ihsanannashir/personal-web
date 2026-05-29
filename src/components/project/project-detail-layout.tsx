@@ -1,4 +1,3 @@
-import Image, { StaticImageData } from "next/image";
 import Link from "next/link";
 
 import SectionLabel from "@/components/ui/section-label";
@@ -13,13 +12,14 @@ interface MetadataRow {
 interface ProjectDetailLayoutProps {
   title: string;
   subtitle: string;
-  heroImage: StaticImageData;
+  heroImage: string;
   heroAlt: string;
   period: string;
   role: string;
   stack: TechTagData[];
   liveUrl?: string;
   liveLabel?: string;
+  repoUrl?: string;
   children: React.ReactNode;
 }
 
@@ -33,6 +33,7 @@ const ProjectDetailLayout = ({
   stack,
   liveUrl,
   liveLabel = "View live",
+  repoUrl,
   children,
 }: ProjectDetailLayoutProps) => {
   const metadata: MetadataRow[] = [
@@ -65,10 +66,27 @@ const ProjectDetailLayout = ({
           },
         ]
       : []),
+    ...(repoUrl
+      ? [
+          {
+            label: "Repository",
+            value: (
+              <a
+                href={repoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-foreground underline hover:opacity-70 transition-opacity"
+              >
+                Repository ↗
+              </a>
+            ),
+          },
+        ]
+      : []),
   ];
 
   return (
-    <div className="editorial-container pt-16 sm:pt-24 pb-20">
+    <div className="editorial-container pt-16 sm:pt-18 pb-20">
       <Link
         href="/work"
         className="text-body-sm text-muted hover:text-foreground transition-colors inline-flex items-center gap-1 mb-8"
@@ -76,15 +94,13 @@ const ProjectDetailLayout = ({
         ← Back to work
       </Link>
 
-      <Image
+      <img
         src={heroImage}
         alt={heroAlt}
-        placeholder="blur"
-        sizes="100vw"
-        className="w-full aspect-[2/1] sm:aspect-[2.5/1] rounded-xl object-cover thin-border mb-10"
+        className="w-full aspect-[2/1] sm:aspect-[2.5/1] rounded-xl object-cover thin-border mb-8 max-h-80"
       />
 
-      <div className="p-5 sm:p-6 rounded-lg thin-border bg-card/50 mb-14">
+      <div className="p-5 sm:p-6 rounded-lg thin-border bg-card/50 mb-10">
         <div className="space-y-3">
           {metadata.map((row) => (
             <div
@@ -114,7 +130,7 @@ export const ProjectSection = ({
   label: string;
   children: React.ReactNode;
 }) => (
-  <section className="mb-14 sm:mb-16 thin-border-t pt-10">
+  <section className="mb-12 sm:mb-14 thin-border-t pt-10">
     <SectionLabel className="mb-6">{label}</SectionLabel>
     {children}
   </section>
@@ -139,17 +155,15 @@ export const ImageFigure = ({
   caption,
   contain,
 }: {
-  src: StaticImageData;
+  src: string;
   alt: string;
   caption: string;
   contain?: boolean;
 }) => (
   <figure className="rounded-lg thin-border overflow-hidden">
-    <Image
+    <img
       src={src}
       alt={alt}
-      placeholder="blur"
-      sizes="100vw"
       className={`w-full ${contain ? "aspect-video object-contain bg-card" : "object-cover"}`}
     />
     <figcaption className="px-4 py-2.5 text-caption text-subtle bg-card/30 thin-border-t">
