@@ -63,27 +63,46 @@ export default async function WorkPage() {
             <Link
               key={project.slug}
               href={`/project/${project.slug}`}
-              className="group block p-6 rounded-lg thin-border bg-card/50 hover:bg-card transition-colors"
+              className="group block rounded-lg thin-border bg-card/50 hover:bg-card transition-colors overflow-hidden"
             >
-              <div className="flex items-baseline justify-between mb-3">
-                <h3 className="text-body-lg font-medium text-foreground group-hover:opacity-70 transition-opacity">
-                  {project.title}
-                </h3>
-                <span className="text-body-sm text-subtle">↗</span>
-              </div>
-              {project.short_description && (
-                <p className="text-body-sm text-muted mb-4 leading-relaxed">
-                  {project.short_description}
-                </p>
-              )}
-              <div className="flex flex-wrap gap-2">
-                {project.tech_tags.map((tag) => (
-                  <TechTag
-                    key={tag.label}
-                    label={tag.label}
-                    domain={tag.domain === "other" ? "default" : tag.domain}
+              {/* Cover area */}
+              <div className="h-44 sm:h-52 bg-border-light flex items-center justify-center relative overflow-hidden border-b border-border/30">
+                {project.cover_image_url ? (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    src={project.cover_image_url}
+                    alt={project.title}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
-                ))}
+                ) : (
+                  <span className="text-6xl transition-transform duration-500 group-hover:scale-110 select-none">
+                    💻
+                  </span>
+                )}
+              </div>
+
+              {/* Content */}
+              <div className="p-5 sm:p-6">
+                <div className="flex items-baseline justify-between mb-3">
+                  <h3 className="text-body-lg font-medium text-foreground group-hover:opacity-70 transition-opacity">
+                    {project.title}
+                  </h3>
+                  <span className="text-body-sm text-subtle">↗</span>
+                </div>
+                {project.short_description && (
+                  <p className="text-body-sm text-muted mb-4 leading-relaxed line-clamp-2">
+                    {project.short_description}
+                  </p>
+                )}
+                <div className="flex flex-wrap gap-2">
+                  {project.tech_tags.map((tag) => (
+                    <TechTag
+                      key={tag.label}
+                      label={tag.label}
+                      domain={tag.domain === "other" ? "default" : tag.domain}
+                    />
+                  ))}
+                </div>
               </div>
             </Link>
           ))}
