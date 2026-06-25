@@ -43,6 +43,8 @@ export default async function WorkPage() {
       .order("display_order", { ascending: true }),
   ]);
 
+  const hasExperiences = (experiences ?? []).length > 0;
+
   return (
     <div className="editorial-container pt-16 sm:pt-24 pb-20">
       {/* Page header */}
@@ -110,112 +112,122 @@ export default async function WorkPage() {
       </section>
 
       {/* ─── Experience — Zigzag Timeline ─── */}
-      <section className="mb-20 sm:mb-26">
-        <SectionLabel className="mb-10">Experience</SectionLabel>
+      {hasExperiences && (
+        <section className="mb-20 sm:mb-26">
+          <SectionLabel className="mb-10">Experience</SectionLabel>
 
-        <div className="relative">
-          {/* Mobile: left border line | Desktop: center line */}
-          <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-border-light lg:left-1/2 lg:-translate-x-1/2" />
+          <div className="relative">
+            {/* Mobile: left border line | Desktop: center line */}
+            <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-border-light lg:left-1/2 lg:-translate-x-1/2" />
 
-          <div className="space-y-8 lg:space-y-16">
-            {(experiences ?? []).map((entry: Experience, index: number) => {
-              const isLeft = index % 2 === 0;
-              const period = formatPeriod(entry.start_date, entry.end_date);
-              const location = `${entry.flag_emoji} ${entry.country_code}`;
+            <div className="space-y-8 lg:space-y-16">
+              {(experiences ?? []).map((entry: Experience, index: number) => {
+                const isLeft = index % 2 === 0;
+                const period = formatPeriod(entry.start_date, entry.end_date);
+                const location = `${entry.flag_emoji} ${entry.country_code}`;
 
-              return (
-                <div key={entry.id} className="relative pl-5 lg:pl-0">
-                  {/* Dot — mobile: left edge | desktop: center */}
-                  <div className="absolute left-0 top-1 -translate-x-1/2 z-10 lg:left-1/2 lg:top-8">
-                    <div className="w-2 h-2 rounded-full bg-foreground" />
+                return (
+                  <div key={entry.id} className="relative pl-5 lg:pl-0">
+                    {/* Dot — mobile: left edge | desktop: center */}
+                    <div className="absolute left-0 top-1 -translate-x-1/2 z-10 lg:left-1/2 lg:top-8">
+                      <div className="w-2 h-2 rounded-full bg-foreground" />
+                    </div>
+
+                    {/* Desktop zigzag grid */}
+                    <div className="lg:grid lg:grid-cols-2 lg:gap-12">
+                      {isLeft ? (
+                        <>
+                          {/* Company card — left on desktop */}
+                          <div className="lg:text-right lg:pr-12">
+                            <div className="lg:inline-block lg:min-w-[280px] lg:p-5 lg:rounded-lg lg:border-[0.5px] lg:border-border lg:bg-card/50 lg:ml-auto lg:text-left">
+                              <h3 className="text-[15px] lg:text-[20px] font-medium text-foreground leading-snug">
+                                {entry.company}
+                              </h3>
+                              <p className="text-[12px] lg:text-body-sm text-subtle lg:text-muted mt-0.5 lg:mt-1">
+                                {period}
+                                <span className="lg:hidden"> · {location}</span>
+                              </p>
+                              <p className="hidden lg:block text-caption text-subtle mt-0.5">
+                                {location}
+                              </p>
+                            </div>
+                          </div>
+
+                          {/* Content — right on desktop */}
+                          <div className="mt-3 lg:mt-0 lg:pl-12">
+                            <h4 className="text-[16px] lg:text-body-lg font-medium text-foreground mb-2">
+                              {entry.role}
+                            </h4>
+                            <p className="text-[13px] lg:text-body-sm text-muted leading-[1.7] mb-2">
+                              {entry.factual_line}
+                            </p>
+                            {entry.personal_note && (
+                              <p className="text-[13px] lg:text-body-sm text-muted italic leading-[1.7] mb-4">
+                                {entry.personal_note}
+                              </p>
+                            )}
+                            <div className="flex flex-wrap gap-1.5">
+                              {entry.tech_tags.map((tag) => (
+                                <TechTag
+                                  key={tag}
+                                  label={tag}
+                                  domain="default"
+                                />
+                              ))}
+                            </div>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          {/* Company card — first on mobile, right (2nd col) on desktop */}
+                          <div className="lg:order-2 lg:text-left lg:pl-12">
+                            <div className="lg:inline-block lg:min-w-[280px] lg:p-5 lg:rounded-lg lg:border-[0.5px] lg:border-border lg:bg-card/50 lg:mr-auto lg:text-left">
+                              <h3 className="text-[15px] lg:text-[20px] font-medium text-foreground leading-snug">
+                                {entry.company}
+                              </h3>
+                              <p className="text-[12px] lg:text-body-sm text-subtle lg:text-muted mt-0.5 lg:mt-1">
+                                {period}
+                                <span className="lg:hidden"> · {location}</span>
+                              </p>
+                              <p className="hidden lg:block text-caption text-subtle mt-0.5">
+                                {location}
+                              </p>
+                            </div>
+                          </div>
+
+                          {/* Content — second on mobile, left (1st col) on desktop */}
+                          <div className="mt-3 lg:mt-0 lg:order-1 lg:pr-12 lg:text-right">
+                            <h4 className="text-[16px] lg:text-body-lg font-medium text-foreground mb-2">
+                              {entry.role}
+                            </h4>
+                            <p className="text-[13px] lg:text-body-sm text-muted leading-[1.7] mb-2">
+                              {entry.factual_line}
+                            </p>
+                            {entry.personal_note && (
+                              <p className="text-[13px] lg:text-body-sm text-muted italic leading-[1.7] mb-4">
+                                {entry.personal_note}
+                              </p>
+                            )}
+                            <div className="flex flex-wrap gap-1.5 lg:justify-end">
+                              {entry.tech_tags.map((tag) => (
+                                <TechTag
+                                  key={tag}
+                                  label={tag}
+                                  domain="default"
+                                />
+                              ))}
+                            </div>
+                          </div>
+                        </>
+                      )}
+                    </div>
                   </div>
-
-                  {/* Desktop zigzag grid */}
-                  <div className="lg:grid lg:grid-cols-2 lg:gap-12">
-                    {isLeft ? (
-                      <>
-                        {/* Company card — left on desktop */}
-                        <div className="lg:text-right lg:pr-12">
-                          <div className="lg:inline-block lg:min-w-[280px] lg:p-5 lg:rounded-lg lg:border-[0.5px] lg:border-border lg:bg-card/50 lg:ml-auto lg:text-left">
-                            <h3 className="text-[15px] lg:text-[20px] font-medium text-foreground leading-snug">
-                              {entry.company}
-                            </h3>
-                            <p className="text-[12px] lg:text-body-sm text-subtle lg:text-muted mt-0.5 lg:mt-1">
-                              {period}
-                              <span className="lg:hidden"> · {location}</span>
-                            </p>
-                            <p className="hidden lg:block text-caption text-subtle mt-0.5">
-                              {location}
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Content — right on desktop */}
-                        <div className="mt-3 lg:mt-0 lg:pl-12">
-                          <h4 className="text-[16px] lg:text-body-lg font-medium text-foreground mb-2">
-                            {entry.role}
-                          </h4>
-                          <p className="text-[13px] lg:text-body-sm text-muted leading-[1.7] mb-2">
-                            {entry.factual_line}
-                          </p>
-                          {entry.personal_note && (
-                            <p className="text-[13px] lg:text-body-sm text-muted italic leading-[1.7] mb-4">
-                              {entry.personal_note}
-                            </p>
-                          )}
-                          <div className="flex flex-wrap gap-1.5">
-                            {entry.tech_tags.map((tag) => (
-                              <TechTag key={tag} label={tag} domain="default" />
-                            ))}
-                          </div>
-                        </div>
-                      </>
-                    ) : (
-                      <>
-                        {/* Company card — first on mobile, right (2nd col) on desktop */}
-                        <div className="lg:order-2 lg:text-left lg:pl-12">
-                          <div className="lg:inline-block lg:min-w-[280px] lg:p-5 lg:rounded-lg lg:border-[0.5px] lg:border-border lg:bg-card/50 lg:mr-auto lg:text-left">
-                            <h3 className="text-[15px] lg:text-[20px] font-medium text-foreground leading-snug">
-                              {entry.company}
-                            </h3>
-                            <p className="text-[12px] lg:text-body-sm text-subtle lg:text-muted mt-0.5 lg:mt-1">
-                              {period}
-                              <span className="lg:hidden"> · {location}</span>
-                            </p>
-                            <p className="hidden lg:block text-caption text-subtle mt-0.5">
-                              {location}
-                            </p>
-                          </div>
-                        </div>
-
-                        {/* Content — second on mobile, left (1st col) on desktop */}
-                        <div className="mt-3 lg:mt-0 lg:order-1 lg:pr-12 lg:text-right">
-                          <h4 className="text-[16px] lg:text-body-lg font-medium text-foreground mb-2">
-                            {entry.role}
-                          </h4>
-                          <p className="text-[13px] lg:text-body-sm text-muted leading-[1.7] mb-2">
-                            {entry.factual_line}
-                          </p>
-                          {entry.personal_note && (
-                            <p className="text-[13px] lg:text-body-sm text-muted italic leading-[1.7] mb-4">
-                              {entry.personal_note}
-                            </p>
-                          )}
-                          <div className="flex flex-wrap gap-1.5 lg:justify-end">
-                            {entry.tech_tags.map((tag) => (
-                              <TechTag key={tag} label={tag} domain="default" />
-                            ))}
-                          </div>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   );
 }
