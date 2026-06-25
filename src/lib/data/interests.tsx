@@ -11,7 +11,7 @@ export const INTERESTS: Interest[] = [
   {
     label: "Running",
     description:
-      "Training for my first half marathon in June 2026. The discipline of running teaches patience, something engineering also demands.",
+      "Finishing the half-marathon already. I’m still running, mostly because it makes my weeks feel anchored.",
   },
   {
     label: "Travelling",
