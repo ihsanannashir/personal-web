@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth/next";
 
 import { supabase } from "@/lib/supabase";
+import { authOptions } from "@/lib/auth";
 import type { TripWithRelations } from "@/lib/types/database";
 
 type RouteParams = { params: Promise<{ slug: string }> };
@@ -30,6 +32,11 @@ export async function GET(_request: Request, { params }: RouteParams) {
 
 // PUT /api/trips/[slug] — update a trip
 export async function PUT(request: Request, { params }: RouteParams) {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const { slug } = await params;
   const body = await request.json();
 
@@ -50,6 +57,11 @@ export async function PUT(request: Request, { params }: RouteParams) {
 
 // DELETE /api/trips/[slug] — delete a trip (cascades to photos/places via FK)
 export async function DELETE(_request: Request, { params }: RouteParams) {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const { slug } = await params;
 
   const { error } = await supabase.from("trips").delete().eq("slug", slug);

@@ -1,11 +1,18 @@
 import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth/next";
 
 import { supabase } from "@/lib/supabase";
+import { authOptions } from "@/lib/auth";
 
 type RouteParams = { params: Promise<{ slug: string }> };
 
 // POST /api/trips/[slug]/relations — batch insert photos and places for a trip
 export async function POST(request: Request, { params }: RouteParams) {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const { slug } = await params;
   const body = await request.json();
   const { trip_id, photos, places } = body as {
@@ -59,6 +66,11 @@ export async function POST(request: Request, { params }: RouteParams) {
 
 // PUT /api/trips/[slug]/relations — replace all photos and places for a trip
 export async function PUT(request: Request, { params }: RouteParams) {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const { slug } = await params;
   const body = await request.json();
   const { trip_id, photos, places } = body as {

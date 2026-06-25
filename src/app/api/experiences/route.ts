@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth/next";
 
 import { supabase } from "@/lib/supabase";
+import { authOptions } from "@/lib/auth";
 import type { Experience } from "@/lib/types/database";
 
 // GET /api/experiences — all experiences ordered by display_order
@@ -19,6 +21,11 @@ export async function GET() {
 
 // POST /api/experiences — create a new experience
 export async function POST(request: Request) {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const body = await request.json();
 
   const { data, error } = await supabase

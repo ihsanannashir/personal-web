@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth/next";
 
 import { supabase } from "@/lib/supabase";
+import { authOptions } from "@/lib/auth";
 import type { Trip } from "@/lib/types/database";
 
 // GET /api/trips — all published trips (or all if ?all=true)
@@ -12,6 +14,12 @@ export async function GET(request: Request) {
 
   if (!all) {
     query = query.eq("status", "published");
+  } else {
+    const session = await getServerSession(authOptions);
+    if (!session) {
+      // Do not allow fetching drafts for unauthenticated users
+      query = query.eq("status", "published");
+    }
   }
 
   const { data, error } = await query.order("trip_start_date", { ascending: false });
@@ -25,6 +33,11 @@ export async function GET(request: Request) {
 
 // POST /api/trips — create a new trip
 export async function POST(request: Request) {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const body = await request.json();
 
   const { data, error } = await supabase

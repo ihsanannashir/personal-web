@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth/next";
 
 import { supabase } from "@/lib/supabase";
+import { authOptions } from "@/lib/auth";
 
 type RouteParams = { params: Promise<{ slug: string }> };
 
@@ -13,6 +15,11 @@ type VisualInput = {
 
 // POST /api/projects/[slug]/visuals — batch insert visuals for a project
 export async function POST(request: Request, { params }: RouteParams) {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const { slug } = await params;
   const body = await request.json();
   const { project_id, visuals } = body as {
@@ -50,6 +57,11 @@ export async function POST(request: Request, { params }: RouteParams) {
 
 // PUT /api/projects/[slug]/visuals — replace all visuals for a project
 export async function PUT(request: Request, { params }: RouteParams) {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const { slug } = await params;
   const body = await request.json();
   const { project_id, visuals } = body as {

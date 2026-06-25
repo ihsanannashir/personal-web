@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth/next";
 
 import { supabase } from "@/lib/supabase";
+import { authOptions } from "@/lib/auth";
 import type { NowEntry } from "@/lib/types/database";
 
 // GET /api/now — single latest now entry
@@ -22,6 +24,11 @@ export async function GET() {
 
 // POST /api/now — create a new now entry
 export async function POST(request: Request) {
+  const session = await getServerSession(authOptions);
+  if (!session) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const body = await request.json();
 
   const { data, error } = await supabase
