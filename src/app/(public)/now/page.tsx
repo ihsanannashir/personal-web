@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 import SectionLabel from "@/components/ui/section-label";
 import Title from "@/components/ui/title";
@@ -13,6 +14,8 @@ export const metadata: Metadata = {
 };
 
 export default function NowPage() {
+  notFound();
+
   const { lastUpdated, city, focus, running, reading, thinkingAbout } =
     NOW_DATA;
 

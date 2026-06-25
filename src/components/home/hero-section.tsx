@@ -46,7 +46,7 @@ const HeroSection = () => {
       <Title className="max-w-3xl mb-6">
         I&apos;m Ihsan An-Nashir,
         <br />
-        <p className="italic">Software Engineer. Reader. Traveller.</p>
+        <p className="italic">Engineer. Reader. Traveller.</p>
       </Title>
 
       {/* Subtext */}
