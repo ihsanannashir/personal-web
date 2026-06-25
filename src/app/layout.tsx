@@ -1,53 +1,38 @@
-import clsx from "clsx";
 import { Metadata } from "next";
-import { Plus_Jakarta_Sans as FontSans } from "next/font/google";
+import { Plus_Jakarta_Sans, DM_Serif_Display } from "next/font/google";
 import "./globals.css";
 
-import OpenGraphIhsan from "@/assets/images/Ihsan-cv.jpg";
 
-import NavigationBar from "@/components/navigation-bar";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import Footer from "@/components/footer";
-import Scroll from "@/lib/utils/scroll";
 
-const fontSans = FontSans({
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
-  variable: "--font-sans",
-  preload: true,
-  fallback: [
-    "system-ui",
-    "-apple-system",
-    "Segoe UI",
-    "Roboto",
-    "Helvetica Neue",
-    "Arial",
-    "sans-serif",
-  ],
+  variable: "--font-plus-jakarta",
+  display: "swap",
+});
+
+const dmSerifDisplay = DM_Serif_Display({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-dm-serif",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
   title: {
-    template: "%s • Ihsan An-Nashir",
-    default: "Ihsan An-Nashir's Portfolio",
+    template: "%s — Ihsan An-Nashir",
+    default: "Ihsan An-Nashir — Software & AI Engineer",
   },
   description:
-    "A Portfolio website of Ihsan An-Nashir, Software and AI Engineer based in Indonesia",
+    "Software & AI Engineer based in Jakarta, Indonesia. Building RAG systems and LLM-powered platforms. Previously in frontend, full-stack, and core banking.",
   keywords:
-    "Ihsan An-Nashir, M. Ihsan An-Nashir, Freelance Web Developer, freelance web, frontend, frontend developer, software engineer, AI Engineer",
+    "Ihsan An-Nashir, Software Engineer, AI Engineer, RAG, LLM, Jakarta, Indonesia, Frontend, Full-stack",
   openGraph: {
-    title: "Ihsan An-Nashir's Portfolio",
+    title: "Ihsan An-Nashir — Software & AI Engineer",
     description:
-      "A Portfolio website of Ihsan An-Nashir, Software and AI Engineer based in Indonesia",
-    siteName: "Ihsan An-Nashir's Portfolio",
+      "Software & AI Engineer based in Jakarta, Indonesia. Building RAG systems and LLM-powered platforms.",
+    siteName: "Ihsan An-Nashir",
     type: "website",
-    url: `https://ihsanannashir.dev`,
-    images: [
-      {
-        url: OpenGraphIhsan.src,
-        width: OpenGraphIhsan.width,
-        height: OpenGraphIhsan.height,
-      },
-    ],
+    url: "https://ihsanannashir.dev",
   },
 };
 
@@ -58,21 +43,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <Scroll />
-      <TooltipProvider>
-        <body
-          className={clsx(
-            "relative min-h-screen bg-background font-sans antialiased",
-            fontSans.variable,
-          )}
-        >
-          <NavigationBar />
-          <main className="mx-auto max-w-4xl pb-12 pt-24 sm:py-24 px-6 min-h-[93svh]">
-            {children}
-          </main>
-          <Footer />
-        </body>
-      </TooltipProvider>
+      <body
+        className={`${plusJakartaSans.variable} ${dmSerifDisplay.variable} min-h-screen bg-background font-sans antialiased`}
+      >
+        {children}
+      </body>
     </html>
   );
 }

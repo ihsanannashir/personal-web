@@ -1,21 +1,31 @@
-import StackShowcase from "@/components/stack-showcase";
 import { ProjectData } from "@/lib/types/item-data";
 
 export const PROJECTS: ProjectData[] = [
   {
+    title: "Fakta.com 2.0",
+    slug: "fakta-com",
+    description:
+      "Indonesian online media platform with news, data, and opinions. Built with CMS, multi-role authorization, and dynamic content delivery.",
+    thumbnail: "/assets/project/fakta/fakta.png",
+    period: "Feb 2024 – Aug 2024",
+    tags: [
+      { label: "Next.js", domain: "frontend" },
+      { label: "TailwindCSS", domain: "frontend" },
+      { label: "Node.js", domain: "backend" },
+    ],
+  },
+  {
     title: "Yomy",
     slug: "yomy",
     description:
-      "A multi-tenant SaaS platform for managing customer feedback, featuring Stripe payments, QR-based reviews, and business dashboards.",
-    thumbnail: "/assets/yomy.png",
-    tech: <StackShowcase react tailwind />,
-  },
-  {
-    title: "Fakta 2.0",
-    slug: "fakta-com",
-    description:
-      "An Indonesian media platform that offers wide range of topics. Built with CMS, multi-role authorization, and dynamic content delivery for news publishing.",
-    thumbnail: "/assets/fakta.png",
-    tech: <StackShowcase nextjs tailwind />,
+      "SaaS customer feedback manager with Stripe payments, QR-based reviews, and business dashboards.",
+    thumbnail: "/assets/project/yomy/yomy.png",
+    period: "Aug 2023 – Jan 2024",
+    tags: [
+      { label: "React", domain: "frontend" },
+      { label: "TailwindCSS", domain: "frontend" },
+      { label: "PostgreSQL", domain: "backend" },
+      { label: "Node.js", domain: "backend" },
+    ],
   },
 ];

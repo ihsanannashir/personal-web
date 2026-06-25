@@ -1,153 +1,128 @@
 "use client";
 
-import { BsList } from "react-icons/bs";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import clsx from "clsx";
 
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { SOCIALS } from "@/lib/data/socials";
-
-type NavMenu = {
-  title: string;
+type NavItem = {
+  label: string;
   href: string;
 };
 
-const MENUS: NavMenu[] = [
-  { title: "Home", href: "/" },
-  { title: "About", href: "/#about" },
-  { title: "Projects", href: "/#projects" },
+const NAV_ITEMS: NavItem[] = [
+  { label: "Home", href: "/" },
+  { label: "Work", href: "/work" },
 ];
-
-// Map section IDs to their nav hrefs
-const SECTION_IDS = ["about", "projects"];
 
 const NavigationBar = () => {
   const pathname = usePathname();
-  const [activeSection, setActiveSection] = useState<string | null>(null);
-
-  useEffect(() => {
-    // Only run scroll spy on the home page
-    if (pathname !== "/") return;
-
-    const observers: IntersectionObserver[] = [];
-
-    SECTION_IDS.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            setActiveSection(id);
-          }
-        },
-        { rootMargin: "-40% 0px -55% 0px" }
-      );
-
-      observer.observe(el);
-      observers.push(observer);
-    });
-
-    // Reset to Home when scrolled to top
-    const handleScroll = () => {
-      if (window.scrollY < 100) {
-        setActiveSection(null);
-      }
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    return () => {
-      observers.forEach((o) => o.disconnect());
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [pathname]);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   const isActive = (href: string) => {
-    // On project detail pages, highlight "Projects" via route matching
-    if (pathname !== "/") {
-      if (href === "/#projects") return pathname.startsWith("/project");
-      return false;
-    }
-
-    // On home page, use scroll spy
-    if (href === "/") return activeSection === null;
-    const sectionId = href.replace("/#", "");
-    return activeSection === sectionId;
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
   };
 
   return (
-    <nav className="fixed z-50 top-0 w-full">
-      {/* Gradient backdrop - fades content scrolling under the navbar */}
-      <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-background via-background/80 to-transparent pointer-events-none" />
+    <>
+      <nav className="fixed z-50 top-0 w-full bg-background/90 backdrop-blur-sm">
+        <div className="editorial-container">
+          <div className="flex items-center justify-between h-16">
+            {/* Wordmark */}
+            <Link
+              href="/"
+              className="font-serif text-heading-sm text-foreground hover:opacity-70 transition-opacity"
+            >
+              Ihsan An-Nashir.
+            </Link>
 
-      <div className="relative sm:max-w-4xl sm:mx-auto mt-4">
-        <div className="flex justify-between mx-6 sm:mx-6 p-4 sm:p-2 bg-white drop-shadow-[4px_4px_0px_rgba(118,116,250,0.75)] rounded-2xl border">
-          {/* Navigation Desktop */}
-          <ul className="hidden sm:flex text-sm">
-            {MENUS.map((menu, index) => {
-              return (
-                <Link href={menu.href} key={index}>
-                  <li
-                    className={clsx(
-                      isActive(menu.href) && "bg-blurple-300 text-white",
-                      "duration-500 py-2 px-4 hover:bg-blurple-300 hover:text-white rounded-xl",
-                    )}
-                  >
-                    {menu.title}
-                  </li>
+            {/* Desktop nav */}
+            <div className="hidden sm:flex items-center gap-8">
+              {NAV_ITEMS.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={clsx(
+                    "text-body-sm transition-colors relative py-1",
+                    isActive(item.href)
+                      ? "text-foreground"
+                      : "text-muted hover:text-foreground",
+                  )}
+                >
+                  {item.label}
+                  {isActive(item.href) && (
+                    <span className="absolute -bottom-0.5 left-0 right-0 h-px bg-foreground" />
+                  )}
                 </Link>
-              );
-            })}
-          </ul>
+              ))}
+              <a
+                href="mailto:ihsanannashir@gmail.com"
+                className="text-body-sm text-muted hover:text-foreground transition-colors"
+              >
+                Say hello ↗
+              </a>
+            </div>
 
-          {/* Navigation Mobile */}
-          <Sheet>
-            <SheetTrigger className="sm:hidden">
-              <BsList size={22} />
-            </SheetTrigger>
-            <SheetContent side={"left"}>
-              <ul className="text-lg space-y-4">
-                {MENUS.map((menu, index) => {
-                  return (
-                    <li
-                      key={index}
-                      className={clsx(isActive(menu.href) && "font-bold")}
-                    >
-                      <Link href={menu.href}>{menu.title}</Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </SheetContent>
-          </Sheet>
-
-          {/* Social Media */}
-          <div className="flex space-x-4 p-0 sm:p-2">
-            {SOCIALS.map((social, index) => {
-              return (
-                <Tooltip key={index}>
-                  <TooltipTrigger>
-                    <Link href={social.url ?? ""} target="_blank">
-                      {social.icon}
-                    </Link>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>{social.title}</p>
-                  </TooltipContent>
-                </Tooltip>
-              );
-            })}
+            {/* Mobile hamburger */}
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="sm:hidden flex flex-col gap-1.5 p-2"
+              aria-label="Toggle menu"
+            >
+              <span
+                className={clsx(
+                  "block w-5 h-px bg-foreground transition-transform duration-300",
+                  mobileOpen && "rotate-45 translate-y-[3.5px]",
+                )}
+              />
+              <span
+                className={clsx(
+                  "block w-5 h-px bg-foreground transition-opacity duration-300",
+                  mobileOpen && "opacity-0",
+                )}
+              />
+              <span
+                className={clsx(
+                  "block w-5 h-px bg-foreground transition-transform duration-300",
+                  mobileOpen && "-rotate-45 -translate-y-[3.5px]",
+                )}
+              />
+            </button>
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+
+      {/* Mobile menu overlay */}
+      {mobileOpen && (
+        <div className="fixed inset-0 z-40 bg-background pt-20">
+          <div className="editorial-container flex flex-col gap-6 pt-8">
+            {NAV_ITEMS.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setMobileOpen(false)}
+                className={clsx(
+                  "font-serif text-display-sm transition-colors",
+                  isActive(item.href)
+                    ? "text-foreground"
+                    : "text-muted hover:text-foreground",
+                )}
+              >
+                {item.label}
+              </Link>
+            ))}
+            <a
+              href="mailto:ihsanannashir@gmail.com"
+              onClick={() => setMobileOpen(false)}
+              className="text-body-lg text-muted hover:text-foreground transition-colors pt-4 thin-border-t"
+            >
+              ihsanannashir@gmail.com
+            </a>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
