@@ -21,18 +21,11 @@ function mapTrip(t: DBTrip): Trip {
   return {
     slug: t.slug,
     title: t.title,
-    date: t.location,
     category: t.type as Trip["category"],
     coverEmoji: "🗺️",
     hero_image_url: t.hero_image_url ?? "",
     description: t.opening_paragraph ?? "",
     featured: t.is_featured,
-    kicker: t.kicker ?? "",
-    opening: t.opening_paragraph ?? "",
-    stats: [],
-    journal: t.journal_entry ?? "",
-    places: [],
-    photoSlots: 0,
     country: t.country ?? "",
     year,
   };

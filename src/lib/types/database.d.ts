@@ -83,15 +83,6 @@ export type TripPlace = {
   display_order: number;
 };
 
-export type NowEntry = {
-  id: number;
-  current_book: string | null;
-  current_book_author: string | null;
-  thinking_about: string[];
-  last_updated_at: string;
-  city: string | null;
-};
-
 // ─── With relations (for detail pages) ──────────────────────────────
 
 export type ProjectWithVisuals = Project & {
@@ -102,47 +93,3 @@ export type TripWithRelations = Trip & {
   trip_photos: TripPhoto[];
   trip_places: TripPlace[];
 };
-
-// ─── Database Interface ─────────────────────────────────────────────
-
-export interface Database {
-  public: {
-    Tables: {
-      projects: {
-        Row: Project;
-        Insert: Omit<Project, "id" | "created_at" | "updated_at">;
-        Update: Partial<Omit<Project, "id" | "created_at" | "updated_at">>;
-      };
-      experiences: {
-        Row: Experience;
-        Insert: Omit<Experience, "id" | "created_at">;
-        Update: Partial<Omit<Experience, "id" | "created_at">>;
-      };
-      trips: {
-        Row: Trip;
-        Insert: Omit<Trip, "id" | "created_at" | "updated_at">;
-        Update: Partial<Omit<Trip, "id" | "created_at" | "updated_at">>;
-      };
-      trip_photos: {
-        Row: TripPhoto;
-        Insert: Omit<TripPhoto, "id">;
-        Update: Partial<Omit<TripPhoto, "id">>;
-      };
-      trip_places: {
-        Row: TripPlace;
-        Insert: Omit<TripPlace, "id">;
-        Update: Partial<Omit<TripPlace, "id">>;
-      };
-      project_visuals: {
-        Row: ProjectVisual;
-        Insert: Omit<ProjectVisual, "id">;
-        Update: Partial<Omit<ProjectVisual, "id">>;
-      };
-      now_entries: {
-        Row: NowEntry;
-        Insert: Omit<NowEntry, "id">;
-        Update: Partial<Omit<NowEntry, "id">>;
-      };
-    };
-  };
-}
