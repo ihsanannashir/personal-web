@@ -13,6 +13,8 @@ type NavItem = {
 const NAV_ITEMS: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Work", href: "/work" },
+  { label: "Atlas", href: "/atlas" },
+  { label: "Now", href: "/now" },
 ];
 
 const NavigationBar = () => {
