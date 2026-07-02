@@ -111,8 +111,10 @@ export default async function WorkPage() {
         </div>
       </section>
 
-      {/* ─── Experience — Zigzag Timeline ─── */}
-      {hasExperiences && (
+      {/* ─── Experience — Zigzag Timeline ───
+          Temporarily disabled: data mapping still in progress on another branch.
+          Remove `false &&` below to re-enable. */}
+      {false && hasExperiences && (
         <section className="mb-20 sm:mb-26">
           <SectionLabel className="mb-10">Experience</SectionLabel>
 
