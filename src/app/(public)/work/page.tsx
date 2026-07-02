@@ -5,6 +5,7 @@ import SectionLabel from "@/components/ui/section-label";
 import Title from "@/components/ui/title";
 import TechTag from "@/components/ui/tech-tag";
 import { supabase } from "@/lib/supabase";
+import { formatPeriod } from "@/lib/utils/experience";
 import type { Project, Experience } from "@/lib/types/database";
 
 export const revalidate = 0;
@@ -14,21 +15,6 @@ export const metadata: Metadata = {
   description:
     "Career timeline, projects, and education of Ihsan An-Nashir — Software & AI Engineer.",
 };
-
-function formatPeriod(start: string, end: string | null): string {
-  const startDate = new Date(start);
-  const startStr = startDate.toLocaleDateString("en-US", {
-    month: "short",
-    year: "numeric",
-  });
-  if (!end) return `${startStr} – Present`;
-  const endDate = new Date(end);
-  const endStr = endDate.toLocaleDateString("en-US", {
-    month: "short",
-    year: "numeric",
-  });
-  return `${startStr} – ${endStr}`;
-}
 
 export default async function WorkPage() {
   const [{ data: projects }, { data: experiences }] = await Promise.all([

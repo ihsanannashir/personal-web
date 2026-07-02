@@ -7,21 +7,6 @@ export type TechTagData = {
   domain: TagDomain;
 };
 
-export type ExperienceEntry = {
-  company: string;
-  role: string;
-  shortRole: string;
-  shortPeriod: string;
-  primaryDomain: TagDomain;
-  location: string;
-  flag: string;
-  period: string;
-  factual: string;
-  narrative: string;
-  bullets: string[];
-  tags: TechTagData[];
-};
-
 export type LanguageEntry = {
   name: string;
   flag: string;

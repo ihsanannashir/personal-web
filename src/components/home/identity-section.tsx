@@ -1,9 +1,24 @@
 import Section from "@/components/ui/section";
 import SectionLabel from "@/components/ui/section-label";
 import TechTag from "@/components/ui/tech-tag";
-import { EXPERIENCE, DOMAIN_TAGS } from "@/lib/data/experience";
+import { formatShortPeriod } from "@/lib/utils/experience";
+import type { Experience } from "@/lib/types/database";
+import type { TechTagData } from "@/lib/types/item-data";
 
-const IdentitySection = () => {
+const DOMAIN_TAGS: TechTagData[] = [
+  { label: "Frontend", domain: "frontend" },
+  { label: "Backend", domain: "backend" },
+  { label: "AI / ML", domain: "ai" },
+  { label: "Core Banking", domain: "default" },
+];
+
+type IdentitySectionProps = {
+  experiences: Experience[];
+};
+
+const IdentitySection = ({ experiences }: IdentitySectionProps) => {
+  const hasExperiences = experiences.length > 0;
+
   return (
     <Section>
       <SectionLabel className="mb-10">About</SectionLabel>
@@ -35,7 +50,6 @@ const IdentitySection = () => {
             </p>
           </div>
 
-          {/* Domain tags */}
           <div className="flex flex-wrap gap-2 pt-2">
             {DOMAIN_TAGS.map((tag) => (
               <TechTag key={tag.label} label={tag.label} domain={tag.domain} />
@@ -44,45 +58,44 @@ const IdentitySection = () => {
         </div>
 
         {/* Right — Career arc timeline */}
-        <div>
-          <h3 className="text-body-sm font-medium text-muted mb-8 uppercase tracking-wide">
-            Career arc
-          </h3>
-          <div className="relative">
-            <div className="absolute left-[5px] top-2 bottom-2 w-px bg-border" />
+        {hasExperiences && (
+          <div>
+            <h3 className="text-body-sm font-medium text-muted mb-8 uppercase tracking-wide">
+              Career arc
+            </h3>
+            <div className="relative">
+              <div className="absolute left-[5px] top-2 bottom-2 w-px bg-border" />
 
-            <div className="space-y-8">
-              {EXPERIENCE.map((entry, index) => (
-                <div key={index} className="flex gap-5">
-                  <div className="relative flex-shrink-0 mt-2">
-                    <div
-                      className={`w-[11px] h-[11px] rounded-full border-2 ${
-                        index === 0
-                          ? "bg-foreground border-foreground"
-                          : "bg-background border-border"
-                      }`}
-                    />
-                  </div>
-
-                  <div className="flex-1 min-w-0">
-                    <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-                      <span className="text-body font-medium text-foreground">
-                        {entry.company}
-                      </span>
-                      <TechTag
-                        label={entry.shortRole}
-                        domain={entry.primaryDomain}
+              <div className="space-y-8">
+                {experiences.map((entry, index) => (
+                  <div key={entry.id} className="flex gap-5">
+                    <div className="relative flex-shrink-0 mt-2">
+                      <div
+                        className={`w-[11px] h-[11px] rounded-full border-2 ${
+                          index === 0
+                            ? "bg-foreground border-foreground"
+                            : "bg-background border-border"
+                        }`}
                       />
                     </div>
-                    <span className="text-caption text-subtle mt-1 block">
-                      {entry.shortPeriod}
-                    </span>
+
+                    <div className="flex-1 min-w-0">
+                      <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                        <span className="text-body font-medium text-foreground">
+                          {entry.company}
+                        </span>
+                        <TechTag label={entry.role} domain="default" />
+                      </div>
+                      <span className="text-caption text-subtle mt-1 block">
+                        {formatShortPeriod(entry.start_date, entry.end_date)}
+                      </span>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </Section>
   );
